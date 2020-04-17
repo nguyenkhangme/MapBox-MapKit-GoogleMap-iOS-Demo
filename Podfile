@@ -1,5 +1,5 @@
 use_frameworks!
  
 target 'mapApp' do
-pod 'Mapbox-iOS-SDK', '~> 5.8'
+pod 'MapboxNavigation', '~> 0.39.0'
 end

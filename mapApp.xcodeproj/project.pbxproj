@@ -30,7 +30,7 @@
 		76F50159244944E600CC79E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76F5015C244944E600CC79E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76F5015E244944E600CC79E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76F501642449451300CC79E7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		76F501642449451300CC79E7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		76F5016624494B9600CC79E7 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		76F501682449532900CC79E7 /* MapModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModule.swift; sourceTree = "<group>"; };
 		8A2AE2D78A00E0245EBFF769 /* Pods-mapApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapApp.debug.xcconfig"; path = "Target Support Files/Pods-mapApp/Pods-mapApp.debug.xcconfig"; sourceTree = "<group>"; };

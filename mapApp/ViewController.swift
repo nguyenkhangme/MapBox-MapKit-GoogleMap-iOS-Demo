@@ -10,7 +10,7 @@ import UIKit
 
 import Mapbox
 
-class ViewController: UIViewController, MGLMapViewDelegate, UISearchBarDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate {
 
     lazy var Mapp = Map(latitude: 40.74699,longtitude: -73.98742,title: "Central Park",subtitle: "The biggest park in New York City!")
     //, coordinate: ["latitude": 40.74699, "longtitude": 40.74699])
@@ -25,22 +25,29 @@ class ViewController: UIViewController, MGLMapViewDelegate, UISearchBarDelegate 
         let mapView = MGLMapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.setCenter(CLLocationCoordinate2D(latitude: Mapp.latitude , longitude: Mapp.longtitude), zoomLevel: 9, animated: false)
-       view.addSubview(mapView)
+       
+        view.addSubview(mapView)
        //mapView.styleURL = MGLStyle.satelliteStyleURL
         mapView.styleURL = url
         
        // Add a point annotation
-       let annotation = MGLPointAnnotation()
-       annotation.coordinate = CLLocationCoordinate2D(latitude: 40.77014, longitude: -73.97480)
+       
+        let annotation = MGLPointAnnotation()
+       
+        annotation.coordinate = CLLocationCoordinate2D(latitude: 40.77014, longitude: -73.97480)
         annotation.title = Mapp.title
         annotation.subtitle = Mapp.subtitle
-       mapView.addAnnotation(annotation)
+       
+        mapView.addAnnotation(annotation)
         
        // Set the map view's delegate
-       mapView.delegate = self
+       
+        mapView.delegate = self
         
        // Allow the map view to display the user's location
-       mapView.showsUserLocation = true
+       
+        mapView.showsUserLocation = true
+        
    }
     
     @IBAction func searchPlace(_ sender: UIBarButtonItem) {
@@ -53,7 +60,28 @@ class ViewController: UIViewController, MGLMapViewDelegate, UISearchBarDelegate 
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        <#code#>
+//        UIApplication.shared.beginIgnoringInteractionEvents()
+//
+//        view.isUserInteractionEnabled = false
+//
+//        let activityIndicator = UIActivityIndicatorView()
+//
+//        activityIndicator.style = UIActivityIndicatorView.Style.medium
+//
+//        activityIndicator.center = self.view.center
+//
+//        activityIndicator.hidesWhenStopped = true
+//
+//        activityIndicator.startAnimating()
+//
+//        self.view.addSubview(activityIndicator)
+
+//        activityIndicator.stopAnimating()
+//
+//
+//        view.isUserInteractionEnabled = false
+        //let searchRequest =
+
     }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
@@ -62,10 +90,13 @@ class ViewController: UIViewController, MGLMapViewDelegate, UISearchBarDelegate 
    }
     
    func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
-   let camera = MGLMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 4500, pitch: 15, heading: 180)
-   mapView.fly(to: camera, withDuration: 4,
-   peakAltitude: 3000, completionHandler: nil)
-   }
+   
+    let camera = MGLMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 4500, pitch: 15, heading: 180)
+   
+    mapView.fly(to: camera, withDuration: 4, peakAltitude: 3000, completionHandler: nil)
+   
+    }
+    
    }
 
 
