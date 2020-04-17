@@ -10,6 +10,8 @@ import Foundation
 
 import Mapbox
 
+import MapboxGeocoder
+
 struct Map: Codable {
     
     var latitude: CLLocationDegrees = 0

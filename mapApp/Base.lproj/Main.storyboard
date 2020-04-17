@@ -18,6 +18,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="hPm-eJ-YZC">
+                        <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="9Jn-QS-rg8">
                             <connections>
                                 <action selector="searchPlace:" destination="BYZ-38-t0r" id="gt9-Ot-0k4"/>
