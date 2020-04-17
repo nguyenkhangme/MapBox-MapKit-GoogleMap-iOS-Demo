@@ -100,6 +100,8 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+    mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
     //func search(query: String!) {
 //        UIApplication.shared.beginIgnoringInteractionEvents()
 //
@@ -109,27 +111,26 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
         
             //Search
         
-        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-            
-        
-            
-
-            // To refine the search, you can set various properties on the options object.
-            
-
-    //            #if !os(tvOS)
-    //                let formatter = CNPostalAddressFormatter()
-    //                print(formatter.string(from: placemark.postalAddress!))
-    //                    // 200 Queen St
-    //                    // Saint John New Brunswick E2L 2X1
-    //                    // Canada
-    //            #endif
-            }
+//        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+//
+//
+//
+//
+//            // To refine the search, you can set various properties on the options object.
+//
+//
+//    //            #if !os(tvOS)
+//    //                let formatter = CNPostalAddressFormatter()
+//    //                print(formatter.string(from: placemark.postalAddress!))
+//    //                    // 200 Queen St
+//    //                    // Saint John New Brunswick E2L 2X1
+//    //                    // Canada
+//    //            #endif
+//            }
 
    
             
-            // MARK: Add a point annotation
-            
+          
            
             
             DispatchQueue.main.async {
@@ -170,6 +171,9 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
                     self.Mapp.longtitude = coordinate.longitude
                     print("\(coordinate.latitude), \(coordinate.longitude)")
                     
+                    // MARK: Add a point annotation
+                              
+                    
                     let annotation = MGLPointAnnotation()
                                       
                     annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
@@ -187,7 +191,7 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
                         }
                         else {
                             activityIndicator.stopAnimating()
-                            self.mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
+                            
                         }
                     }
                     
