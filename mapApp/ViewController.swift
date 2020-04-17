@@ -33,6 +33,8 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
     
     lazy var mapView = NavigationMapView(frame: view.bounds)
     
+    var directionsRoute: Route?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -103,17 +105,7 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
 //
         //view.isUserInteractionEnabled = true
 
-        let activityIndicator = UIActivityIndicatorView()
-
-        activityIndicator.style = UIActivityIndicatorView.Style.medium
-
-        activityIndicator.center = self.view.center
-
-        activityIndicator.hidesWhenStopped = true
-
-        activityIndicator.startAnimating()
-
-        self.view.addSubview(activityIndicator)
+        
         
             //Search
         
@@ -141,6 +133,18 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
            
             
             DispatchQueue.main.async {
+                
+                let activityIndicator = UIActivityIndicatorView()
+
+                activityIndicator.style = UIActivityIndicatorView.Style.medium
+
+                activityIndicator.center = self.view.center
+
+                activityIndicator.hidesWhenStopped = true
+
+                activityIndicator.startAnimating()
+
+                self.view.addSubview(activityIndicator)
                 
                 let options = ForwardGeocodeOptions(query: searchBar.text!)
                 
@@ -176,9 +180,26 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
                     annotation.subtitle = self.Mapp.subtitle
                     self.mapView.addAnnotation(annotation)
                     
+                    self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
+                        if error != nil {
+                            print("Error calculating route")
+                            activityIndicator.stopAnimating()
+                        }
+                        else {
+                            activityIndicator.stopAnimating()
+                            self.mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
+                        }
                     }
-                        // 45.270093, -66.050985
+                    
                     activityIndicator.stopAnimating()
+                    
+                   
+                    
+                    }
+                
+                //activityIndicator.stopAnimating()
+                        // 45.270093, -66.050985
+                   
                                       //
                                       //
                     //self.view.isUserInteractionEnabled = false
@@ -192,10 +213,62 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
 
     }
     
+    func calculateRoute(from origin: CLLocationCoordinate2D,
+    to destination: CLLocationCoordinate2D,
+    completion: @escaping (Route?, Error?) -> ()) {
+     
+    // Coordinate accuracy is the maximum distance away from the waypoint that the route may still be considered viable, measured in meters. Negative values indicate that a indefinite number of meters away from the route and still be considered viable.
+    let origin = Waypoint(coordinate: origin, coordinateAccuracy: -1, name: "Start")
+    let destination = Waypoint(coordinate: destination, coordinateAccuracy: -1, name: "Finish")
+     
+    // Specify that the route is intended for automobiles avoiding traffic
+    let options = NavigationRouteOptions(waypoints: [origin, destination], profileIdentifier: .automobileAvoidingTraffic)
+     
+    // Generate the route object and draw it on the map
+    _ = Directions.shared.calculate(options) { [unowned self] (waypoints, routes, error) in
+    self.directionsRoute = routes?.first
+    // Draw the route on the map after creating it
+    self.drawRoute(route: self.directionsRoute!)
+    }
+    }
+     
+    func drawRoute(route: Route) {
+         //mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
+        guard route.coordinateCount > 0 else { return }
+        // Convert the route’s coordinates into a polyline
+        var routeCoordinates = route.coordinates!
+        let polyline = MGLPolylineFeature(coordinates: &routeCoordinates, count: route.coordinateCount)
+         
+        // If there's already a route line on the map, reset its shape to the new route
+        if let source = mapView.style?.source(withIdentifier: "route-source") as? MGLShapeSource {
+            source.shape = polyline
+        } else {
+            let source = MGLShapeSource(identifier: "route-source", features: [polyline], options: nil)
+             
+            // Customize the route line color and width
+            let lineStyle = MGLLineStyleLayer(identifier: "route-style", source: source)
+            lineStyle.lineColor = NSExpression(forConstantValue: #colorLiteral(red: 0.1897518039, green: 0.3010634184, blue: 0.7994888425, alpha: 1))
+            lineStyle.lineWidth = NSExpression(forConstantValue: 3)
+             
+            // Add the source and style layer of the route line to the map
+            mapView.style?.addSource(source)
+            mapView.style?.addLayer(lineStyle)
+        }
+    }
+    
+
+    
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
-   // Always allow callouts to popup when annotations are tapped.
-   return true
-   }
+        return true
+    }
+     
+    // Present the navigation view controller when the callout is selected
+    func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
+        let navigationViewController = NavigationViewController(for: directionsRoute!)
+        navigationViewController.modalPresentationStyle = .fullScreen
+        self.present(navigationViewController, animated: true, completion: nil)
+    }
+
     
    func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
    
