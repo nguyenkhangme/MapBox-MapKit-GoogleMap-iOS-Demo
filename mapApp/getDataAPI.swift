@@ -11,7 +11,7 @@ import Foundation
 
 struct FetchData {
     func loadData(query: String) {
-        guard let url = URL(string:"https://api.mapbox.com/geocoding/v5/mapbox.places/" + query + ".json?access_token=YOUR_MAPBOX_ACCESS_TOKEN") else {
+        guard let url = URL(string:"https://api.mapbox.com/geocoding/v5/mapbox.places/" + query + ".json?access_token=pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g") else {
             print("Invalid URL")
             return
         }
