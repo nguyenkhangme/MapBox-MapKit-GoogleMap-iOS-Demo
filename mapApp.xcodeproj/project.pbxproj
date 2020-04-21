@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		76C6FEEE2449BC6500D16C9A /* getDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6FEED2449BC6500D16C9A /* getDataAPI.swift */; };
+		76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */; };
 		76F50151244944E500CC79E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F50150244944E500CC79E7 /* AppDelegate.swift */; };
 		76F50153244944E500CC79E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F50152244944E500CC79E7 /* SceneDelegate.swift */; };
 		76F50155244944E500CC79E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F50154244944E500CC79E7 /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 		17CAA556097A5042B63A6CF0 /* Pods-mapApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapApp.release.xcconfig"; path = "Target Support Files/Pods-mapApp/Pods-mapApp.release.xcconfig"; sourceTree = "<group>"; };
 		23A3DAD9E35034D1FDE974D1 /* Pods_mapApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mapApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C6FEED2449BC6500D16C9A /* getDataAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getDataAPI.swift; sourceTree = "<group>"; };
+		76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		76F5014D244944E500CC79E7 /* mapApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76F50150244944E500CC79E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76F50152244944E500CC79E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				76F50154244944E500CC79E7 /* ViewController.swift */,
 				76F501682449532900CC79E7 /* MapModule.swift */,
 				76F50156244944E500CC79E7 /* Main.storyboard */,
+				76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */,
 				76F50159244944E600CC79E7 /* Assets.xcassets */,
 				76F5015B244944E600CC79E7 /* LaunchScreen.storyboard */,
 				76F5015E244944E600CC79E7 /* Info.plist */,
@@ -224,6 +227,7 @@
 				76F50151244944E500CC79E7 /* AppDelegate.swift in Sources */,
 				76F501692449532900CC79E7 /* MapModule.swift in Sources */,
 				76C6FEEE2449BC6500D16C9A /* getDataAPI.swift in Sources */,
+				76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */,
 				76F50153244944E500CC79E7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

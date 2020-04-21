@@ -22,7 +22,7 @@ import MapboxDirections
 
 
 
-class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate {
+class ViewController: UIViewController, UISearchBarDelegate {
 
     let geocoder = Geocoder.shared
     
@@ -41,6 +41,7 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
         //searchTextField.delegate = self
         
         // Set the map view's delegate
+        definesPresentationContext = true
          
           mapView.delegate = self
           
@@ -58,10 +59,7 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
        //mapView.styleURL = MGLStyle.satelliteStyleURL
         mapView.styleURL = url
         
-     
-        
- 
-        
+
   // Allow the map view to display the user's location
     
         mapView.showsUserLocation = true
@@ -69,27 +67,32 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
         mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
     
         
-        
-        
-        
-        // MARK: Search
-        
-      
-
-        
-        
-  
-        
    }
+    
+    //var resultSearchController:UISearchController? = nil
+   
+    //resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+    //resultSearchController?.searchResultsUpdater = locationSearchTable
     
     @IBAction func searchPlace(_ sender: UIBarButtonItem) {
         
+        //let locationSearchTable = LocationSearchTableViewController()
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTableViewController
         
-        let searchController = UISearchController(searchResultsController: nil)
+        locationSearchTable.mapView = mapView
+        
+        let searchController = UISearchController(searchResultsController: locationSearchTable)
+        
+        searchController.searchResultsUpdater = locationSearchTable
 
+        //searchController.hidesNavigationBarDuringPresentation = false
+        //searchController.dimsBackgroundDuringPresentation = true
+        
         searchController.searchBar.delegate = self
-
-
+        
+//        let searchBar = searchController.searchBar
+//        searchBar.sizeToFit()
+//        navigationItem.titleView = searchController.searchBar
 
         present(searchController, animated: true, completion: nil)
         
@@ -101,7 +104,9 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-    mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
+        searchBar.placeholder = "Search for places"
+        
+        mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
     //func search(query: String!) {
 //        UIApplication.shared.beginIgnoringInteractionEvents()
 //
@@ -150,7 +155,7 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
                 let options = ForwardGeocodeOptions(query: searchBar.text!)
                 
                 options.allowedISOCountryCodes = ["CA"]
-                options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
+                //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
                 options.allowedScopes = [.address, .pointOfInterest]
 
                 _ = self.geocoder.geocode(options) { (placemarks, attribution, error) in
@@ -251,7 +256,7 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
              
             // Customize the route line color and width
             let lineStyle = MGLLineStyleLayer(identifier: "route-style", source: source)
-            lineStyle.lineColor = NSExpression(forConstantValue: #colorLiteral(red: 0.1897518039, green: 0.3010634184, blue: 0.7994888425, alpha: 1))
+            lineStyle.lineColor = NSExpression(forConstantValue: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1))
             lineStyle.lineWidth = NSExpression(forConstantValue: 3)
              
             // Add the source and style layer of the route line to the map
@@ -262,25 +267,7 @@ class ViewController: UIViewController, UISearchBarDelegate, MGLMapViewDelegate 
     
 
     
-    func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
-        return true
-    }
-     
-    // Present the navigation view controller when the callout is selected
-    func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
-        let navigationViewController = NavigationViewController(for: directionsRoute!)
-        navigationViewController.modalPresentationStyle = .fullScreen
-        self.present(navigationViewController, animated: true, completion: nil)
-    }
-
     
-   func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
-   
-    let camera = MGLMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 4500, pitch: 15, heading: 180)
-   
-    mapView.fly(to: camera, withDuration: 4, peakAltitude: 3000, completionHandler: nil)
-   
-    }
     
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //           searchTextField.resignFirstResponder()
@@ -296,3 +283,25 @@ extension ViewController : UITextFieldDelegate {
     }
 }
 
+extension ViewController: MGLMapViewDelegate {
+    
+    func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+         return true
+     }
+      
+     // Present the navigation view controller when the callout is selected
+     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
+         let navigationViewController = NavigationViewController(for: directionsRoute!)
+         navigationViewController.modalPresentationStyle = .fullScreen
+         self.present(navigationViewController, animated: true, completion: nil)
+     }
+
+     
+    func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
+    
+     let camera = MGLMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 4500, pitch: 15, heading: 180)
+    
+     mapView.fly(to: camera, withDuration: 4, peakAltitude: 3000, completionHandler: nil)
+    
+     }
+}
