@@ -71,6 +71,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
         mapView.showsUserLocation = true
         
         mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+        
+        view.addSubview(goToUserPlaceButton)
     
         
    }
@@ -80,15 +82,13 @@ class ViewController: UIViewController, UISearchBarDelegate {
     //resultSearchController = UISearchController(searchResultsController: locationSearchTable)
     //resultSearchController?.searchResultsUpdater = locationSearchTable
     
+    @IBOutlet weak var goToUserPlaceButton: UIButton!
     @IBAction func GoToUserLocation(_ sender: Any) {
         
-        mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
+    
         
-        func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
-                let navigationViewController = NavigationViewController(for: directionsRoute!)
-                navigationViewController.modalPresentationStyle = .fullScreen
-                self.present(navigationViewController, animated: true, completion: nil)
-            }
+        mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+             
     }
     
     @IBAction func searchPlace(_ sender: UIBarButtonItem) {
@@ -171,7 +171,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
                 self.view.addSubview(activityIndicator)
                 
-                searchBar.text = self.query
+                //searchBar.text = self.query
                 
                 let options = ForwardGeocodeOptions(query: searchBar.text!)
                 
@@ -188,7 +188,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         // 200 Queen St
                     
                     self.Mapp.title = placemark.name
-                    self.Mapp.subtitle = placemark.qualifiedName!
+                    self.Mapp.subtitle = placemark.qualifiedName ?? " "
                    // print(placemark.qualifiedName)
                         // 200 Queen St, Saint John, New Brunswick E2L 2X1, Canada
 
