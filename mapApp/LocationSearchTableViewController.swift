@@ -57,8 +57,6 @@ class LocationSearchTableViewController: UITableViewController {
     
         let selectedItem = matchingItems[indexPath.row]
         
-        print("SSS: \(selectedItem.name)")
-        
         cell.textLabel?.text = selectedItem.name
         cell.detailTextLabel?.text = selectedItem.qualifiedName
 

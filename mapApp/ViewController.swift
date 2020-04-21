@@ -22,7 +22,6 @@ import MapboxDirections
 
 
 protocol HandleMapSearch {
-    func creatAnnotation(query: String)
     func addAnnotation(placemark: GeocodedPlacemark)
 }
 
@@ -193,10 +192,15 @@ class ViewController: UIViewController, UISearchBarDelegate {
                    // print(placemark.qualifiedName)
                         // 200 Queen St, Saint John, New Brunswick E2L 2X1, Canada
 
-                    let coordinate = placemark.location!.coordinate
-                    self.Mapp.latitude = coordinate.latitude
-                    self.Mapp.longtitude = coordinate.longitude
-                    print("\(coordinate.latitude), \(coordinate.longitude)")
+                   if let coordinate = placemark.location {
+                        
+                        self.Mapp.latitude = coordinate.coordinate.latitude
+                        self.Mapp.longtitude = coordinate.coordinate.longitude
+                        
+                    } else {
+                        return
+                    }
+                    //print("\(coordinate.latitude), \(coordinate.longitude)")
                     
                     // MARK: Add a point annotation
                               
@@ -348,9 +352,16 @@ extension ViewController: HandleMapSearch {
         self.Mapp.title = placemark.name
         self.Mapp.subtitle = placemark.qualifiedName ?? " "
         
-        let coordinate = placemark.location!.coordinate
-        self.Mapp.latitude = coordinate.latitude
-        self.Mapp.longtitude = coordinate.longitude
+        if let coordinate = placemark.location {
+            
+            self.Mapp.latitude = coordinate.coordinate.latitude
+            self.Mapp.longtitude = coordinate.coordinate.longitude
+            
+        } else {
+            return
+        }
+        //let coordinate = placemark.location!.coordinate
+        
         
         let annotation = MGLPointAnnotation()
                                              
@@ -374,11 +385,5 @@ extension ViewController: HandleMapSearch {
                            
         activityIndicator.stopAnimating()
     }
-    
-    func creatAnnotation(query: String) {
-        self.query = query
-        
-    }
-    
    
 }
