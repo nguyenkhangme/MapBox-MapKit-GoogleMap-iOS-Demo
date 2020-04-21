@@ -15,7 +15,6 @@ import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
 
-import MapKit
 
 #if !os(tvOS)
     import Contacts
@@ -38,8 +37,8 @@ class LocationSearchTableViewController: UITableViewController {
     var handleMapSearchDelegate:HandleMapSearch? = nil
 
     lazy var mapView = NavigationMapView()
-    var matchingItems:[MKMapItem] = []
-    var matchingItems1: [GeocodedPlacemark] = []
+
+    var matchingItems: [GeocodedPlacemark] = []
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -55,9 +54,11 @@ class LocationSearchTableViewController: UITableViewController {
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    
+        let selectedItem = matchingItems[indexPath.row]
         
-        //let selectedItem = matchingItems[indexPath.row].placemark
-        let selectedItem = matchingItems1[indexPath.row - 1]
+        print("SSS: \(selectedItem.name)")
+        
         cell.textLabel?.text = selectedItem.name
         cell.detailTextLabel?.text = selectedItem.qualifiedName
 
@@ -65,10 +66,8 @@ class LocationSearchTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedItem = matchingItems[indexPath.row].placemark
-        handleMapSearchDelegate?.creatAnnotation(query: selectedItem.name ?? " ")
-        
-        let selectedItem1 = matchingItems1[indexPath.row]
+
+        let selectedItem1 = matchingItems[indexPath.row]
         handleMapSearchDelegate?.addAnnotation(placemark: selectedItem1)
     }
     
@@ -123,21 +122,9 @@ class LocationSearchTableViewController: UITableViewController {
 extension LocationSearchTableViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
-//        guard //let mapView? = mapView,
-//            let searchBarText = searchController.searchBar.text else { return }
-//        let request = MKLocalSearch.Request()
-//        request.naturalLanguageQuery = searchBarText
-//        //request.region = mapView.region
-//        let search = MKLocalSearch(request: request)
-//        search.start { response, _ in
-//            guard let response = response else {
-//                return
-//            }
-//            self.matchingItems = response.mapItems
-//            self.tableView.reloadData()
-//        }
         
         let options = ForwardGeocodeOptions(query: searchController.searchBar.text ?? "")
+    
         
         options.allowedISOCountryCodes = ["CA"]
         //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
@@ -151,14 +138,15 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
 //            self.matchingItems1.append(placemark)
             if let placemarksX = placemarks {
                 
-                self.matchingItems1 = placemarksX
+                self.matchingItems = placemarksX
+                self.tableView.reloadData()
                 
             } else {
                 return
             }
             
-            self.tableView.reloadData()
-            print("placemark: \(String(describing: placemarks)),\nmatching: \(self.matchingItems1)")
+            
+            print("placemark: \(String(describing: placemarks)),\nmatching: \(self.matchingItems)")
         }
         
     }

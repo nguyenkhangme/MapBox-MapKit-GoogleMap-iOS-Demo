@@ -211,6 +211,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     annotation.subtitle = self.Mapp.subtitle
                     self.mapView.addAnnotation(annotation)
                     
+                    
+                    
                     self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
                         if error != nil {
                             print("Error calculating route")
