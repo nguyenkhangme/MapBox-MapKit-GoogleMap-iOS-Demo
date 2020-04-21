@@ -23,6 +23,7 @@ import MapboxDirections
 
 protocol HandleMapSearch {
     func creatAnnotation(query: String)
+    func getPlacemark(placemark: GeocodedPlacemark)
 }
 
 
@@ -328,8 +329,19 @@ extension ViewController: MGLMapViewDelegate {
 }
 
 extension ViewController: HandleMapSearch {
+    func getPlacemark(placemark: GeocodedPlacemark) {
+        
+        self.Mapp.title = placemark.name
+        self.Mapp.subtitle = placemark.qualifiedName ?? " "
+        
+        let coordinate = placemark.location!.coordinate
+        self.Mapp.latitude = coordinate.latitude
+        self.Mapp.longtitude = coordinate.longitude
+    }
+    
     func creatAnnotation(query: String) {
         self.query = query
         
     }
+   
 }
