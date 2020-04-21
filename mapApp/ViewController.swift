@@ -21,6 +21,10 @@ import MapboxDirections
 #endif
 
 
+protocol HandleMapSearch {
+    func creatAnnotation()
+}
+
 
 class ViewController: UIViewController, UISearchBarDelegate {
 
@@ -74,10 +78,23 @@ class ViewController: UIViewController, UISearchBarDelegate {
     //resultSearchController = UISearchController(searchResultsController: locationSearchTable)
     //resultSearchController?.searchResultsUpdater = locationSearchTable
     
+    @IBAction func GoToUserLocation(_ sender: Any) {
+        
+        mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
+        
+        func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
+                let navigationViewController = NavigationViewController(for: directionsRoute!)
+                navigationViewController.modalPresentationStyle = .fullScreen
+                self.present(navigationViewController, animated: true, completion: nil)
+            }
+    }
+    
     @IBAction func searchPlace(_ sender: UIBarButtonItem) {
         
         //let locationSearchTable = LocationSearchTableViewController()
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTableViewController
+        
+        locationSearchTable.handleMapSearchDelegate = self
         
         locationSearchTable.mapView = mapView
         
@@ -304,4 +321,10 @@ extension ViewController: MGLMapViewDelegate {
      mapView.fly(to: camera, withDuration: 4, peakAltitude: 3000, completionHandler: nil)
     
      }
+}
+
+extension ViewController: HandleMapSearch {
+    func creatAnnotation() {
+        print("")
+    }
 }

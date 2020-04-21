@@ -26,6 +26,8 @@ class LocationSearchTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    var handleMapSearchDelegate:HandleMapSearch? = nil
 
     lazy var mapView = NavigationMapView()
     var matchingItems:[MKMapItem] = []
@@ -51,6 +53,11 @@ class LocationSearchTableViewController: UITableViewController {
         cell.detailTextLabel?.text = ""
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = matchingItems[indexPath.row].placemark
+       
     }
     
 
