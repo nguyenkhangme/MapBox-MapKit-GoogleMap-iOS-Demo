@@ -67,6 +67,7 @@ class LocationSearchTableViewController: UITableViewController {
 
         let selectedItem1 = matchingItems[indexPath.row]
         handleMapSearchDelegate?.addAnnotation(placemark: selectedItem1)
+        dismiss(animated: true, completion: nil)
     }
     
 

@@ -104,26 +104,18 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         searchController.searchResultsUpdater = locationSearchTable
 
-        //searchController.hidesNavigationBarDuringPresentation = false
-        //searchController.dimsBackgroundDuringPresentation = true
-        
         searchController.searchBar.delegate = self
         
-//        let searchBar = searchController.searchBar
-//        searchBar.sizeToFit()
-//        navigationItem.titleView = searchController.searchBar
-
+        searchController.searchBar.placeholder = "Search for places"
+ 
         present(searchController, animated: true, completion: nil)
         
-//        let query = searchTextField.text
-//
-//        search(query: query)
-//
+
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        searchBar.placeholder = "Search for places"
+        
         
         mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
     //func search(query: String!) {
@@ -131,15 +123,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
 //
         //view.isUserInteractionEnabled = true
 
-        
-        
             //Search
         
 //        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-//
-//
-//
-//
+
 //            // To refine the search, you can set various properties on the options object.
 //
 //
@@ -152,11 +139,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
 //    //            #endif
 //            }
 
-   
-            
-          
-           
-            
+
             DispatchQueue.main.async {
                 
                 let activityIndicator = UIActivityIndicatorView()
@@ -230,15 +213,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     
                     activityIndicator.stopAnimating()
                     
-                   
-                    
                     }
                 
                 //activityIndicator.stopAnimating()
-                        // 45.270093, -66.050985
-                   
-                                      //
-                                      //
+       
                     //self.view.isUserInteractionEnabled = false
                     
                 
@@ -294,9 +272,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
 
-    
-    
-    
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //           searchTextField.resignFirstResponder()
 //       }
@@ -372,18 +347,23 @@ extension ViewController: HandleMapSearch {
         annotation.title = self.Mapp.title
         annotation.subtitle = self.Mapp.subtitle
         self.mapView.addAnnotation(annotation)
+        
+        self.mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
                            
         self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
             if error != nil {
                 print("Error calculating route")
                 activityIndicator.stopAnimating()
             } else {
+                
                 activityIndicator.stopAnimating()
                                        
             }
+            activityIndicator.stopAnimating()
         }
-                           
-        activityIndicator.stopAnimating()
+        
+       
+        //
     }
    
 }
