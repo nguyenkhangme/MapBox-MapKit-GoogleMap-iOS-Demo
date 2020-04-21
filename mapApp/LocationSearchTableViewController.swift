@@ -69,7 +69,7 @@ class LocationSearchTableViewController: UITableViewController {
         handleMapSearchDelegate?.creatAnnotation(query: selectedItem.name ?? " ")
         
         let selectedItem1 = matchingItems1[indexPath.row]
-        handleMapSearchDelegate?.getPlacemark(placemark: selectedItem1)
+        handleMapSearchDelegate?.addAnnotation(placemark: selectedItem1)
     }
     
 
@@ -144,13 +144,21 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
         options.allowedScopes = [.address, .pointOfInterest]
 
         _ = self.geocoder.geocode(options) { (placemarks, attribution, error) in
-            guard let placemark = placemarks?.first else {
+//            guard let placemark = placemarks?.first else {
+//                return
+//            }
+//
+//            self.matchingItems1.append(placemark)
+            if let placemarksX = placemarks {
+                
+                self.matchingItems1 = placemarksX
+                
+            } else {
                 return
             }
             
-            self.matchingItems1.append(placemark)
             self.tableView.reloadData()
-            print("placemark: \(placemark),\nmatching: \(self.matchingItems1)")
+            print("placemark: \(String(describing: placemarks)),\nmatching: \(self.matchingItems1)")
         }
         
     }

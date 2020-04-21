@@ -23,7 +23,7 @@ import MapboxDirections
 
 protocol HandleMapSearch {
     func creatAnnotation(query: String)
-    func getPlacemark(placemark: GeocodedPlacemark)
+    func addAnnotation(placemark: GeocodedPlacemark)
 }
 
 
@@ -329,7 +329,19 @@ extension ViewController: MGLMapViewDelegate {
 }
 
 extension ViewController: HandleMapSearch {
-    func getPlacemark(placemark: GeocodedPlacemark) {
+    func addAnnotation(placemark: GeocodedPlacemark) {
+        
+        let activityIndicator = UIActivityIndicatorView()
+
+        activityIndicator.style = UIActivityIndicatorView.Style.medium
+
+        activityIndicator.center = self.view.center
+
+        activityIndicator.hidesWhenStopped = true
+
+        activityIndicator.startAnimating()
+
+        self.view.addSubview(activityIndicator)
         
         self.Mapp.title = placemark.name
         self.Mapp.subtitle = placemark.qualifiedName ?? " "
@@ -337,11 +349,34 @@ extension ViewController: HandleMapSearch {
         let coordinate = placemark.location!.coordinate
         self.Mapp.latitude = coordinate.latitude
         self.Mapp.longtitude = coordinate.longitude
+        
+        let annotation = MGLPointAnnotation()
+                                             
+        annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
+                           
+        print("annotation coordinate: \(annotation.coordinate)")
+                           
+        annotation.title = self.Mapp.title
+        annotation.subtitle = self.Mapp.subtitle
+        self.mapView.addAnnotation(annotation)
+                           
+        self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
+            if error != nil {
+                print("Error calculating route")
+                activityIndicator.stopAnimating()
+            } else {
+                activityIndicator.stopAnimating()
+                                       
+            }
+        }
+                           
+        activityIndicator.stopAnimating()
     }
     
     func creatAnnotation(query: String) {
         self.query = query
         
     }
+    
    
 }
