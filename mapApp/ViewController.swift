@@ -22,7 +22,7 @@ import MapboxDirections
 
 
 protocol HandleMapSearch {
-    func creatAnnotation()
+    func creatAnnotation(query: String)
 }
 
 
@@ -36,6 +36,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     //@IBOutlet weak var searchTextField: UITextField!
     
     lazy var mapView = NavigationMapView(frame: view.bounds)
+    
+    var query = ""
     
     var directionsRoute: Route?
     
@@ -168,6 +170,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 activityIndicator.startAnimating()
 
                 self.view.addSubview(activityIndicator)
+                
+                searchBar.text = self.query
                 
                 let options = ForwardGeocodeOptions(query: searchBar.text!)
                 
@@ -324,7 +328,8 @@ extension ViewController: MGLMapViewDelegate {
 }
 
 extension ViewController: HandleMapSearch {
-    func creatAnnotation() {
-        print("")
+    func creatAnnotation(query: String) {
+        self.query = query
+        
     }
 }
