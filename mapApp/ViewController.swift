@@ -151,37 +151,48 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 activityIndicator.hidesWhenStopped = true
 
                 activityIndicator.startAnimating()
+                
+//                activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+//                let views = ["view": self.view!, "activityIndicator": activityIndicator]
+//                let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[view]-(<=0)-[activityIndicator(100)]", options: NSLayoutConstraint.FormatOptions.alignAllCenterY, metrics: nil, views: views)
+//                let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[view]-(<=0)-[activityIndicator(100)]", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: views)
+//                self.view.addConstraints(horizontalConstraints)
+//                self.view.addConstraints(verticalConstraints)
 
                 self.view.addSubview(activityIndicator)
                 
                 //searchBar.text = self.query
                 
-                let options = ForwardGeocodeOptions(query: searchBar.text!)
+                DispatchQueue.global(qos: .userInteractive).async { [weak self] in
                 
-                options.allowedISOCountryCodes = ["CA"]
-                //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
-                options.allowedScopes = [.address, .pointOfInterest]
-
-                _ = self.geocoder.geocode(options) { (placemarks, attribution, error) in
-                    guard let placemark = placemarks?.first else {
-                        return
-                    }
-
-                    print(placemark.name)
-                        // 200 Queen St
+                    let options = ForwardGeocodeOptions(query: searchBar.text!)
                     
-                    self.Mapp.title = placemark.name
-                    self.Mapp.subtitle = placemark.qualifiedName ?? " "
-                   // print(placemark.qualifiedName)
-                        // 200 Queen St, Saint John, New Brunswick E2L 2X1, Canada
+                    options.allowedISOCountryCodes = ["CA"]
+                    //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
+                    options.allowedScopes = [.address, .pointOfInterest]
 
-                   if let coordinate = placemark.location {
+                    let task = self!.geocoder.geocode(options) { (placemarks, attribution, error) in
+                        guard let placemark = placemarks?.first else {
+                            return
+                        }
+
+                        print(placemark.name)
+                            // 200 Queen St
                         
-                        self.Mapp.latitude = coordinate.coordinate.latitude
-                        self.Mapp.longtitude = coordinate.coordinate.longitude
+                        self!.Mapp.title = placemark.name
+                        self!.Mapp.subtitle = placemark.qualifiedName ?? " "
                         
-                    } else {
-                        return
+                       // print(placemark.qualifiedName)
+                            // 200 Queen St, Saint John, New Brunswick E2L 2X1, Canada
+
+                       if let coordinate = placemark.location {
+                            
+                        self!.Mapp.latitude = coordinate.coordinate.latitude
+                        self!.Mapp.longtitude = coordinate.coordinate.longitude
+                            
+                        } else {
+                            return
+                        }
                     }
                     //print("\(coordinate.latitude), \(coordinate.longitude)")
                     
@@ -190,17 +201,17 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     
                     let annotation = MGLPointAnnotation()
                                       
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: self!.Mapp.latitude, longitude: self!.Mapp.longtitude)
                     
                     print("annotation coordinate: \(annotation.coordinate)")
                     
-                    annotation.title = self.Mapp.title
-                    annotation.subtitle = self.Mapp.subtitle
-                    self.mapView.addAnnotation(annotation)
+                    annotation.title = self!.Mapp.title
+                    annotation.subtitle = self!.Mapp.subtitle
+                    self!.mapView.addAnnotation(annotation)
                     
                     
                     
-                    self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
+                    self!.calculateRoute(from: (self!.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
                         if error != nil {
                             print("Error calculating route")
                             activityIndicator.stopAnimating()
@@ -319,22 +330,47 @@ extension ViewController: HandleMapSearch {
         activityIndicator.center = self.view.center
 
         activityIndicator.hidesWhenStopped = true
+        
+//        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+//          let views = ["view": view!, "activityIndicator": activityIndicator]
+//          let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[view]-(<=0)-[activityIndicator(100)]", options: NSLayoutConstraint.FormatOptions.alignAllCenterY, metrics: nil, views: views)
+//          let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[view]-(<=0)-[activityIndicator(100)]", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: views)
+//          view.addConstraints(horizontalConstraints)
+//          view.addConstraints(verticalConstraints)
 
         activityIndicator.startAnimating()
 
         self.view.addSubview(activityIndicator)
         
-        self.Mapp.title = placemark.name
-        self.Mapp.subtitle = placemark.qualifiedName ?? " "
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+                
+                self!.Mapp.title = placemark.name
+                self!.Mapp.subtitle = placemark.qualifiedName ?? " "
+                
+               // print(placemark.qualifiedName)
+                    // 200 Queen St, Saint John, New Brunswick E2L 2X1, Canada
+
+               if let coordinate = placemark.location {
+                    
+                self!.Mapp.latitude = coordinate.coordinate.latitude
+                self!.Mapp.longtitude = coordinate.coordinate.longitude
+                    
+                } else {
+                    return
+                }
+            }
         
-        if let coordinate = placemark.location {
-            
-            self.Mapp.latitude = coordinate.coordinate.latitude
-            self.Mapp.longtitude = coordinate.coordinate.longitude
-            
-        } else {
-            return
-        }
+//        self.Mapp.title = placemark.name
+//        self.Mapp.subtitle = placemark.qualifiedName ?? " "
+//        
+//        if let coordinate = placemark.location {
+//            
+//            self.Mapp.latitude = coordinate.coordinate.latitude
+//            self.Mapp.longtitude = coordinate.coordinate.longitude
+//            
+//        } else {
+//            return
+//        }
         //let coordinate = placemark.location!.coordinate
         
         
