@@ -123,9 +123,10 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
         
         
         
-        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
         
             let options = ForwardGeocodeOptions(query: searchController.searchBar.text ?? "")
+
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             
             options.allowedISOCountryCodes = ["CA"]
             //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
