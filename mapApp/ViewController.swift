@@ -142,9 +142,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 
                 //searchBar.text = self.query
                 
+                let options = ForwardGeocodeOptions(query: searchBar.text!)
+                
                 DispatchQueue.global(qos: .userInteractive).async { [weak self] in
                 
-                    let options = ForwardGeocodeOptions(query: searchBar.text!)
+                   
                     
                     options.allowedISOCountryCodes = ["CA"]
                     //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
@@ -173,6 +175,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                             return
                         }
                     }
+                }
                     //print("\(coordinate.latitude), \(coordinate.longitude)")
                     
                     // MARK: Add a point annotation
@@ -180,17 +183,17 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     
                     let annotation = MGLPointAnnotation()
                                       
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: self!.Mapp.latitude, longitude: self!.Mapp.longtitude)
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
                     
                     print("annotation coordinate: \(annotation.coordinate)")
                     
-                    annotation.title = self!.Mapp.title
-                    annotation.subtitle = self!.Mapp.subtitle
-                    self!.mapView.addAnnotation(annotation)
+                    annotation.title = self.Mapp.title
+                    annotation.subtitle = self.Mapp.subtitle
+                    self.mapView.addAnnotation(annotation)
                     
                     
                     
-                    self!.calculateRoute(from: (self!.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
+                    self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
                         if error != nil {
                             print("Error calculating route")
                             activityIndicator.stopAnimating()
@@ -203,7 +206,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     
                     activityIndicator.stopAnimating()
                     
-                    }
                 
                 //activityIndicator.stopAnimating()
        
