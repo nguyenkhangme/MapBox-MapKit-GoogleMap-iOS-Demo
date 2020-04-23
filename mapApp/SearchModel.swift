@@ -8,43 +8,45 @@
 import CoreLocation
 import Foundation
 
-struct Coordinate {
+struct PlaceMark {
     
-    var latitude: Double
-    var longitude: Double
-    var elevation: Double
-
+    var placeName: String
+    var matchingPlaceName: String
+    var coordinates: [CLLocationCoordinate2D]
     
-    
-    enum CodingKeys: String, CodingKey {
-        case latitude
-        case longitude
-        case additionalInfo
-    }
-    
-    enum AdditionalInfoKeys: String, CodingKey {
-        case elevation
+    private enum CodingKeys: String, CodingKey {
+        case placeName = "place_name"
+        case matchingPlaceName = "matching_place_name"
+        
     }
 }
 
-extension Coordinate: Decodable {
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        latitude = try values.decode(Double.self, forKey: .latitude)
-        longitude = try values.decode(Double.self, forKey: .longitude)
+struct PlaceMarkService: Decodable {
+    
+    var type: String
+    var query: [String]
+    var features: [feature]
+    
+    struct feature: Decodable {
+        var id: String
+        var type: String
+        var place_type: [String]
+        var relevance: Int
+        var properties: [property]
+        var text: String
         
-        let additionalInfo = try values.nestedContainer(keyedBy: AdditionalInfoKeys.self, forKey: .additionalInfo)
-        elevation = try additionalInfo.decode(Double.self, forKey: .elevation)
-    }
-}
-
-extension Coordinate: Encodable {
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(latitude, forKey: .latitude)
-        try container.encode(longitude, forKey: .longitude)
+        struct property: Decodable {
+            var markerColor: String
+            var markerSize: String
+            var markerSymbol: String
+            
+             private enum CodingKeys: String, CodingKey {
+                case markerColor = "marker-color"
+                case markerSize = "marker-size"
+                case markerSymbol = "marker-symbol"
+            }
+        }
         
-        var additionalInfo = container.nestedContainer(keyedBy: AdditionalInfoKeys.self, forKey: .additionalInfo)
-        try additionalInfo.encode(elevation, forKey: .elevation)
+        
     }
 }

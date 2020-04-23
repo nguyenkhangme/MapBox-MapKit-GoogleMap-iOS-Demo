@@ -7,9 +7,6 @@
 
 import Foundation
 
-//https://www.hackingwithswift.com/books/ios-swiftui/sending-and-receiving-codable-data-with-urlsession-and-swiftui
-
-
 
 struct FetchData {
     func loadData(query: String) {
@@ -20,8 +17,18 @@ struct FetchData {
         
         let request = URLRequest(url: url)
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            // Handle the result of that networking task.
-        }.resume()
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            let data = data
+//            if let string = String(data: data, encoding: .utf8) {
+//                DispatchQueue.main.async {
+//
+//                }
+//                    //print(\(string))
+//            }
+            
+            
+        }
+        task.resume()
     }
+
 }
