@@ -10,9 +10,9 @@ import Foundation
 
 struct PlaceMark {
     
-    var placeName: String
-    var matchingPlaceName: String
-    var coordinates: [Double]
+    var placeName: String = ""
+    var matchingPlaceName: String = ""
+    var coordinates: [Double] = []
     
     private enum CodingKeys: String, CodingKey {
         case placeName = "place_name"
@@ -72,5 +72,17 @@ struct PlaceMarkService: Decodable {
        
         
         
+    }
+}
+
+extension PlaceMark {
+    init(from service: PlaceMarkService) {
+        for Feature in service.features {
+            placeName = Feature.place_name
+            matchingPlaceName = Feature.matching_place_name
+            for Geometry in Feature.geometry {
+                coordinates = Geometry.coordinates
+            }
+        }
     }
 }
