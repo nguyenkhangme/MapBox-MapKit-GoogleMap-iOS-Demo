@@ -18,13 +18,16 @@ struct FetchData {
         let request = URLRequest(url: url)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            let data = data
+//            let data = data
 //            if let string = String(data: data, encoding: .utf8) {
 //                DispatchQueue.main.async {
 //
 //                }
 //                    //print(\(string))
 //            }
+            
+            
+            
             
             
         }
