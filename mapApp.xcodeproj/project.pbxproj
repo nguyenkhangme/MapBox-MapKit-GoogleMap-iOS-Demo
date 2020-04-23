@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		762DAB0624516A2C005ADBB4 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762DAB0524516A2C005ADBB4 /* APIService.swift */; };
+		762DAB0824516A83005ADBB4 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762DAB0724516A83005ADBB4 /* SearchModel.swift */; };
+		762DAB0A245172C2005ADBB4 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762DAB09245172C2005ADBB4 /* CoreLocation.swift */; };
 		76C6FEEE2449BC6500D16C9A /* getDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6FEED2449BC6500D16C9A /* getDataAPI.swift */; };
 		76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */; };
 		76F50151244944E500CC79E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F50150244944E500CC79E7 /* AppDelegate.swift */; };
@@ -24,6 +27,9 @@
 /* Begin PBXFileReference section */
 		17CAA556097A5042B63A6CF0 /* Pods-mapApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapApp.release.xcconfig"; path = "Target Support Files/Pods-mapApp/Pods-mapApp.release.xcconfig"; sourceTree = "<group>"; };
 		23A3DAD9E35034D1FDE974D1 /* Pods_mapApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mapApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		762DAB0524516A2C005ADBB4 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = SOURCE_ROOT; };
+		762DAB0724516A83005ADBB4 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		762DAB09245172C2005ADBB4 /* CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocation.swift; sourceTree = "<group>"; };
 		76C6FEED2449BC6500D16C9A /* getDataAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getDataAPI.swift; sourceTree = "<group>"; };
 		76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		76F5014D244944E500CC79E7 /* mapApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +89,9 @@
 		76F5014F244944E500CC79E7 /* mapApp */ = {
 			isa = PBXGroup;
 			children = (
+				762DAB0524516A2C005ADBB4 /* APIService.swift */,
+				762DAB0724516A83005ADBB4 /* SearchModel.swift */,
+				762DAB09245172C2005ADBB4 /* CoreLocation.swift */,
 				76C6FEED2449BC6500D16C9A /* getDataAPI.swift */,
 				76F50150244944E500CC79E7 /* AppDelegate.swift */,
 				76F50152244944E500CC79E7 /* SceneDelegate.swift */,
@@ -224,11 +233,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F50155244944E500CC79E7 /* ViewController.swift in Sources */,
+				762DAB0624516A2C005ADBB4 /* APIService.swift in Sources */,
 				76F50151244944E500CC79E7 /* AppDelegate.swift in Sources */,
+				762DAB0824516A83005ADBB4 /* SearchModel.swift in Sources */,
 				76F501692449532900CC79E7 /* MapModule.swift in Sources */,
 				76C6FEEE2449BC6500D16C9A /* getDataAPI.swift in Sources */,
 				76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */,
 				76F50153244944E500CC79E7 /* SceneDelegate.swift in Sources */,
+				762DAB0A245172C2005ADBB4 /* CoreLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

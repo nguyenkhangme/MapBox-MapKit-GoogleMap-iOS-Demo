@@ -12,6 +12,8 @@ import Mapbox
 
 import MapboxGeocoder
 
+import CoreLocation
+
 struct Map: Codable {
     
     var latitude: CLLocationDegrees = 0
@@ -22,6 +24,7 @@ struct Map: Codable {
     
     var subtitle = ""
     
+    //var test: CLLocationCoordinate2D
     //var coordinate = ["latitude": CLLocationDegrees(0), "longtitude": CLLocationDegrees(0)]
 }
 
