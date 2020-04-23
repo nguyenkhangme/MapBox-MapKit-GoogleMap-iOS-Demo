@@ -12,7 +12,7 @@ struct PlaceMark {
     
     var placeName: String
     var matchingPlaceName: String
-    var coordinates: [CLLocationCoordinate2D]
+    var coordinates: [Double]
     
     private enum CodingKeys: String, CodingKey {
         case placeName = "place_name"
@@ -34,6 +34,14 @@ struct PlaceMarkService: Decodable {
         var relevance: Int
         var properties: [property]
         var text: String
+        var place_name: String
+        var matching_text: String
+        var matching_place_name: String
+        var center: [Double]
+        var geometry:[Geometry]
+        var address: String
+        var context: [Context]
+        
         
         struct property: Decodable {
             var markerColor: String
@@ -46,6 +54,22 @@ struct PlaceMarkService: Decodable {
                 case markerSymbol = "marker-symbol"
             }
         }
+        
+        struct Geometry: Decodable {
+            var type: String
+            var coordinates: [Double]
+            var interpolated: Bool
+            var omitted: Bool
+        }
+        
+        struct Context: Decodable {
+            var id: String
+            var short_code: String
+            var wikidata: String
+            var text: String
+        }
+        
+       
         
         
     }
