@@ -64,8 +64,10 @@ struct FetchData {
                     for placeMarkCount in placeMarks.Name.indices {
                         //print("\(placeMarkName)\n")
                         print("\(placeMarks.Name[placeMarkCount])\n")
-                        print("\(placeMarks.placeName[placeMarkCount])\n\n")
+                        print("\(placeMarks.placeName[placeMarkCount])\n")
+                        print("\(placeMarks.coordinates[placeMarkCount])\n\n")
                     }
+                    
                     
 //                    for placeMarkName in placeMarks.Name {
 //                        print("\(placeMarkName)\n")
