@@ -172,14 +172,12 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
 }
 
 extension LocationSearchTableViewController : HandleModelSearch {
-    func addPlaceMark(name: String, qualified_Name: String, longtitude: CLLocationDegrees, latitude: CLLocationDegrees, idx: Int) {
-        
-    }
-    
-    func addPlaceMark1(name: [String], qualified_Name: [String]) {
+
+    func addPlaceMark1(name: [String], qualified_Name: [String], coordinates: [[Double]]) {
         print("OK Delegate Table View")
         matchingItems1.Name = name
         matchingItems1.placeName = qualified_Name
+        matchingItems1.coordinates = coordinates
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

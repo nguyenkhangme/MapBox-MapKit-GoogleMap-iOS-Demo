@@ -67,16 +67,16 @@ struct FetchData {
                     //for placeMark in placeMarks {
                     
                     
-                    self.HandleModelSearchDelegate?.addPlaceMark1(name:placeMarks.Name, qualified_Name: placeMarks.placeName)
+                    self.HandleModelSearchDelegate?.addPlaceMark1(name:placeMarks.Name, qualified_Name: placeMarks.placeName, coordinates: placeMarks.coordinates)
                     
-                    for placeMarkCount in placeMarks.Name.indices {
-                    self.HandleModelSearchDelegate?.addPlaceMark(name:placeMarks.Name[placeMarkCount], qualified_Name: placeMarks.placeName[placeMarkCount], longtitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][0]), latitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][1]), idx: placeMarkCount)
-                        //print("\(placeMarkName)\n")
-                        print("\(placeMarks.Name[placeMarkCount])\n")
-                        print("\(placeMarks.placeName[placeMarkCount])\n")
-                        print("\(CLLocationDegrees(placeMarks.coordinates[placeMarkCount][0]))")
-                        print(",\(CLLocationDegrees(placeMarks.coordinates[placeMarkCount][1]))\n\n")
-                    }
+//                    for placeMarkCount in placeMarks.Name.indices {
+////                    self.HandleModelSearchDelegate?.addPlaceMark(name:placeMarks.Name[placeMarkCount], qualified_Name: placeMarks.placeName[placeMarkCount], longtitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][0]), latitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][1]), idx: placeMarkCount)
+//                        //print("\(placeMarkName)\n")
+////                        print("\(placeMarks.Name[placeMarkCount])\n")
+////                        print("\(placeMarks.placeName[placeMarkCount])\n")
+////                        print("\(CLLocationDegrees(placeMarks.coordinates[placeMarkCount][0]))")
+////                        print(",\(CLLocationDegrees(placeMarks.coordinates[placeMarkCount][1]))\n\n")
+//                    }
                     
                     
 //                    for placeMarkName in placeMarks.Name {
