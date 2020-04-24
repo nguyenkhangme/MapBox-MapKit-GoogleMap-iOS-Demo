@@ -39,8 +39,12 @@ struct FetchData {
 //                    //print(\(string))
 //            }
                 
-                guard let json = data else { return }
-                //let decoder = JSONDecoder()
+                guard let json = data else {
+                    print("Unexpected error URLSessionDataTask: \(String(describing: error)).")
+                    return
+                    
+            }
+                
 //                let placeMarkStores = try decoder.decode([PlaceMarkService].self, from: json)
 //
 //                let placeMarks = placeMarkStores.map { PlaceMark(from: $0) }
@@ -52,10 +56,23 @@ struct FetchData {
                 let decoder = JSONDecoder()
                 do {
                     let placeMarkStores = try decoder.decode(PlaceMarkService.self, from: json)
-                    let placeMark = PlaceMark(from: placeMarkStores)
+                    let placeMarks = PlaceMark(from: placeMarkStores)
                     
                     //for placeMark in placeMarks {
-                        print("\(placeMark.placeName)\n\(placeMark.matchingPlaceName)\n")
+                    
+                    
+                    for placeMarkCount in placeMarks.Name.indices {
+                        //print("\(placeMarkName)\n")
+                        print("\(placeMarks.Name[placeMarkCount])\n")
+                        print("\(placeMarks.placeName[placeMarkCount])\n\n")
+                    }
+                    
+//                    for placeMarkName in placeMarks.Name {
+//                        print("\(placeMarkName)\n")
+//                    }
+//                    for placeMarkPlaceName in placeMarks.placeName {
+//                        print("\(placeMarkPlaceName)\n\n")
+//                    }
                     //}
                 }catch {
                     print("Unexpected error: \(error).")
@@ -356,11 +373,15 @@ struct test {
         let decoder = JSONDecoder()
         do {
             let placeMarkStores = try decoder.decode(PlaceMarkService.self, from: json)
-            let placeMark = PlaceMark(from: placeMarkStores)
+            let placeMarks = PlaceMark(from: placeMarkStores)
             
             //for placeMark in placeMarks {
-                print("\(placeMark.placeName)\n\(placeMark.matchingPlaceName)\n")
-            //}
+            for placeMarkName in placeMarks.Name {
+                print("\(placeMarkName)\n")
+            }
+            for placeMarkPlaceName in placeMarks.placeName {
+                print("\(placeMarkPlaceName)\n\n")
+            }
         }catch {
             print("Unexpected error: \(error).")
         }
@@ -372,14 +393,14 @@ struct test {
 
 struct PlaceMark {
     
-    var placeName: String = ""
-    var matchingPlaceName: String?
-    var coordinates: [Double] = []
+    var placeName: [String] = []
+    var Name: [String] = []
+    var coordinates: [[Double]] = []
     
     private enum CodingKeys: String, CodingKey {
         case placeName = "place_name"
-        case matchingPlaceName = "matching_place_name"
-        
+        case Name = "text"
+        case coordinates
     }
     
 //    var json: Data? {
@@ -450,12 +471,18 @@ struct PlaceMarkService: Decodable {
 extension PlaceMark {
     init(from service: PlaceMarkService) {
         for Feature in service.features {
-            placeName = Feature.place_name
-            matchingPlaceName = Feature.matching_place_name
-            
+            placeName.append(Feature.place_name)
+            Name.append(Feature.text)
+
             let Geometry = Feature.geometry
-            coordinates = Geometry.coordinates
-            
+            coordinates.append(Geometry.coordinates)
+
         }
+            
+//            placeName = service.place_name
+//            Name = service.text
+//
+//            let Geometry = service.geometry
+//            coordinates = Geometry.coordinates
     }
 }
