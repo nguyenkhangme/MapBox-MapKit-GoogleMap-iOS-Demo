@@ -410,11 +410,18 @@ extension ViewController: HandleMapSearch {
 
 extension ViewController: HandleModelSearch {
     func addPlaceMark1(name: [String], qualified_Name: [String], coordinates: [[Double]]) {
-                    DispatchQueue.main.async {
+        DispatchQueue.main.async {
         
             let annotation = MGLPointAnnotation()
                                                  
-            annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinates[0][1]), longitude: CLLocationDegrees(coordinates[0][0]))
+            for coordinate in coordinates.indices {
+                if coordinate == 0
+                {
+                annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinates[coordinate][1]), longitude: CLLocationDegrees(coordinates[coordinate][0]))
+                }
+                            
+                        }
+//            annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinates[0][1]), longitude: CLLocationDegrees(coordinates[0][0]))
                                
            
                                
