@@ -20,6 +20,7 @@ import MapboxDirections
     import Contacts
 #endif
 
+
 class LocationSearchTableViewController: UITableViewController {
     
     let sharedFetchData = FetchData.shared
@@ -125,6 +126,8 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
         
         sharedFetchData.loadData(query: searchController.searchBar.text ?? "")
         
+        //print("abcdef: \(sharedFetchData.loadData(query: searchController.searchBar.text ?? "").abcdef.Name[0])")
+        
         let options = ForwardGeocodeOptions(query: searchController.searchBar.text ?? "")
 
 
@@ -156,3 +159,5 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
     }
 
 }
+
+

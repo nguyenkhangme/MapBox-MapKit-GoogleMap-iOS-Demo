@@ -25,13 +25,17 @@ protocol HandleMapSearch {
     func addAnnotation(placemark: GeocodedPlacemark)
 }
 
+protocol HandleModelSearch {
+    func addPlaceMark(name: String, qualified_Name: String, longtitude: CLLocationDegrees, latitude: CLLocationDegrees, idx: Int)
+}
 
 class ViewController: UIViewController, UISearchBarDelegate {
     
     let sharedTest = test.shared
     
-    let sharedFetchData = FetchData.shared
+    var sharedFetchData = FetchData.shared
     
+    var tessst = FetchData()
   
     
     let geocoder = Geocoder.shared
@@ -51,6 +55,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         super.viewDidLoad()
         
         sharedTest.tesst()
+       
     
         //searchTextField.delegate = self
         
@@ -152,69 +157,74 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 
                 //searchBar.text = self.query
         
-        sharedFetchData.loadData(query: searchBar.text ?? "")
+//         sharedFetchData.HandleModelSearchDelegate = self
+//
+//        sharedFetchData.loadData(query: searchBar.text ?? "")
+        
+        tessst.HandleModelSearchDelegate = self
+        tessst.loadData(query: searchBar.text ?? "")
                 
-                let options = ForwardGeocodeOptions(query: searchBar.text ?? "")
-                
-                //DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-                
-                   
-                    
-                    options.allowedISOCountryCodes = ["CA"]
-                    //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
-                    options.allowedScopes = [.address, .pointOfInterest]
-
-                    let task = self.geocoder.geocode(options) { (placemarks, attribution, error) in
-                        guard let placemark = placemarks?.first else {
-                            return
-                        }
-
-                        print(placemark.name)
-                            // 200 Queen St
-                        
-                        self.Mapp.title = placemark.name
-                        self.Mapp.subtitle = placemark.qualifiedName ?? " "
-                        
-                       // print(placemark.qualifiedName)
-                            // 200 Queen St, Saint John, New Brunswick E2L 2X1, Canada
-
-                       if let coordinate = placemark.location {
-                            
-                        self.Mapp.latitude = coordinate.coordinate.latitude
-                        self.Mapp.longtitude = coordinate.coordinate.longitude
-                            
-                        } else {
-                            return
-                        }
-                    }
+//                let options = ForwardGeocodeOptions(query: searchBar.text ?? "")
+//
+//                //DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+//
+//
+//
+//                    options.allowedISOCountryCodes = ["CA"]
+//                    //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
+//                    options.allowedScopes = [.address, .pointOfInterest]
+//
+//                    let task = self.geocoder.geocode(options) { (placemarks, attribution, error) in
+//                        guard let placemark = placemarks?.first else {
+//                            return
+//                        }
+//
+//                        print(placemark.name)
+//                            // 200 Queen St
+//
+//                        self.Mapp.title = placemark.name
+//                        self.Mapp.subtitle = placemark.qualifiedName ?? " "
+//
+//                       // print(placemark.qualifiedName)
+//                            // 200 Queen St, Saint John, New Brunswick E2L 2X1, Canada
+//
+//                       if let coordinate = placemark.location {
+//
+//                        self.Mapp.latitude = coordinate.coordinate.latitude
+//                        self.Mapp.longtitude = coordinate.coordinate.longitude
+//
+//                        } else {
+//                            return
+//                        }
+//                    }
                 //}
                     //print("\(coordinate.latitude), \(coordinate.longitude)")
                     
                     // MARK: Add a point annotation
                               
                     
-                    let annotation = MGLPointAnnotation()
-                                      
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
-                    
-                    print("annotation coordinate: \(annotation.coordinate)")
-                    
-                    annotation.title = self.Mapp.title
-                    annotation.subtitle = self.Mapp.subtitle
-                    self.mapView.addAnnotation(annotation)
-                    
-                    
-                    
-                    self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
-                        if error != nil {
-                            print("Error calculating route")
-                            activityIndicator.stopAnimating()
-                        }
-                        else {
-                            activityIndicator.stopAnimating()
-                            
-                        }
-                    }
+//                    let annotation = MGLPointAnnotation()
+//                                      
+//                    annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
+//                    
+//                    print("annotation coordinate: \(annotation.coordinate)")
+//                    
+//                    annotation.title = self.Mapp.title
+//                    annotation.subtitle = self.Mapp.subtitle
+//                    self.mapView.addAnnotation(annotation)
+//                    
+//                    
+//                    
+//                    self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
+//                        if error != nil {
+//                            print("Error calculating route")
+//                            activityIndicator.stopAnimating()
+//                        }
+//                        else {
+//                            activityIndicator.stopAnimating()
+//                            
+//                        }
+//                    }
                     
                     activityIndicator.stopAnimating()
                     
@@ -395,4 +405,39 @@ extension ViewController: HandleMapSearch {
         //
     }
    
+}
+
+extension ViewController: HandleModelSearch {
+    func addPlaceMark(name: String, qualified_Name: String, longtitude: CLLocationDegrees, latitude: CLLocationDegrees, idx: Int)
+    {
+        print("OKDelegate!")
+        if idx == 0 {
+            print("AAAAA: \(name)")
+//            Mapp.title = name
+//            Mapp.subtitle = qualified_Name
+//            Mapp.longtitude = longtitude
+//            Mapp.latitude = latitude
+            
+            let annotation = MGLPointAnnotation()
+                                                 
+            annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longtitude)
+                               
+           
+                               
+            annotation.title = name
+            annotation.subtitle = qualified_Name
+            
+            print("annotation coordinate: \(annotation.coordinate), name: \(String(describing: annotation.title)) ")
+            self.mapView.addAnnotation(annotation)
+            
+            self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
+                if error != nil {
+                    print("Error calculating route")
+                                          //activityIndicator.stopAnimating()
+                }
+                                  
+            }
+        }
+        
+    }
 }

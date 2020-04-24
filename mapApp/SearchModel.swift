@@ -16,7 +16,11 @@ struct FetchData {
     
     static let shared = FetchData()
     
+    var HandleModelSearchDelegate: HandleModelSearch? = nil
+    
     func loadData(query: String) {
+        
+        //var abcdef = PlaceMark()
         
         guard let urlString = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else
         {
@@ -58,14 +62,20 @@ struct FetchData {
                     let placeMarkStores = try decoder.decode(PlaceMarkService.self, from: json)
                     let placeMarks = PlaceMark(from: placeMarkStores)
                     
+                    //abcdef = PlaceMark(from: placeMarkStores)
+                    
                     //for placeMark in placeMarks {
                     
                     
                     for placeMarkCount in placeMarks.Name.indices {
+                        DispatchQueue.main.async {
+                        self.HandleModelSearchDelegate?.addPlaceMark(name:placeMarks.Name[placeMarkCount], qualified_Name: placeMarks.placeName[placeMarkCount], longtitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][0]), latitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][1]), idx: placeMarkCount)
+                        }
                         //print("\(placeMarkName)\n")
                         print("\(placeMarks.Name[placeMarkCount])\n")
                         print("\(placeMarks.placeName[placeMarkCount])\n")
-                        print("\(placeMarks.coordinates[placeMarkCount])\n\n")
+                        print("\(CLLocationDegrees(placeMarks.coordinates[placeMarkCount][0]))")
+                        print(",\(CLLocationDegrees(placeMarks.coordinates[placeMarkCount][1]))\n\n")
                     }
                     
                     
@@ -414,7 +424,7 @@ struct PlaceMarkService: Decodable {
     
     var type: String?
     var query: [String]?
-    var features: [feature]
+    var features: [feature]?
     
    
     
@@ -467,12 +477,16 @@ struct PlaceMarkService: Decodable {
         
     }
     
-     var attribution: String
+     var attribution: String?
 }
 
 extension PlaceMark {
     init(from service: PlaceMarkService) {
-        for Feature in service.features {
+        
+        guard let Features = service.features else {
+            return
+        }
+        for Feature in Features {
             placeName.append(Feature.place_name)
             Name.append(Feature.text)
 
