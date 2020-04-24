@@ -27,6 +27,7 @@ protocol HandleMapSearch {
 
 protocol HandleModelSearch {
     func addPlaceMark(name: String, qualified_Name: String, longtitude: CLLocationDegrees, latitude: CLLocationDegrees, idx: Int)
+     func addPlaceMark1(name: [String], qualified_Name: [String])
 }
 
 class ViewController: UIViewController, UISearchBarDelegate {
@@ -408,6 +409,9 @@ extension ViewController: HandleMapSearch {
 }
 
 extension ViewController: HandleModelSearch {
+    func addPlaceMark1(name: [String], qualified_Name: [String]) {
+    }
+    
     func addPlaceMark(name: String, qualified_Name: String, longtitude: CLLocationDegrees, latitude: CLLocationDegrees, idx: Int)
     {
         print("OKDelegate!")
@@ -417,25 +421,27 @@ extension ViewController: HandleModelSearch {
 //            Mapp.subtitle = qualified_Name
 //            Mapp.longtitude = longtitude
 //            Mapp.latitude = latitude
+            DispatchQueue.main.async {
             
-            let annotation = MGLPointAnnotation()
-                                                 
-            annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longtitude)
-                               
-           
-                               
-            annotation.title = name
-            annotation.subtitle = qualified_Name
-            
-            print("annotation coordinate: \(annotation.coordinate), name: \(String(describing: annotation.title)) ")
-            self.mapView.addAnnotation(annotation)
-            
-            self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
-                if error != nil {
-                    print("Error calculating route")
-                                          //activityIndicator.stopAnimating()
+                let annotation = MGLPointAnnotation()
+                                                     
+                annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longtitude)
+                                   
+               
+                                   
+                annotation.title = name
+                annotation.subtitle = qualified_Name
+                
+                print("annotation coordinate: \(annotation.coordinate), name: \(String(describing: annotation.title)) ")
+                self.mapView.addAnnotation(annotation)
+                
+                self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
+                    if error != nil {
+                        print("Error calculating route")
+                                              //activityIndicator.stopAnimating()
+                    }
+                                      
                 }
-                                  
             }
         }
         

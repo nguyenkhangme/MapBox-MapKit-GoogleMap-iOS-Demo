@@ -23,7 +23,9 @@ import MapboxDirections
 
 class LocationSearchTableViewController: UITableViewController {
     
-    let sharedFetchData = FetchData.shared
+    var sharedFetchData = FetchData.shared
+    
+    var tessst = FetchData()
     
     let geocoder = Geocoder.shared
 
@@ -42,6 +44,8 @@ class LocationSearchTableViewController: UITableViewController {
     lazy var mapView = NavigationMapView()
 
     var matchingItems: [GeocodedPlacemark] = []
+    
+    var matchingItems1 = PlaceMark()
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -51,25 +55,29 @@ class LocationSearchTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return matchingItems.count
+        return matchingItems1.Name.count
     }
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
     
-        let selectedItem = matchingItems[indexPath.row]
         
-        cell.textLabel?.text = selectedItem.name
-        cell.detailTextLabel?.text = selectedItem.qualifiedName
+//        let selectedItem = matchingItems[indexPath.row]
+//
+//        cell.textLabel?.text = selectedItem.name
+//        cell.detailTextLabel?.text = selectedItem.qualifiedName
+        
+        cell.textLabel?.text = matchingItems1.Name[indexPath.row]
+        cell.detailTextLabel?.text = matchingItems1.placeName[indexPath.row]
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let selectedItem1 = matchingItems[indexPath.row]
-        handleMapSearchDelegate?.addAnnotation(placemark: selectedItem1)
+//        let selectedItem1 = matchingItems1[indexPath.row]
+//        handleMapSearchDelegate?.addAnnotation(placemark: selectedItem1)
         dismiss(animated: true, completion: nil)
     }
     
@@ -124,34 +132,37 @@ class LocationSearchTableViewController: UITableViewController {
 extension LocationSearchTableViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
-        sharedFetchData.loadData(query: searchController.searchBar.text ?? "")
+        
+        tessst.HandleModelSearchDelegate = self
+        tessst.loadData(query: searchController.searchBar.text ?? "")
+      
         
         //print("abcdef: \(sharedFetchData.loadData(query: searchController.searchBar.text ?? "").abcdef.Name[0])")
         
-        let options = ForwardGeocodeOptions(query: searchController.searchBar.text ?? "")
-
-
-        //DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-            
-            options.allowedISOCountryCodes = ["CA"]
-            //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
-            options.allowedScopes = [.address, .pointOfInterest]
-
-            _ = self.geocoder.geocode(options) { (placemarks, attribution, error) in
-               
-                if let placemarksX = placemarks {
-                    DispatchQueue.main.async {
-//                        if options == ForwardGeocodeOptions(query: searchController.searchBar.text ?? "") {
+//        let options = ForwardGeocodeOptions(query: searchController.searchBar.text ?? "")
 //
-//                        }
-                        self.matchingItems = placemarksX
-                        self.tableView.reloadData()
-                    }
-                                
-                } else {
-                    return
-                }
-            }
+//
+//        //DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+//
+//            options.allowedISOCountryCodes = ["CA"]
+//            //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
+//            options.allowedScopes = [.address, .pointOfInterest]
+//
+//            _ = self.geocoder.geocode(options) { (placemarks, attribution, error) in
+//
+//                if let placemarksX = placemarks {
+//                    DispatchQueue.main.async {
+////                        if options == ForwardGeocodeOptions(query: searchController.searchBar.text ?? "") {
+////
+////                        }
+//                        self.matchingItems = placemarksX
+//                        self.tableView.reloadData()
+//                    }
+//
+//                } else {
+//                    return
+//                }
+//            }
             
             //print("placemark: \(String(describing: placemarks)),\nmatching: \(self.matchingItems)")
         //}
@@ -160,4 +171,20 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
 
 }
 
-
+extension LocationSearchTableViewController : HandleModelSearch {
+    func addPlaceMark(name: String, qualified_Name: String, longtitude: CLLocationDegrees, latitude: CLLocationDegrees, idx: Int) {
+        
+    }
+    
+    func addPlaceMark1(name: [String], qualified_Name: [String]) {
+        print("OK Delegate Table View")
+        matchingItems1.Name = name
+        matchingItems1.placeName = qualified_Name
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+    }
+    
+    
+}

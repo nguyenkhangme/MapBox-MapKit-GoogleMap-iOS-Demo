@@ -67,10 +67,10 @@ struct FetchData {
                     //for placeMark in placeMarks {
                     
                     
+                    self.HandleModelSearchDelegate?.addPlaceMark1(name:placeMarks.Name, qualified_Name: placeMarks.placeName)
+                    
                     for placeMarkCount in placeMarks.Name.indices {
-                        DispatchQueue.main.async {
-                        self.HandleModelSearchDelegate?.addPlaceMark(name:placeMarks.Name[placeMarkCount], qualified_Name: placeMarks.placeName[placeMarkCount], longtitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][0]), latitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][1]), idx: placeMarkCount)
-                        }
+                    self.HandleModelSearchDelegate?.addPlaceMark(name:placeMarks.Name[placeMarkCount], qualified_Name: placeMarks.placeName[placeMarkCount], longtitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][0]), latitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][1]), idx: placeMarkCount)
                         //print("\(placeMarkName)\n")
                         print("\(placeMarks.Name[placeMarkCount])\n")
                         print("\(placeMarks.placeName[placeMarkCount])\n")
@@ -407,7 +407,7 @@ struct PlaceMark {
     
     var placeName: [String] = []
     var Name: [String] = []
-    var coordinates: [[Double]] = []
+    var coordinates: [[Double]] = [[]]
     
     private enum CodingKeys: String, CodingKey {
         case placeName = "place_name"
