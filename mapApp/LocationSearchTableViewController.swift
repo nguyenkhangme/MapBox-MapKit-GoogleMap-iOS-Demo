@@ -22,6 +22,8 @@ import MapboxDirections
 
 class LocationSearchTableViewController: UITableViewController {
     
+    let sharedFetchData = FetchData.shared
+    
     let geocoder = Geocoder.shared
 
     override func viewDidLoad() {
@@ -121,24 +123,26 @@ class LocationSearchTableViewController: UITableViewController {
 extension LocationSearchTableViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
+        sharedFetchData.loadData(query: searchController.searchBar.text ?? "")
+        
         let options = ForwardGeocodeOptions(query: searchController.searchBar.text ?? "")
 
 
-        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+        //DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             
             options.allowedISOCountryCodes = ["CA"]
             //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
             options.allowedScopes = [.address, .pointOfInterest]
 
-            _ = self!.geocoder.geocode(options) { (placemarks, attribution, error) in
+            _ = self.geocoder.geocode(options) { (placemarks, attribution, error) in
                
                 if let placemarksX = placemarks {
                     DispatchQueue.main.async {
 //                        if options == ForwardGeocodeOptions(query: searchController.searchBar.text ?? "") {
 //
 //                        }
-                        self!.matchingItems = placemarksX
-                        self!.tableView.reloadData()
+                        self.matchingItems = placemarksX
+                        self.tableView.reloadData()
                     }
                                 
                 } else {
@@ -147,7 +151,7 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
             }
             
             //print("placemark: \(String(describing: placemarks)),\nmatching: \(self.matchingItems)")
-        }
+        //}
         
     }
 

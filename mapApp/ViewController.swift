@@ -27,7 +27,13 @@ protocol HandleMapSearch {
 
 
 class ViewController: UIViewController, UISearchBarDelegate {
-
+    
+    let sharedTest = test.shared
+    
+    let sharedFetchData = FetchData.shared
+    
+  
+    
     let geocoder = Geocoder.shared
     
     lazy var Mapp = Map(latitude: 40.74699,longtitude: -73.98742,title: "Central Park",subtitle: "The biggest park in New York City!")
@@ -43,6 +49,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        sharedTest.tesst()
     
         //searchTextField.delegate = self
         
@@ -107,6 +115,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
         searchController.searchBar.delegate = self
         
         searchController.searchBar.placeholder = "Search for places"
+        
+        searchController.searchBar.resignFirstResponder()
  
         present(searchController, animated: true, completion: nil)
         
@@ -119,7 +129,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
 
-            DispatchQueue.main.async {
+            //DispatchQueue.main.async {
                 
                 let activityIndicator = UIActivityIndicatorView()
 
@@ -141,10 +151,12 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 self.view.addSubview(activityIndicator)
                 
                 //searchBar.text = self.query
+        
+        sharedFetchData.loadData(query: searchBar.text ?? "")
                 
-                let options = ForwardGeocodeOptions(query: searchBar.text!)
+                let options = ForwardGeocodeOptions(query: searchBar.text ?? "")
                 
-                DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+                //DispatchQueue.global(qos: .userInteractive).async { [weak self] in
                 
                    
                     
@@ -152,7 +164,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
                     options.allowedScopes = [.address, .pointOfInterest]
 
-                    let task = self!.geocoder.geocode(options) { (placemarks, attribution, error) in
+                    let task = self.geocoder.geocode(options) { (placemarks, attribution, error) in
                         guard let placemark = placemarks?.first else {
                             return
                         }
@@ -160,22 +172,22 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         print(placemark.name)
                             // 200 Queen St
                         
-                        self!.Mapp.title = placemark.name
-                        self!.Mapp.subtitle = placemark.qualifiedName ?? " "
+                        self.Mapp.title = placemark.name
+                        self.Mapp.subtitle = placemark.qualifiedName ?? " "
                         
                        // print(placemark.qualifiedName)
                             // 200 Queen St, Saint John, New Brunswick E2L 2X1, Canada
 
                        if let coordinate = placemark.location {
                             
-                        self!.Mapp.latitude = coordinate.coordinate.latitude
-                        self!.Mapp.longtitude = coordinate.coordinate.longitude
+                        self.Mapp.latitude = coordinate.coordinate.latitude
+                        self.Mapp.longtitude = coordinate.coordinate.longitude
                             
                         } else {
                             return
                         }
                     }
-                }
+                //}
                     //print("\(coordinate.latitude), \(coordinate.longitude)")
                     
                     // MARK: Add a point annotation
@@ -213,7 +225,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     
                 
                 
-        }
+        //}
  
     
     
