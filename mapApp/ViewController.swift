@@ -22,7 +22,7 @@ import MapboxDirections
 
 
 protocol HandleMapSearch {
-    func addAnnotation(placemark: GeocodedPlacemark)
+    func addAnnotationAPI(placemark: PlaceMark, row: Int)
 }
 
 protocol HandleModelSearch {
@@ -31,6 +31,8 @@ protocol HandleModelSearch {
 }
 
 class ViewController: UIViewController, UISearchBarDelegate {
+    
+     
     
     let sharedTest = test.shared
     
@@ -52,18 +54,27 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     var directionsRoute: Route?
     
+    let activityIndicatorX = UIActivityIndicatorView()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicatorX.style = UIActivityIndicatorView.Style.medium
+
+        activityIndicatorX.center = self.view.center
+
+        activityIndicatorX.hidesWhenStopped = true
+
+        self.view.addSubview(activityIndicatorX)
+        
         sharedTest.tesst()
        
-    
-        //searchTextField.delegate = self
         
         // Set the map view's delegate
         definesPresentationContext = true
          
-          mapView.delegate = self
+        mapView.delegate = self
           
   
         
@@ -91,10 +102,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
    }
     
-    //var resultSearchController:UISearchController? = nil
-   
-    //resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-    //resultSearchController?.searchResultsUpdater = locationSearchTable
+    
     
     @IBOutlet weak var goToUserPlaceButton: UIButton!
     @IBAction func GoToUserLocation(_ sender: Any) {
@@ -103,6 +111,38 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
              
+    }
+    
+    func updateViewFromModel(){
+        
+
+        
+        mapView.clearsContextBeforeDrawing = true
+        
+        let annotation = MGLPointAnnotation()
+                                             
+        annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
+                           
+        print("annotation coordinate update view from model: \(annotation.coordinate)")
+                           
+        annotation.title = self.Mapp.title
+        annotation.subtitle = self.Mapp.subtitle
+        
+        self.view.addSubview(activityIndicatorX)
+        activityIndicatorX.startAnimating()
+        print("star animating...")
+        
+        self.mapView.addAnnotation(annotation)
+        
+        self.mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
+                           
+        self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
+        if error != nil {
+            print("Error calculating route")
+            //activityIndicator.stopAnimating()
+        }
+    }
+        
     }
     
     @IBAction func searchPlace(_ sender: UIBarButtonItem) {
@@ -133,112 +173,15 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         
         
+        
         mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
 
-            //DispatchQueue.main.async {
+        self.view.addSubview(activityIndicatorX)
+        activityIndicatorX.startAnimating()
                 
-                let activityIndicator = UIActivityIndicatorView()
-
-                activityIndicator.style = UIActivityIndicatorView.Style.medium
-
-                activityIndicator.center = self.view.center
-
-                activityIndicator.hidesWhenStopped = true
-
-                activityIndicator.startAnimating()
-                
-//                activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-//                let views = ["view": self.view!, "activityIndicator": activityIndicator]
-//                let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[view]-(<=0)-[activityIndicator(100)]", options: NSLayoutConstraint.FormatOptions.alignAllCenterY, metrics: nil, views: views)
-//                let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[view]-(<=0)-[activityIndicator(100)]", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: views)
-//                self.view.addConstraints(horizontalConstraints)
-//                self.view.addConstraints(verticalConstraints)
-
-                self.view.addSubview(activityIndicator)
-                
-                //searchBar.text = self.query
-        
-//         sharedFetchData.HandleModelSearchDelegate = self
-//
-//        sharedFetchData.loadData(query: searchBar.text ?? "")
         
         tessst.HandleModelSearchDelegate = self
         tessst.loadData(query: searchBar.text ?? "")
-                
-//                let options = ForwardGeocodeOptions(query: searchBar.text ?? "")
-//
-//                //DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-//
-//
-//
-//                    options.allowedISOCountryCodes = ["CA"]
-//                    //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
-//                    options.allowedScopes = [.address, .pointOfInterest]
-//
-//                    let task = self.geocoder.geocode(options) { (placemarks, attribution, error) in
-//                        guard let placemark = placemarks?.first else {
-//                            return
-//                        }
-//
-//                        print(placemark.name)
-//                            // 200 Queen St
-//
-//                        self.Mapp.title = placemark.name
-//                        self.Mapp.subtitle = placemark.qualifiedName ?? " "
-//
-//                       // print(placemark.qualifiedName)
-//                            // 200 Queen St, Saint John, New Brunswick E2L 2X1, Canada
-//
-//                       if let coordinate = placemark.location {
-//
-//                        self.Mapp.latitude = coordinate.coordinate.latitude
-//                        self.Mapp.longtitude = coordinate.coordinate.longitude
-//
-//                        } else {
-//                            return
-//                        }
-//                    }
-                //}
-                    //print("\(coordinate.latitude), \(coordinate.longitude)")
-                    
-                    // MARK: Add a point annotation
-                              
-                    
-//                    let annotation = MGLPointAnnotation()
-//                                      
-//                    annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
-//                    
-//                    print("annotation coordinate: \(annotation.coordinate)")
-//                    
-//                    annotation.title = self.Mapp.title
-//                    annotation.subtitle = self.Mapp.subtitle
-//                    self.mapView.addAnnotation(annotation)
-//                    
-//                    
-//                    
-//                    self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
-//                        if error != nil {
-//                            print("Error calculating route")
-//                            activityIndicator.stopAnimating()
-//                        }
-//                        else {
-//                            activityIndicator.stopAnimating()
-//                            
-//                        }
-//                    }
-                    
-                    activityIndicator.stopAnimating()
-                    
-                
-                //activityIndicator.stopAnimating()
-       
-                    //self.view.isUserInteractionEnabled = false
-                    
-                
-                
-        //}
- 
-    
     
 
     }
@@ -283,6 +226,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
             // Add the source and style layer of the route line to the map
             mapView.style?.addSource(source)
             mapView.style?.addLayer(lineStyle)
+            
+            activityIndicatorX.stopAnimating()
+            print("stop animating")
         }
     }
     
@@ -325,85 +271,13 @@ extension ViewController: MGLMapViewDelegate {
 }
 
 extension ViewController: HandleMapSearch {
-    func addAnnotation(placemark: GeocodedPlacemark) {
+    func addAnnotationAPI(placemark: PlaceMark, row: Int) {
+        self.Mapp.title = placemark.Name[row]
+        self.Mapp.subtitle = placemark.placeName[row]
+        self.Mapp.longtitude = CLLocationDegrees(placemark.coordinates[row][0])
+        self.Mapp.latitude = CLLocationDegrees(placemark.coordinates[row][1])
         
-        let activityIndicator = UIActivityIndicatorView()
-
-        activityIndicator.style = UIActivityIndicatorView.Style.medium
-
-        activityIndicator.center = self.view.center
-
-        activityIndicator.hidesWhenStopped = true
-        
-//        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-//          let views = ["view": view!, "activityIndicator": activityIndicator]
-//          let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[view]-(<=0)-[activityIndicator(100)]", options: NSLayoutConstraint.FormatOptions.alignAllCenterY, metrics: nil, views: views)
-//          let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[view]-(<=0)-[activityIndicator(100)]", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: views)
-//          view.addConstraints(horizontalConstraints)
-//          view.addConstraints(verticalConstraints)
-
-        activityIndicator.startAnimating()
-
-        self.view.addSubview(activityIndicator)
-        
-        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-                
-                self!.Mapp.title = placemark.name
-                self!.Mapp.subtitle = placemark.qualifiedName ?? " "
-                
-               // print(placemark.qualifiedName)
-                    // 200 Queen St, Saint John, New Brunswick E2L 2X1, Canada
-
-               if let coordinate = placemark.location {
-                    
-                self!.Mapp.latitude = coordinate.coordinate.latitude
-                self!.Mapp.longtitude = coordinate.coordinate.longitude
-                    
-                } else {
-                    return
-                }
-            }
-        
-//        self.Mapp.title = placemark.name
-//        self.Mapp.subtitle = placemark.qualifiedName ?? " "
-//        
-//        if let coordinate = placemark.location {
-//            
-//            self.Mapp.latitude = coordinate.coordinate.latitude
-//            self.Mapp.longtitude = coordinate.coordinate.longitude
-//            
-//        } else {
-//            return
-//        }
-        //let coordinate = placemark.location!.coordinate
-        
-        
-        let annotation = MGLPointAnnotation()
-                                             
-        annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
-                           
-        print("annotation coordinate: \(annotation.coordinate)")
-                           
-        annotation.title = self.Mapp.title
-        annotation.subtitle = self.Mapp.subtitle
-        self.mapView.addAnnotation(annotation)
-        
-        self.mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
-                           
-        self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
-            if error != nil {
-                print("Error calculating route")
-                activityIndicator.stopAnimating()
-            } else {
-                
-                activityIndicator.stopAnimating()
-                                       
-            }
-            activityIndicator.stopAnimating()
-        }
-        
-       
-        //
+        updateViewFromModel()
     }
    
 }
@@ -421,14 +295,13 @@ extension ViewController: HandleModelSearch {
                 }
                             
                         }
-//            annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinates[0][1]), longitude: CLLocationDegrees(coordinates[0][0]))
-                               
-           
-                               
             annotation.title = name[0]
             annotation.subtitle = qualified_Name[0]
             
             print("annotation coordinate: \(annotation.coordinate), name: \(String(describing: annotation.title)) ")
+            
+            self.activityIndicatorX.startAnimating()
+            
             self.mapView.addAnnotation(annotation)
             
             self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in

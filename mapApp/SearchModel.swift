@@ -407,7 +407,7 @@ struct PlaceMark {
     
     var placeName: [String] = []
     var Name: [String] = []
-    var coordinates: [[Double]] = [[]]
+    var coordinates: [[Double]] = [Array(arrayLiteral:2)]
     
     private enum CodingKeys: String, CodingKey {
         case placeName = "place_name"

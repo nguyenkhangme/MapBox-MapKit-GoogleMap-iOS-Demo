@@ -63,11 +63,6 @@ class LocationSearchTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
     
         
-//        let selectedItem = matchingItems[indexPath.row]
-//
-//        cell.textLabel?.text = selectedItem.name
-//        cell.detailTextLabel?.text = selectedItem.qualifiedName
-        
         cell.textLabel?.text = matchingItems1.Name[indexPath.row]
         cell.detailTextLabel?.text = matchingItems1.placeName[indexPath.row]
 
@@ -76,8 +71,9 @@ class LocationSearchTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-//        let selectedItem1 = matchingItems1[indexPath.row]
-//        handleMapSearchDelegate?.addAnnotation(placemark: selectedItem1)
+        //API
+        let selectedItem1 = matchingItems1
+        handleMapSearchDelegate?.addAnnotationAPI(placemark: selectedItem1, row: indexPath.row)
         dismiss(animated: true, completion: nil)
     }
     
@@ -136,37 +132,6 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
         tessst.HandleModelSearchDelegate = self
         tessst.loadData(query: searchController.searchBar.text ?? "")
       
-        
-        //print("abcdef: \(sharedFetchData.loadData(query: searchController.searchBar.text ?? "").abcdef.Name[0])")
-        
-//        let options = ForwardGeocodeOptions(query: searchController.searchBar.text ?? "")
-//
-//
-//        //DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-//
-//            options.allowedISOCountryCodes = ["CA"]
-//            //specific, near//options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
-//            options.allowedScopes = [.address, .pointOfInterest]
-//
-//            _ = self.geocoder.geocode(options) { (placemarks, attribution, error) in
-//
-//                if let placemarksX = placemarks {
-//                    DispatchQueue.main.async {
-////                        if options == ForwardGeocodeOptions(query: searchController.searchBar.text ?? "") {
-////
-////                        }
-//                        self.matchingItems = placemarksX
-//                        self.tableView.reloadData()
-//                    }
-//
-//                } else {
-//                    return
-//                }
-//            }
-            
-            //print("placemark: \(String(describing: placemarks)),\nmatching: \(self.matchingItems)")
-        //}
-        
     }
 
 }
@@ -174,7 +139,7 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
 extension LocationSearchTableViewController : HandleModelSearch {
 
     func addPlaceMark1(name: [String], qualified_Name: [String], coordinates: [[Double]]) {
-        print("OK Delegate Table View")
+        print("OK Delegate Table View in location search")
         matchingItems1.Name = name
         matchingItems1.placeName = qualified_Name
         matchingItems1.coordinates = coordinates
