@@ -55,6 +55,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var directionsRoute: Route?
     
     let activityIndicatorX = UIActivityIndicatorView()
+    
+    lazy var locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTableViewController
 
     
     override func viewDidLoad() {
@@ -134,8 +136,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         self.mapView.addAnnotation(annotation)
         
-        self.mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
-                           
+        
         self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
         if error != nil {
             print("Error calculating route")
@@ -148,7 +149,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     @IBAction func searchPlace(_ sender: UIBarButtonItem) {
         
         //let locationSearchTable = LocationSearchTableViewController()
-        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTableViewController
+        
         
         locationSearchTable.handleMapSearchDelegate = self
         
@@ -171,10 +172,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        
-        
-        
-        mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
 
         self.view.addSubview(activityIndicatorX)
         activityIndicatorX.startAnimating()
@@ -182,6 +179,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         tessst.HandleModelSearchDelegate = self
         tessst.loadData(query: searchBar.text ?? "")
+        
+        locationSearchTable.dismiss(animated: true, completion: nil)
     
 
     }
@@ -215,6 +214,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
         // If there's already a route line on the map, reset its shape to the new route
         if let source = mapView.style?.source(withIdentifier: "route-source") as? MGLShapeSource {
             source.shape = polyline
+            
+            self.mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
+            activityIndicatorX.stopAnimating()
+            print("stop animating")
         } else {
             let source = MGLShapeSource(identifier: "route-source", features: [polyline], options: nil)
              
@@ -227,6 +230,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
             mapView.style?.addSource(source)
             mapView.style?.addLayer(lineStyle)
             
+            self.mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
             activityIndicatorX.stopAnimating()
             print("stop animating")
         }
@@ -277,6 +281,7 @@ extension ViewController: HandleMapSearch {
         self.Mapp.longtitude = CLLocationDegrees(placemark.coordinates[row][0])
         self.Mapp.latitude = CLLocationDegrees(placemark.coordinates[row][1])
         
+        
         updateViewFromModel()
     }
    
@@ -284,33 +289,13 @@ extension ViewController: HandleMapSearch {
 
 extension ViewController: HandleModelSearch {
     func addPlaceMark1(name: [String], qualified_Name: [String], coordinates: [[Double]]) {
-        DispatchQueue.main.async {
         
-            let annotation = MGLPointAnnotation()
-                                                 
-            for coordinate in coordinates.indices {
-                if coordinate == 0
-                {
-                annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinates[coordinate][1]), longitude: CLLocationDegrees(coordinates[coordinate][0]))
-                }
-                            
-                        }
-            annotation.title = name[0]
-            annotation.subtitle = qualified_Name[0]
-            
-            print("annotation coordinate: \(annotation.coordinate), name: \(String(describing: annotation.title)) ")
-            
-            self.activityIndicatorX.startAnimating()
-            
-            self.mapView.addAnnotation(annotation)
-            
-            self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
-                if error != nil {
-                    print("Error calculating route")
-                                          //activityIndicator.stopAnimating()
-                }
-                                  
-            }
+        Mapp.title = name[0]
+        Mapp.subtitle = qualified_Name[0]
+        Mapp.latitude = CLLocationDegrees(coordinates[0][1])
+        Mapp.longtitude = CLLocationDegrees(coordinates[0][0])
+        DispatchQueue.main.async {
+            self.updateViewFromModel()
         }
     }
     
