@@ -77,13 +77,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
          
         mapView.delegate = self
           
-  
-        
         let url = URL(string: "mapbox://styles/mapbox/streets-v11")
-        
-        //print("AASASDASDSAD: \(String(describing: Mapp.coordinate["latitude"]))")
-    
-        
+
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
        // mapView.setCenter(CLLocationCoordinate2D(latitude: Mapp.latitude , longitude: Mapp.longtitude), zoomLevel: 9, animated: false)
        
@@ -99,12 +94,38 @@ class ViewController: UIViewController, UISearchBarDelegate {
         mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
         
         view.addSubview(goToUserPlaceButton)
+        view.addSubview(NavigitionViewButton)
     
         
    }
     
     
     
+    @IBOutlet weak var NavigitionViewButton: UIButton!
+    @IBAction func GoToNavigitionView(_ sender: UIButton) {
+        
+//        let annotation = MGLPointAnnotation()
+//                                                    
+//        annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
+//                                  
+//        print("annotation coordinate update view from model: \(annotation.coordinate)")
+//                                  
+//        annotation.title = self.Mapp.title
+//        annotation.subtitle = self.Mapp.subtitle
+//        
+//        let origin = Waypoint(coordinate: self.mapView.userLocation!.coordinate, name: "Mapbox")
+//        let destination = Waypoint(coordinate: annotation.coordinate, name: "White House")
+//
+//        let options = NavigationRouteOptions(waypoints: [origin, destination])
+//
+//        Directions.shared.calculate(options) { (waypoints, routes, error) in
+//            guard let route = routes?.first else { return }
+//         
+//            let viewController = NavigationViewController(for: route)
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.present(viewController, animated: true, completion: nil)
+//        }
+    }
     @IBOutlet weak var goToUserPlaceButton: UIButton!
     @IBAction func GoToUserLocation(_ sender: Any) {
         
