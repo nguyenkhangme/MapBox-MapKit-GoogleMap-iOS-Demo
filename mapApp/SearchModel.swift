@@ -35,65 +35,25 @@ struct FetchData {
         let request = URLRequest(url: url)
         
         let task = URLSession.shared.dataTask(with: request) {data, response, error in
-//            let data = data
-//            if let string = String(data: data, encoding: .utf8) {
-//                DispatchQueue.main.async {
-//
-//                }
-//                    //print(\(string))
-//            }
                 
                 guard let json = data else {
                     print("Unexpected error URLSessionDataTask: \(String(describing: error)).")
                     return
                     
             }
-                
-//                let placeMarkStores = try decoder.decode([PlaceMarkService].self, from: json)
-//
-//                let placeMarks = placeMarkStores.map { PlaceMark(from: $0) }
-//
-//                for placeMark in placeMarks {
-//                    print("\(placeMark.placename)\n\(placeMark.matchingPlaceName)\n")
-//                }
+            
                 
                 let decoder = JSONDecoder()
                 do {
                     let placeMarkStores = try decoder.decode(PlaceMarkService.self, from: json)
                     let placeMarks = PlaceMark(from: placeMarkStores)
                     
-                    //abcdef = PlaceMark(from: placeMarkStores)
-                    
-                    //for placeMark in placeMarks {
-                    
-                    
                     self.HandleModelSearchDelegate?.addPlaceMark1(name:placeMarks.Name, qualified_Name: placeMarks.placeName, coordinates: placeMarks.coordinates)
-                    
-//                    for placeMarkCount in placeMarks.Name.indices {
-////                    self.HandleModelSearchDelegate?.addPlaceMark(name:placeMarks.Name[placeMarkCount], qualified_Name: placeMarks.placeName[placeMarkCount], longtitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][0]), latitude: CLLocationDegrees(placeMarks.coordinates[placeMarkCount][1]), idx: placeMarkCount)
-//                        //print("\(placeMarkName)\n")
-////                        print("\(placeMarks.Name[placeMarkCount])\n")
-////                        print("\(placeMarks.placeName[placeMarkCount])\n")
-////                        print("\(CLLocationDegrees(placeMarks.coordinates[placeMarkCount][0]))")
-////                        print(",\(CLLocationDegrees(placeMarks.coordinates[placeMarkCount][1]))\n\n")
-//                    }
-                    
-                    
-//                    for placeMarkName in placeMarks.Name {
-//                        print("\(placeMarkName)\n")
-//                    }
-//                    for placeMarkPlaceName in placeMarks.placeName {
-//                        print("\(placeMarkPlaceName)\n\n")
-//                    }
-                    //}
+               
                 }catch {
                     print("Unexpected error: \(error).")
                 }
-                    
-          
-            
-            
-            
+
         }
         task.resume()
     }
