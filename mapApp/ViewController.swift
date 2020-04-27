@@ -128,6 +128,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func updateViewFromModel(){
         
+        //New Bug: Draw route not change when user moving
+        
         mapView.clearsContextBeforeDrawing = true
         removeAllAnnotations()
         
