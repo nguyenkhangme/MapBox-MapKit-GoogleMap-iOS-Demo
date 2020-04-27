@@ -11,11 +11,11 @@ import Foundation
 public typealias Parameters = [String:Any]
 
 public protocol ParameterEncoder {
- static func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws
+    func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws
 }
 
 public enum NetworkError : String, Error{
     case parametersNil = "Parameters were Nil."
-    case enncodingFailed = "Parameters encoding failed."
+    case encodingFailed = "Parameters encoding failed."
     case missingURL = "URL is nil."
 }

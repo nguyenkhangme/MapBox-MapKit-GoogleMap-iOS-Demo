@@ -13,6 +13,8 @@
 		76AB15572456B93000F3B86C /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB15562456B93000F3B86C /* HTTPMethod.swift */; };
 		76AB15592456BA4D00F3B86C /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB15582456BA4D00F3B86C /* HTTPTask.swift */; };
 		76AB155B2456BD8F00F3B86C /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB155A2456BD8F00F3B86C /* ParameterEncoding.swift */; };
+		76AB155D2456C2BA00F3B86C /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB155C2456C2BA00F3B86C /* URLParameterEncoder.swift */; };
+		76AB15732456CF5500F3B86C /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB15722456CF5500F3B86C /* JSONParameterEncoder.swift */; };
 		76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */; };
 		76F50151244944E500CC79E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F50150244944E500CC79E7 /* AppDelegate.swift */; };
 		76F50153244944E500CC79E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F50152244944E500CC79E7 /* SceneDelegate.swift */; };
@@ -35,6 +37,8 @@
 		76AB15562456B93000F3B86C /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		76AB15582456BA4D00F3B86C /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		76AB155A2456BD8F00F3B86C /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		76AB155C2456C2BA00F3B86C /* URLParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
+		76AB15722456CF5500F3B86C /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
 		76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		76F5014D244944E500CC79E7 /* mapApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76F50150244944E500CC79E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,8 +113,17 @@
 			isa = PBXGroup;
 			children = (
 				76AB155A2456BD8F00F3B86C /* ParameterEncoding.swift */,
+				76AB155C2456C2BA00F3B86C /* URLParameterEncoder.swift */,
+				76AB15722456CF5500F3B86C /* JSONParameterEncoder.swift */,
 			);
 			path = Encoding;
+			sourceTree = "<group>";
+		};
+		76AB155E2456C2E200F3B86C /* Support */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		76F50144244944E400CC79E7 = {
@@ -139,15 +152,16 @@
 				76AB154F2456B3B700F3B86C /* Networking */,
 				762DAB0724516A83005ADBB4 /* SearchModel.swift */,
 				762DAB09245172C2005ADBB4 /* CoreLocation.swift */,
-				76F50150244944E500CC79E7 /* AppDelegate.swift */,
-				76F50152244944E500CC79E7 /* SceneDelegate.swift */,
 				76F50154244944E500CC79E7 /* ViewController.swift */,
 				76F501682449532900CC79E7 /* MapModule.swift */,
 				76F50156244944E500CC79E7 /* Main.storyboard */,
 				76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */,
-				76F50159244944E600CC79E7 /* Assets.xcassets */,
 				76F5015B244944E600CC79E7 /* LaunchScreen.storyboard */,
+				76F50152244944E500CC79E7 /* SceneDelegate.swift */,
+				76F50150244944E500CC79E7 /* AppDelegate.swift */,
+				76F50159244944E600CC79E7 /* Assets.xcassets */,
 				76F5015E244944E600CC79E7 /* Info.plist */,
+				76AB155E2456C2E200F3B86C /* Support */,
 			);
 			path = mapApp;
 			sourceTree = "<group>";
@@ -282,10 +296,12 @@
 				76F50151244944E500CC79E7 /* AppDelegate.swift in Sources */,
 				762DAB0824516A83005ADBB4 /* SearchModel.swift in Sources */,
 				76F501692449532900CC79E7 /* MapModule.swift in Sources */,
+				76AB15732456CF5500F3B86C /* JSONParameterEncoder.swift in Sources */,
 				76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */,
 				76AB155B2456BD8F00F3B86C /* ParameterEncoding.swift in Sources */,
 				76AB15572456B93000F3B86C /* HTTPMethod.swift in Sources */,
 				76AB15592456BA4D00F3B86C /* HTTPTask.swift in Sources */,
+				76AB155D2456C2BA00F3B86C /* URLParameterEncoder.swift in Sources */,
 				76AB15552456B78A00F3B86C /* EndPointType.swift in Sources */,
 				76F50153244944E500CC79E7 /* SceneDelegate.swift in Sources */,
 				762DAB0A245172C2005ADBB4 /* CoreLocation.swift in Sources */,
