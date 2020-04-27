@@ -32,6 +32,7 @@ protocol HandleModelSearch {
 class ViewController: UIViewController, UISearchBarDelegate {
     
      
+    let sharedPlaceMark = PlaceMark.shared
     
     let sharedTest = test.shared
     
@@ -94,7 +95,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
         
         view.addSubview(goToUserPlaceButton)
-        view.addSubview(NavigitionViewButton)
+        //view.addSubview(NavigitionViewButton)
     
         
    }
@@ -104,27 +105,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var NavigitionViewButton: UIButton!
     @IBAction func GoToNavigitionView(_ sender: UIButton) {
         
-//        let annotation = MGLPointAnnotation()
-//                                                    
-//        annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
-//                                  
-//        print("annotation coordinate update view from model: \(annotation.coordinate)")
-//                                  
-//        annotation.title = self.Mapp.title
-//        annotation.subtitle = self.Mapp.subtitle
-//        
-//        let origin = Waypoint(coordinate: self.mapView.userLocation!.coordinate, name: "Mapbox")
-//        let destination = Waypoint(coordinate: annotation.coordinate, name: "White House")
-//
-//        let options = NavigationRouteOptions(waypoints: [origin, destination])
-//
-//        Directions.shared.calculate(options) { (waypoints, routes, error) in
-//            guard let route = routes?.first else { return }
-//         
-//            let viewController = NavigationViewController(for: route)
-//            viewController.modalPresentationStyle = .fullScreen
-//            self.present(viewController, animated: true, completion: nil)
-//        }
     }
     @IBOutlet weak var goToUserPlaceButton: UIButton!
     @IBAction func GoToUserLocation(_ sender: Any) {
@@ -146,7 +126,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         annotation.coordinate = CLLocationCoordinate2D(latitude: self.Mapp.latitude, longitude: self.Mapp.longtitude)
                            
         print("annotation coordinate update view from model: \(annotation.coordinate)")
-                           
+        
         annotation.title = self.Mapp.title
         annotation.subtitle = self.Mapp.subtitle
         
@@ -200,9 +180,21 @@ class ViewController: UIViewController, UISearchBarDelegate {
         tessst.HandleModelSearchDelegate = self
         tessst.loadData(query: searchBar.text ?? "")
         
+        //Singleton
+        //Uncomment this and comment delegate to use
+//        handleSharedPlaceMark()
+//        updateViewFromModel()
+        
         locationSearchTable.dismiss(animated: true, completion: nil)
     
 
+    }
+    
+    func handleSharedPlaceMark(){
+        Mapp.title = sharedPlaceMark.Name[0]
+        Mapp.subtitle = sharedPlaceMark.placeName[0]
+        Mapp.latitude = CLLocationDegrees(sharedPlaceMark.coordinates[0][1])
+        Mapp.longtitude = CLLocationDegrees(sharedPlaceMark.coordinates[0][0])
     }
     
     func calculateRoute(from origin: CLLocationCoordinate2D,
@@ -309,7 +301,7 @@ extension ViewController: HandleMapSearch {
 
 extension ViewController: HandleModelSearch {
     func addPlaceMark1(name: [String], qualified_Name: [String], coordinates: [[Double]]) {
-        
+
         Mapp.title = name[0]
         Mapp.subtitle = qualified_Name[0]
         Mapp.latitude = CLLocationDegrees(coordinates[0][1])

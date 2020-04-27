@@ -42,15 +42,22 @@ struct FetchData {
                     
             }
             
+            var sharedPlaceMark = PlaceMark.shared
                 
-                let decoder = JSONDecoder()
-                do {
-                    let placeMarkStores = try decoder.decode(PlaceMarkService.self, from: json)
-                    let placeMarks = PlaceMark(from: placeMarkStores)
+            let decoder = JSONDecoder()
+                
+            do {
                     
-                    self.HandleModelSearchDelegate?.addPlaceMark1(name:placeMarks.Name, qualified_Name: placeMarks.placeName, coordinates: placeMarks.coordinates)
+                let placeMarkStores = try decoder.decode(PlaceMarkService.self, from: json)
+                let placeMarks = PlaceMark(from: placeMarkStores)
+                  //Delegate
+                self.HandleModelSearchDelegate?.addPlaceMark1(name:placeMarks.Name, qualified_Name: placeMarks.placeName, coordinates: placeMarks.coordinates)
+                    //Singleton
+                
+                sharedPlaceMark = placeMarks
                
-                }catch {
+                
+            }catch {
                     print("Unexpected error: \(error).")
                 }
 
@@ -364,6 +371,8 @@ struct test {
 
 
 struct PlaceMark {
+    
+    static let shared = PlaceMark()
     
     var placeName: [String] = []
     var Name: [String] = []
