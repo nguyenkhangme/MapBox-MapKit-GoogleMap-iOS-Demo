@@ -174,7 +174,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 
         
         tessst.HandleModelSearchDelegate = self
-        tessst.loadData(query: searchBar.text ?? "")
+        tessst.loadData(query: searchBar.text ?? "", coordinate: self.mapView.userLocation!.coordinate)
         
         //Singleton
         //Uncomment this and comment delegate to use

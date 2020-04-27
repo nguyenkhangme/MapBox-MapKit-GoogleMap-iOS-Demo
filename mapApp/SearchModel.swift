@@ -18,7 +18,7 @@ struct FetchData {
     
     var HandleModelSearchDelegate: HandleModelSearch? = nil
     
-    func loadData(query: String) {
+    func loadData(query: String, coordinate: CLLocationCoordinate2D) {
         
         //var abcdef = PlaceMark()
         
@@ -27,7 +27,7 @@ struct FetchData {
             return
             
         }
-        guard let url = URL(string:"https://api.mapbox.com/geocoding/v5/mapbox.places/" + urlString + ".json?country=CA&access_token=pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g") else {
+        guard let url = URL(string:"https://api.mapbox.com/geocoding/v5/mapbox.places/" + urlString + ".json?proximity="+String(coordinate.longitude)+","+String(coordinate.latitude)+"&access_token=pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g") else {
             print("Invalid URL")
             return
         }
