@@ -98,6 +98,19 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
    }
     
+    func removeAllAnnotations() {
+      
+      guard let annotations = mapView.annotations else { return print("Annotations Error") }
+      
+      if annotations.count != 0 {
+        for annotation in annotations {
+          mapView.removeAnnotation(annotation)
+        }
+      } else {
+        return
+      }
+    }
+    
     
     
     @IBOutlet weak var NavigitionViewButton: UIButton!
@@ -116,6 +129,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     func updateViewFromModel(){
         
         mapView.clearsContextBeforeDrawing = true
+        removeAllAnnotations()
         
         let annotation = MGLPointAnnotation()
                                              
