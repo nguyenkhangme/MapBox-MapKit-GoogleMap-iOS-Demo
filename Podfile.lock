@@ -17,12 +17,22 @@ PODS:
   - MapboxNavigationNative (6.2.1)
   - MapboxSpeech (0.1.1)
   - Polyline (4.2.1)
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.13.1):
+    - PromiseKit/CorePromise
   - Solar (2.1.0)
   - Turf (0.3.0)
 
 DEPENDENCIES:
   - MapboxGeocoder.swift (~> 0.12)
   - MapboxNavigation (~> 0.39.0)
+  - PromiseKit (~> 6.8)
 
 SPEC REPOS:
   trunk:
@@ -35,6 +45,7 @@ SPEC REPOS:
     - MapboxNavigationNative
     - MapboxSpeech
     - Polyline
+    - PromiseKit
     - Solar
     - Turf
 
@@ -48,9 +59,10 @@ SPEC CHECKSUMS:
   MapboxNavigationNative: 11dc22140f4698d3f26989f2b6379dc81ef0d4c1
   MapboxSpeech: 59b3984d3f433a443d24acf53097f918c5cc70f9
   Polyline: 0e9890790292741c8186201a536b6bb6a78d02dd
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   Solar: 2dc6e7cc39186cb0c8228fa08df76fb50c7d8f24
   Turf: c6bdf62d6a70c647874f295dd1cf4eefc0c3e9e6
 
-PODFILE CHECKSUM: d5f52084f2b44a8e9d92a879c3ab5d1782d5ff0b
+PODFILE CHECKSUM: 5ffe0ddf7f4c8005e19c718e30309a5ddb8c6e06
 
 COCOAPODS: 1.9.0.beta.2
