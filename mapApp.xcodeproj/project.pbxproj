@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		762DAB0824516A83005ADBB4 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762DAB0724516A83005ADBB4 /* SearchModel.swift */; };
 		762DAB0A245172C2005ADBB4 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762DAB09245172C2005ADBB4 /* CoreLocation.swift */; };
+		76AB15552456B78A00F3B86C /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB15542456B78A00F3B86C /* EndPointType.swift */; };
+		76AB15572456B93000F3B86C /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB15562456B93000F3B86C /* HTTPMethod.swift */; };
+		76AB15592456BA4D00F3B86C /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB15582456BA4D00F3B86C /* HTTPTask.swift */; };
+		76AB155B2456BD8F00F3B86C /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB155A2456BD8F00F3B86C /* ParameterEncoding.swift */; };
 		76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */; };
 		76F50151244944E500CC79E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F50150244944E500CC79E7 /* AppDelegate.swift */; };
 		76F50153244944E500CC79E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F50152244944E500CC79E7 /* SceneDelegate.swift */; };
@@ -27,6 +31,10 @@
 		23A3DAD9E35034D1FDE974D1 /* Pods_mapApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mapApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		762DAB0724516A83005ADBB4 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		762DAB09245172C2005ADBB4 /* CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocation.swift; sourceTree = "<group>"; };
+		76AB15542456B78A00F3B86C /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		76AB15562456B93000F3B86C /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		76AB15582456BA4D00F3B86C /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		76AB155A2456BD8F00F3B86C /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
 		76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		76F5014D244944E500CC79E7 /* mapApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76F50150244944E500CC79E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +70,49 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		76AB154F2456B3B700F3B86C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				76AB15512456B3FC00F3B86C /* EndPoint */,
+				76AB15502456B3F800F3B86C /* Manager */,
+				76AB15522456B40100F3B86C /* Service */,
+				76AB15532456B44600F3B86C /* Encoding */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		76AB15502456B3F800F3B86C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		76AB15512456B3FC00F3B86C /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		76AB15522456B40100F3B86C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				76AB15542456B78A00F3B86C /* EndPointType.swift */,
+				76AB15562456B93000F3B86C /* HTTPMethod.swift */,
+				76AB15582456BA4D00F3B86C /* HTTPTask.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		76AB15532456B44600F3B86C /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				76AB155A2456BD8F00F3B86C /* ParameterEncoding.swift */,
+			);
+			path = Encoding;
+			sourceTree = "<group>";
+		};
 		76F50144244944E400CC79E7 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +136,7 @@
 		76F5014F244944E500CC79E7 /* mapApp */ = {
 			isa = PBXGroup;
 			children = (
+				76AB154F2456B3B700F3B86C /* Networking */,
 				762DAB0724516A83005ADBB4 /* SearchModel.swift */,
 				762DAB09245172C2005ADBB4 /* CoreLocation.swift */,
 				76F50150244944E500CC79E7 /* AppDelegate.swift */,
@@ -231,6 +283,10 @@
 				762DAB0824516A83005ADBB4 /* SearchModel.swift in Sources */,
 				76F501692449532900CC79E7 /* MapModule.swift in Sources */,
 				76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */,
+				76AB155B2456BD8F00F3B86C /* ParameterEncoding.swift in Sources */,
+				76AB15572456B93000F3B86C /* HTTPMethod.swift in Sources */,
+				76AB15592456BA4D00F3B86C /* HTTPTask.swift in Sources */,
+				76AB15552456B78A00F3B86C /* EndPointType.swift in Sources */,
 				76F50153244944E500CC79E7 /* SceneDelegate.swift in Sources */,
 				762DAB0A245172C2005ADBB4 /* CoreLocation.swift in Sources */,
 			);

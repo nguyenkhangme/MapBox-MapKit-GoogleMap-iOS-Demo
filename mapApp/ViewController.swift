@@ -50,8 +50,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     lazy var mapView = NavigationMapView(frame: view.bounds)
     
-    var query = ""
-    
     var directionsRoute: Route?
     
     let activityIndicatorX = UIActivityIndicatorView()
@@ -116,8 +114,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func updateViewFromModel(){
-        
-
         
         mapView.clearsContextBeforeDrawing = true
         
@@ -248,10 +244,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
-
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//           searchTextField.resignFirstResponder()
-//       }
     
    }
 
@@ -265,6 +257,7 @@ extension ViewController : UITextFieldDelegate {
 
 extension ViewController: MGLMapViewDelegate {
     
+    //Show annotation information
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
          return true
      }
