@@ -1,6 +1,6 @@
 # MapBox-MapKit-GoogleMap-iOS-Demo
 
-I am updating my project, it just support MapBox right now.
+I am updating my project, it only support MapBox right now.
 
 ## What it can do
 
