@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		762DAB0824516A83005ADBB4 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762DAB0724516A83005ADBB4 /* SearchModel.swift */; };
-		762DAB0A245172C2005ADBB4 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762DAB09245172C2005ADBB4 /* CoreLocation.swift */; };
 		76AB15552456B78A00F3B86C /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB15542456B78A00F3B86C /* EndPointType.swift */; };
 		76AB15572456B93000F3B86C /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB15562456B93000F3B86C /* HTTPMethod.swift */; };
 		76AB15592456BA4D00F3B86C /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AB15582456BA4D00F3B86C /* HTTPTask.swift */; };
@@ -32,7 +31,6 @@
 		17CAA556097A5042B63A6CF0 /* Pods-mapApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapApp.release.xcconfig"; path = "Target Support Files/Pods-mapApp/Pods-mapApp.release.xcconfig"; sourceTree = "<group>"; };
 		23A3DAD9E35034D1FDE974D1 /* Pods_mapApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mapApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		762DAB0724516A83005ADBB4 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
-		762DAB09245172C2005ADBB4 /* CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocation.swift; sourceTree = "<group>"; };
 		76AB15542456B78A00F3B86C /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
 		76AB15562456B93000F3B86C /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		76AB15582456BA4D00F3B86C /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
@@ -122,6 +120,10 @@
 		76AB155E2456C2E200F3B86C /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				76F50152244944E500CC79E7 /* SceneDelegate.swift */,
+				76F50150244944E500CC79E7 /* AppDelegate.swift */,
+				76F50159244944E600CC79E7 /* Assets.xcassets */,
+				76F5015E244944E600CC79E7 /* Info.plist */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -149,19 +151,12 @@
 		76F5014F244944E500CC79E7 /* mapApp */ = {
 			isa = PBXGroup;
 			children = (
-				76AB154F2456B3B700F3B86C /* Networking */,
-				762DAB0724516A83005ADBB4 /* SearchModel.swift */,
-				762DAB09245172C2005ADBB4 /* CoreLocation.swift */,
-				76F50154244944E500CC79E7 /* ViewController.swift */,
-				76F501682449532900CC79E7 /* MapModule.swift */,
-				76F50156244944E500CC79E7 /* Main.storyboard */,
-				76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */,
-				76F5015B244944E600CC79E7 /* LaunchScreen.storyboard */,
-				76F50152244944E500CC79E7 /* SceneDelegate.swift */,
-				76F50150244944E500CC79E7 /* AppDelegate.swift */,
-				76F50159244944E600CC79E7 /* Assets.xcassets */,
-				76F5015E244944E600CC79E7 /* Info.plist */,
 				76AB155E2456C2E200F3B86C /* Support */,
+				CE007515246E49AB001465AE /* Model */,
+				CE007514246E4995001465AE /* VC */,
+				76AB154F2456B3B700F3B86C /* Networking */,
+				76F50156244944E500CC79E7 /* Main.storyboard */,
+				76F5015B244944E600CC79E7 /* LaunchScreen.storyboard */,
 			);
 			path = mapApp;
 			sourceTree = "<group>";
@@ -173,6 +168,24 @@
 				17CAA556097A5042B63A6CF0 /* Pods-mapApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		CE007514246E4995001465AE /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				76F50154244944E500CC79E7 /* ViewController.swift */,
+				76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		CE007515246E49AB001465AE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				762DAB0724516A83005ADBB4 /* SearchModel.swift */,
+				76F501682449532900CC79E7 /* MapModule.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,7 +317,6 @@
 				76AB155D2456C2BA00F3B86C /* URLParameterEncoder.swift in Sources */,
 				76AB15552456B78A00F3B86C /* EndPointType.swift in Sources */,
 				76F50153244944E500CC79E7 /* SceneDelegate.swift in Sources */,
-				762DAB0A245172C2005ADBB4 /* CoreLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,7 +462,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = mapApp/Info.plist;
+				INFOPLIST_FILE = mapApp/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -468,7 +480,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = mapApp/Info.plist;
+				INFOPLIST_FILE = mapApp/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
