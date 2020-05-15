@@ -25,6 +25,8 @@
 		76F5016724494B9600CC79E7 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 76F5016624494B9600CC79E7 /* Cartfile */; };
 		76F501692449532900CC79E7 /* MapModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F501682449532900CC79E7 /* MapModule.swift */; };
 		BE401B4071EF6127E2786CB0 /* Pods_mapApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A3DAD9E35034D1FDE974D1 /* Pods_mapApp.framework */; };
+		CE5FF4E2246E508E006F8E6A /* GoogleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FF4E0246E508E006F8E6A /* GoogleMapViewController.swift */; };
+		CE5FF4E3246E508E006F8E6A /* GoogleMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		76F5016624494B9600CC79E7 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		76F501682449532900CC79E7 /* MapModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModule.swift; sourceTree = "<group>"; };
 		8A2AE2D78A00E0245EBFF769 /* Pods-mapApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapApp.debug.xcconfig"; path = "Target Support Files/Pods-mapApp/Pods-mapApp.debug.xcconfig"; sourceTree = "<group>"; };
+		CE5FF4E0246E508E006F8E6A /* GoogleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapViewController.swift; sourceTree = "<group>"; };
+		CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleMapViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,8 @@
 			children = (
 				76F50154244944E500CC79E7 /* ViewController.swift */,
 				76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */,
+				CE5FF4E0246E508E006F8E6A /* GoogleMapViewController.swift */,
+				CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -200,6 +206,7 @@
 				76F5014A244944E500CC79E7 /* Frameworks */,
 				76F5014B244944E500CC79E7 /* Resources */,
 				F5505035FCF37169B7F20247 /* [CP] Embed Pods Frameworks */,
+				E604D31829F034824537F019 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -250,6 +257,7 @@
 			files = (
 				76F5016724494B9600CC79E7 /* Cartfile in Resources */,
 				76F5015D244944E600CC79E7 /* LaunchScreen.storyboard in Resources */,
+				CE5FF4E3246E508E006F8E6A /* GoogleMapViewController.xib in Resources */,
 				76F5015A244944E600CC79E7 /* Assets.xcassets in Resources */,
 				76F501652449451300CC79E7 /* Podfile in Resources */,
 				76F50158244944E500CC79E7 /* Main.storyboard in Resources */,
@@ -279,6 +287,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E604D31829F034824537F019 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-mapApp/Pods-mapApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-mapApp/Pods-mapApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mapApp/Pods-mapApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F5505035FCF37169B7F20247 /* [CP] Embed Pods Frameworks */ = {
@@ -313,6 +338,7 @@
 				76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */,
 				76AB155B2456BD8F00F3B86C /* ParameterEncoding.swift in Sources */,
 				76AB15572456B93000F3B86C /* HTTPMethod.swift in Sources */,
+				CE5FF4E2246E508E006F8E6A /* GoogleMapViewController.swift in Sources */,
 				76AB15592456BA4D00F3B86C /* HTTPTask.swift in Sources */,
 				76AB155D2456C2BA00F3B86C /* URLParameterEncoder.swift in Sources */,
 				76AB15552456B78A00F3B86C /* EndPointType.swift in Sources */,
