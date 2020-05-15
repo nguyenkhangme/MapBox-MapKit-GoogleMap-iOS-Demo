@@ -1,5 +1,7 @@
 # MapBox-MapKit-GoogleMap-iOS-Demo
 
+I am updating my project, it just support MapBox right now.
+
 ## What it can do
 
 - Show map
