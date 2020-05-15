@@ -1,4 +1,9 @@
 PODS:
+  - GoogleMaps (3.8.0):
+    - GoogleMaps/Maps (= 3.8.0)
+  - GoogleMaps/Base (3.8.0)
+  - GoogleMaps/Maps (3.8.0):
+    - GoogleMaps/Base
   - Mapbox-iOS-SDK (5.5.1)
   - MapboxCoreNavigation (0.39.0):
     - MapboxDirections.swift (~> 0.30.0)
@@ -30,12 +35,14 @@ PODS:
   - Turf (0.3.0)
 
 DEPENDENCIES:
+  - GoogleMaps (= 3.8.0)
   - MapboxGeocoder.swift (~> 0.12)
   - MapboxNavigation (~> 0.39.0)
   - PromiseKit (~> 6.8)
 
 SPEC REPOS:
   trunk:
+    - GoogleMaps
     - Mapbox-iOS-SDK
     - MapboxCoreNavigation
     - MapboxDirections.swift
@@ -50,6 +57,7 @@ SPEC REPOS:
     - Turf
 
 SPEC CHECKSUMS:
+  GoogleMaps: 7c8d66d70e4e8c300f43a7219d8fdaad7b325a9a
   Mapbox-iOS-SDK: 051d78eb8beb4bd0601212a18ea3ba8608bae32f
   MapboxCoreNavigation: 3f31b3764415722f4962687c37e9bb8c58f631ef
   MapboxDirections.swift: 1c6df988c24b753888ebd9976d7c98632501a413
@@ -63,6 +71,6 @@ SPEC CHECKSUMS:
   Solar: 2dc6e7cc39186cb0c8228fa08df76fb50c7d8f24
   Turf: c6bdf62d6a70c647874f295dd1cf4eefc0c3e9e6
 
-PODFILE CHECKSUM: 5ffe0ddf7f4c8005e19c718e30309a5ddb8c6e06
+PODFILE CHECKSUM: d5bae94dc1724b2434c68fddc9ff7d90dd791901
 
 COCOAPODS: 1.9.1
