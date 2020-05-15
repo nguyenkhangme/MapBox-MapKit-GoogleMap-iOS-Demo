@@ -223,8 +223,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
             // Generate the route object and draw it on the map
             _ = Directions.shared.calculate(options) { [unowned self] (waypoints, routes, error) in
             self.directionsRoute = routes?.first
+                guard let directionRouteCheck = self.directionsRoute else {
+                    return
+                }
             // Draw the route on the map after creating it
-            self.drawRoute(route: self.directionsRoute!)
+            self.drawRoute(route: directionRouteCheck)
         }
     }
      
