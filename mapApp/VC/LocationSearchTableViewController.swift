@@ -130,7 +130,8 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
         
         
         tessst.HandleModelSearchDelegate = self
-        tessst.loadData(query: searchController.searchBar.text ?? "", coordinate:self.mapView.userLocation!.coordinate)
+        _ = tessst.fetchData(query: searchController.searchBar.text ?? "", coordinate:self.mapView.userLocation!.coordinate)
+        //tessst.loadData(query: searchController.searchBar.text ?? "", coordinate:self.mapView.userLocation!.coordinate)
       
     }
 

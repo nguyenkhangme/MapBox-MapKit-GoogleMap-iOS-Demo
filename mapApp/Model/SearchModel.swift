@@ -7,6 +7,7 @@
 //
 import CoreLocation
 import Foundation
+import PromiseKit
 
 
 struct FetchData {
@@ -18,6 +19,87 @@ struct FetchData {
     
     var HandleModelSearchDelegate: HandleModelSearch? = nil
     
+    func fetchData(query: String, coordinate: CLLocationCoordinate2D) -> PlaceMark?{
+        var placeMarkss = PlaceMark()
+        let promise =
+            firstly(){
+                    
+                return (loadPlaceMark(query: query, coordinate: coordinate)!)
+               
+            }
+            .done() { placeMarkStores in
+            
+                placeMarkss = PlaceMark(from: placeMarkStores)
+            
+                self.HandleModelSearchDelegate?.addPlaceMark1(name:placeMarkss.Name, qualified_Name: placeMarkss.placeName, coordinates: placeMarkss.coordinates)
+            }
+        
+        promise.catch(){ error in
+            print(error)
+        }
+        
+        return placeMarkss
+    }
+    
+    func loadPlaceMark(query: String, coordinate: CLLocationCoordinate2D) -> Promise<PlaceMarkService>? {
+        //let bgq = DispatchQueue.global(qos: .userInitiated)
+        
+//        let urlString = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+//        var url = URLComponents(string: "https://api.mapbox.com/geocoding/v5/mapbox.places/\(String(describing: urlString)).json")
+//        var queryItems : [URLQueryItem] = []
+//
+//        let queries : [String:String] =
+//        ["proximity" : "\(coordinate.longitude),\(coordinate.latitude)",
+//        "access_token":"pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g"
+//            ]
+//        for (key,value) in queries {
+//            queryItems.append(URLQueryItem(name: key, value: value))
+//        }
+//
+//        url?.queryItems = queryItems
+        
+        
+        
+       // var placeMarks = PlaceMark()
+        
+        guard let urlString = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else
+        {
+            return nil
+            
+        }
+        
+        guard let url = URL(string:"https://api.mapbox.com/geocoding/v5/mapbox.places/" + urlString + ".json?proximity="+String(coordinate.longitude)+","+String(coordinate.latitude)+"&access_token=pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g") else {
+            print("Invalid URL")
+            return nil
+        }
+        
+        let request = URLRequest(url: url)
+    
+        
+        let promise =
+            firstly() {
+            
+                return URLSession.shared.dataTask(.promise, with:request)
+            
+        }.compactMap {
+            return try JSONDecoder().decode(PlaceMarkService.self, from: $0.data)
+        }
+//            .done() { placeMarkStores in
+//
+//            placeMarks = PlaceMark(from: placeMarkStores)
+//           self.HandleModelSearchDelegate?.addPlaceMark1(name:placeMarks.Name, qualified_Name: placeMarks.placeName, coordinates: placeMarks.coordinates)
+//         }
+         promise.catch{ error in
+            print(error)
+            
+        }
+        
+       
+            return promise
+        
+    }
+    
     func loadData(query: String, coordinate: CLLocationCoordinate2D) {
         
         //var abcdef = PlaceMark()
@@ -27,6 +109,7 @@ struct FetchData {
             return
             
         }
+        
         guard let url = URL(string:"https://api.mapbox.com/geocoding/v5/mapbox.places/" + urlString + ".json?proximity="+String(coordinate.longitude)+","+String(coordinate.latitude)+"&access_token=pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g") else {
             print("Invalid URL")
             return
