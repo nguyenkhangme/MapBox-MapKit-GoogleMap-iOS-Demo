@@ -273,14 +273,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
    }
 
-extension ViewController : UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
-
 extension ViewController: MGLMapViewDelegate {
     
     //Show annotation information
@@ -288,16 +280,6 @@ extension ViewController: MGLMapViewDelegate {
          return true
      }
       
-     // Present the navigation view controller when the callout is selected
-//     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
-//        guard let directionRouteCheck = self.directionsRoute else {
-//            return
-//        }
-//        let navigationViewController = NavigationViewController(for: directionRouteCheck)
-//         navigationViewController.modalPresentationStyle = .fullScreen
-//         self.present(navigationViewController, animated: true, completion: nil)
-//     }
-
      
     func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
 

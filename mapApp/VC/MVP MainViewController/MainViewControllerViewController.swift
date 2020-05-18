@@ -14,9 +14,7 @@
 
 import UIKit
 
-protocol goToTheMap {
-    func show(whatMap: String)
-}
+
 
 class MainViewControllerViewController: UIViewController, MainViewControllerViewProtocol {
 

@@ -32,7 +32,7 @@ class TableViewController: UITableViewController {
     
 
     
-    var delegate: goToTheMap? = nil
+    var delegate: GoToTheMap? = nil
 
     // MARK: - Table view data source
 
