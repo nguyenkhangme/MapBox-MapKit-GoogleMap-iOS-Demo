@@ -25,6 +25,13 @@
 		76F5016724494B9600CC79E7 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 76F5016624494B9600CC79E7 /* Cartfile */; };
 		76F501692449532900CC79E7 /* MapModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F501682449532900CC79E7 /* MapModule.swift */; };
 		BE401B4071EF6127E2786CB0 /* Pods_mapApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A3DAD9E35034D1FDE974D1 /* Pods_mapApp.framework */; };
+		CE01728A24722360000E1306 /* MainViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01728724722360000E1306 /* MainViewControllerPresenter.swift */; };
+		CE01728B24722360000E1306 /* MainViewControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01728824722360000E1306 /* MainViewControllerViewController.swift */; };
+		CE01728C24722360000E1306 /* MainViewControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01728924722360000E1306 /* MainViewControllerViewController.xib */; };
+		CE017293247224EF000E1306 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE017291247224EF000E1306 /* TableViewController.swift */; };
+		CE017294247224EF000E1306 /* TableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE017292247224EF000E1306 /* TableViewController.xib */; };
+		CE01729724723993000E1306 /* CellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01729524723993000E1306 /* CellTableViewCell.swift */; };
+		CE01729824723993000E1306 /* CellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01729624723993000E1306 /* CellTableViewCell.xib */; };
 		CE5FF4E2246E508E006F8E6A /* GoogleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FF4E0246E508E006F8E6A /* GoogleMapViewController.swift */; };
 		CE5FF4E3246E508E006F8E6A /* GoogleMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */; };
 /* End PBXBuildFile section */
@@ -52,6 +59,13 @@
 		76F5016624494B9600CC79E7 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		76F501682449532900CC79E7 /* MapModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModule.swift; sourceTree = "<group>"; };
 		8A2AE2D78A00E0245EBFF769 /* Pods-mapApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapApp.debug.xcconfig"; path = "Target Support Files/Pods-mapApp/Pods-mapApp.debug.xcconfig"; sourceTree = "<group>"; };
+		CE01728724722360000E1306 /* MainViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerPresenter.swift; sourceTree = "<group>"; };
+		CE01728824722360000E1306 /* MainViewControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerViewController.swift; sourceTree = "<group>"; };
+		CE01728924722360000E1306 /* MainViewControllerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewControllerViewController.xib; sourceTree = "<group>"; };
+		CE017291247224EF000E1306 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		CE017292247224EF000E1306 /* TableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewController.xib; sourceTree = "<group>"; };
+		CE01729524723993000E1306 /* CellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTableViewCell.swift; sourceTree = "<group>"; };
+		CE01729624723993000E1306 /* CellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellTableViewCell.xib; sourceTree = "<group>"; };
 		CE5FF4E0246E508E006F8E6A /* GoogleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapViewController.swift; sourceTree = "<group>"; };
 		CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleMapViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +195,13 @@
 				76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */,
 				CE5FF4E0246E508E006F8E6A /* GoogleMapViewController.swift */,
 				CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */,
+				CE01728724722360000E1306 /* MainViewControllerPresenter.swift */,
+				CE01728824722360000E1306 /* MainViewControllerViewController.swift */,
+				CE01728924722360000E1306 /* MainViewControllerViewController.xib */,
+				CE017291247224EF000E1306 /* TableViewController.swift */,
+				CE017292247224EF000E1306 /* TableViewController.xib */,
+				CE01729524723993000E1306 /* CellTableViewCell.swift */,
+				CE01729624723993000E1306 /* CellTableViewCell.xib */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -260,6 +281,9 @@
 				CE5FF4E3246E508E006F8E6A /* GoogleMapViewController.xib in Resources */,
 				76F5015A244944E600CC79E7 /* Assets.xcassets in Resources */,
 				76F501652449451300CC79E7 /* Podfile in Resources */,
+				CE017294247224EF000E1306 /* TableViewController.xib in Resources */,
+				CE01728C24722360000E1306 /* MainViewControllerViewController.xib in Resources */,
+				CE01729824723993000E1306 /* CellTableViewCell.xib in Resources */,
 				76F50158244944E500CC79E7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,12 +356,16 @@
 			files = (
 				76F50155244944E500CC79E7 /* ViewController.swift in Sources */,
 				76F50151244944E500CC79E7 /* AppDelegate.swift in Sources */,
+				CE017293247224EF000E1306 /* TableViewController.swift in Sources */,
 				762DAB0824516A83005ADBB4 /* SearchModel.swift in Sources */,
 				76F501692449532900CC79E7 /* MapModule.swift in Sources */,
 				76AB15732456CF5500F3B86C /* JSONParameterEncoder.swift in Sources */,
 				76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */,
 				76AB155B2456BD8F00F3B86C /* ParameterEncoding.swift in Sources */,
+				CE01728B24722360000E1306 /* MainViewControllerViewController.swift in Sources */,
 				76AB15572456B93000F3B86C /* HTTPMethod.swift in Sources */,
+				CE01729724723993000E1306 /* CellTableViewCell.swift in Sources */,
+				CE01728A24722360000E1306 /* MainViewControllerPresenter.swift in Sources */,
 				CE5FF4E2246E508E006F8E6A /* GoogleMapViewController.swift in Sources */,
 				76AB15592456BA4D00F3B86C /* HTTPTask.swift in Sources */,
 				76AB155D2456C2BA00F3B86C /* URLParameterEncoder.swift in Sources */,

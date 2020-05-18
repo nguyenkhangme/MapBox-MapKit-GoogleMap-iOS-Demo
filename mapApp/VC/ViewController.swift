@@ -93,7 +93,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
         
         view.addSubview(goToUserPlaceButton)
-        //view.addSubview(NavigitionViewButton)
+        view.addSubview(NavigitionViewButton)
     
         
    }
@@ -115,6 +115,13 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var NavigitionViewButton: UIButton!
     @IBAction func GoToNavigitionView(_ sender: UIButton) {
+        
+        guard let directionRouteCheck = self.directionsRoute else {
+            return
+        }
+        let navigationViewController = NavigationViewController(for: directionRouteCheck)
+         navigationViewController.modalPresentationStyle = .fullScreen
+         self.present(navigationViewController, animated: true, completion: nil)
         
     }
     @IBOutlet weak var goToUserPlaceButton: UIButton!
@@ -282,19 +289,22 @@ extension ViewController: MGLMapViewDelegate {
      }
       
      // Present the navigation view controller when the callout is selected
-     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
-         let navigationViewController = NavigationViewController(for: directionsRoute!)
-         navigationViewController.modalPresentationStyle = .fullScreen
-         self.present(navigationViewController, animated: true, completion: nil)
-     }
+//     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
+//        guard let directionRouteCheck = self.directionsRoute else {
+//            return
+//        }
+//        let navigationViewController = NavigationViewController(for: directionRouteCheck)
+//         navigationViewController.modalPresentationStyle = .fullScreen
+//         self.present(navigationViewController, animated: true, completion: nil)
+//     }
 
      
     func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
-    
+
      let camera = MGLMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 4500, pitch: 15, heading: 180)
-    
+
      mapView.fly(to: camera, withDuration: 4, peakAltitude: 3000, completionHandler: nil)
-    
+
      }
 }
 
