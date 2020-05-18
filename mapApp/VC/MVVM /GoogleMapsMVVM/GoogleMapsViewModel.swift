@@ -1,5 +1,5 @@
 //
-//  MainViewModel.swift
+//  GoogleMapsViewModel.swift
 //  mapApp
 //
 //  Created by user on 5/18/20.
@@ -7,7 +7,3 @@
 //
 
 import Foundation
-
-struct ViewModel {
-    
-}

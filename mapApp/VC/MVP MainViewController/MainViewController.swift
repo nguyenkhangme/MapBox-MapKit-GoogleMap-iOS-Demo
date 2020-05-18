@@ -6,6 +6,8 @@
 //  Copyright © 2020 Vinova.Train.mapApp. All rights reserved.
 //
 
+
+
 import UIKit
 
 //MapBox
@@ -108,6 +110,7 @@ class MainViewController: UIViewController {
        
 
     }
+    
     @objc func searchPlace(){
     
     }

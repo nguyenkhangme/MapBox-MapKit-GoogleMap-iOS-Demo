@@ -16,7 +16,15 @@ class GoogleMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        configureMap()
         // Do any additional setup after loading the view.
+        
+        
+    }
+
+    func configureMap(){
+        
         
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
         let mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
@@ -28,8 +36,18 @@ class GoogleMapViewController: UIViewController {
         marker.title = "Sydney"
         marker.snippet = "Australia"
         marker.map = mapView
+        
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let viewsDictionary: [String:Any] = ["GoogleMapView": mapView]
+        
+        let GoogleMapView_H = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[GoogleMapView]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+        
+        let GoogleMapView_V = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[GoogleMapView]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+        
+        view.addConstraints(GoogleMapView_H)
+        view.addConstraints(GoogleMapView_V)
     }
-
 
     /*
     // MARK: - Navigation

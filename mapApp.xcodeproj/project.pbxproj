@@ -36,8 +36,15 @@
 		CE0172A324724857000E1306 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172A224724857000E1306 /* MainPresenter.swift */; };
 		CE0172A624726AAD000E1306 /* MapBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172A524726AAC000E1306 /* MapBoxViewModel.swift */; };
 		CE0172A8247270F7000E1306 /* BackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0172A7247270F7000E1306 /* BackButton.png */; };
-		CE0172AA24727DAA000E1306 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172A924727DAA000E1306 /* MainViewModel.swift */; };
-		CE5FF4E2246E508E006F8E6A /* GoogleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FF4E0246E508E006F8E6A /* GoogleMapViewController.swift */; };
+		CE0172AD24728942000E1306 /* MapBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172AB24728942000E1306 /* MapBoxViewController.swift */; };
+		CE0172AE24728942000E1306 /* MapBoxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0172AC24728942000E1306 /* MapBoxViewController.xib */; };
+		CE0172B224728B4A000E1306 /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172B124728B4A000E1306 /* HomeNavigationViewController.swift */; };
+		CE0172B424728DAA000E1306 /* GoogleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172B324728DAA000E1306 /* GoogleMapViewController.swift */; };
+		CE0172B824728E67000E1306 /* GoogleMapsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172B724728E67000E1306 /* GoogleMapsViewModel.swift */; };
+		CE0172BC24728EB1000E1306 /* AppleMapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172BA24728EB1000E1306 /* AppleMapsViewController.swift */; };
+		CE0172BD24728EB1000E1306 /* AppleMapsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0172BB24728EB1000E1306 /* AppleMapsViewController.xib */; };
+		CE0172BF24728EC7000E1306 /* AppleMapsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172BE24728EC7000E1306 /* AppleMapsViewModel.swift */; };
+		CE0172C124729114000E1306 /* old-map-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE0172C024729113000E1306 /* old-map-background.jpg */; };
 		CE5FF4E3246E508E006F8E6A /* GoogleMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */; };
 /* End PBXBuildFile section */
 
@@ -75,8 +82,15 @@
 		CE0172A224724857000E1306 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		CE0172A524726AAC000E1306 /* MapBoxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxViewModel.swift; sourceTree = "<group>"; };
 		CE0172A7247270F7000E1306 /* BackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackButton.png; sourceTree = "<group>"; };
-		CE0172A924727DAA000E1306 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		CE5FF4E0246E508E006F8E6A /* GoogleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapViewController.swift; sourceTree = "<group>"; };
+		CE0172AB24728942000E1306 /* MapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxViewController.swift; sourceTree = "<group>"; };
+		CE0172AC24728942000E1306 /* MapBoxViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapBoxViewController.xib; sourceTree = "<group>"; };
+		CE0172B124728B4A000E1306 /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationViewController.swift; sourceTree = "<group>"; };
+		CE0172B324728DAA000E1306 /* GoogleMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleMapViewController.swift; sourceTree = "<group>"; };
+		CE0172B724728E67000E1306 /* GoogleMapsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsViewModel.swift; sourceTree = "<group>"; };
+		CE0172BA24728EB1000E1306 /* AppleMapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapsViewController.swift; sourceTree = "<group>"; };
+		CE0172BB24728EB1000E1306 /* AppleMapsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppleMapsViewController.xib; sourceTree = "<group>"; };
+		CE0172BE24728EC7000E1306 /* AppleMapsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapsViewModel.swift; sourceTree = "<group>"; };
+		CE0172C024729113000E1306 /* old-map-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "old-map-background.jpg"; sourceTree = "<group>"; };
 		CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleMapViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +165,7 @@
 				76F50152244944E500CC79E7 /* SceneDelegate.swift */,
 				76F50150244944E500CC79E7 /* AppDelegate.swift */,
 				76F50159244944E600CC79E7 /* Assets.xcassets */,
+				CE0172C024729113000E1306 /* old-map-background.jpg */,
 				CE0172A7247270F7000E1306 /* BackButton.png */,
 				76F5015E244944E600CC79E7 /* Info.plist */,
 			);
@@ -202,10 +217,9 @@
 		CE007514246E4995001465AE /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				CE0172B124728B4A000E1306 /* HomeNavigationViewController.swift */,
 				CE0172A424726A95000E1306 /* MVVM  */,
 				CE01729D247246F8000E1306 /* Old VC */,
-				CE5FF4E0246E508E006F8E6A /* GoogleMapViewController.swift */,
-				CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */,
 				CE01729B247246B0000E1306 /* MVP MainViewController */,
 				CE01729C247246E8000E1306 /* Table View */,
 			);
@@ -256,10 +270,41 @@
 		CE0172A424726A95000E1306 /* MVVM  */ = {
 			isa = PBXGroup;
 			children = (
-				CE0172A524726AAC000E1306 /* MapBoxViewModel.swift */,
-				CE0172A924727DAA000E1306 /* MainViewModel.swift */,
+				CE0172B924728E8B000E1306 /* AppleMapsMVVM */,
+				CE0172B624728E50000E1306 /* GoogleMapsMVVM */,
+				CE0172B524728E3F000E1306 /* MapBox MVVM */,
 			);
 			path = "MVVM ";
+			sourceTree = "<group>";
+		};
+		CE0172B524728E3F000E1306 /* MapBox MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				CE0172AB24728942000E1306 /* MapBoxViewController.swift */,
+				CE0172A524726AAC000E1306 /* MapBoxViewModel.swift */,
+				CE0172AC24728942000E1306 /* MapBoxViewController.xib */,
+			);
+			path = "MapBox MVVM";
+			sourceTree = "<group>";
+		};
+		CE0172B624728E50000E1306 /* GoogleMapsMVVM */ = {
+			isa = PBXGroup;
+			children = (
+				CE0172B324728DAA000E1306 /* GoogleMapViewController.swift */,
+				CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */,
+				CE0172B724728E67000E1306 /* GoogleMapsViewModel.swift */,
+			);
+			path = GoogleMapsMVVM;
+			sourceTree = "<group>";
+		};
+		CE0172B924728E8B000E1306 /* AppleMapsMVVM */ = {
+			isa = PBXGroup;
+			children = (
+				CE0172BA24728EB1000E1306 /* AppleMapsViewController.swift */,
+				CE0172BB24728EB1000E1306 /* AppleMapsViewController.xib */,
+				CE0172BE24728EC7000E1306 /* AppleMapsViewModel.swift */,
+			);
+			path = AppleMapsMVVM;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,14 +370,17 @@
 			files = (
 				76F5016724494B9600CC79E7 /* Cartfile in Resources */,
 				76F5015D244944E600CC79E7 /* LaunchScreen.storyboard in Resources */,
+				CE0172BD24728EB1000E1306 /* AppleMapsViewController.xib in Resources */,
 				CE0172A8247270F7000E1306 /* BackButton.png in Resources */,
 				CE5FF4E3246E508E006F8E6A /* GoogleMapViewController.xib in Resources */,
 				76F5015A244944E600CC79E7 /* Assets.xcassets in Resources */,
 				76F501652449451300CC79E7 /* Podfile in Resources */,
 				CE01728C24722360000E1306 /* MainViewControllerViewController.xib in Resources */,
 				CE0172A124724845000E1306 /* MainViewController.xib in Resources */,
+				CE0172AE24728942000E1306 /* MapBoxViewController.xib in Resources */,
 				CE01729824723993000E1306 /* CellTableViewCell.xib in Resources */,
 				76F50158244944E500CC79E7 /* Main.storyboard in Resources */,
+				CE0172C124729114000E1306 /* old-map-background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,21 +452,25 @@
 			files = (
 				76F50155244944E500CC79E7 /* ViewController.swift in Sources */,
 				76F50151244944E500CC79E7 /* AppDelegate.swift in Sources */,
+				CE0172BC24728EB1000E1306 /* AppleMapsViewController.swift in Sources */,
 				CE017293247224EF000E1306 /* TableViewController.swift in Sources */,
 				762DAB0824516A83005ADBB4 /* SearchModel.swift in Sources */,
 				76F501692449532900CC79E7 /* MapModule.swift in Sources */,
 				76AB15732456CF5500F3B86C /* JSONParameterEncoder.swift in Sources */,
 				76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */,
 				76AB155B2456BD8F00F3B86C /* ParameterEncoding.swift in Sources */,
+				CE0172B424728DAA000E1306 /* GoogleMapViewController.swift in Sources */,
 				CE0172A324724857000E1306 /* MainPresenter.swift in Sources */,
 				CE01728B24722360000E1306 /* MainViewControllerViewController.swift in Sources */,
 				76AB15572456B93000F3B86C /* HTTPMethod.swift in Sources */,
 				CE01729724723993000E1306 /* CellTableViewCell.swift in Sources */,
+				CE0172B824728E67000E1306 /* GoogleMapsViewModel.swift in Sources */,
 				CE01728A24722360000E1306 /* MainViewControllerPresenter.swift in Sources */,
-				CE5FF4E2246E508E006F8E6A /* GoogleMapViewController.swift in Sources */,
-				CE0172AA24727DAA000E1306 /* MainViewModel.swift in Sources */,
+				CE0172B224728B4A000E1306 /* HomeNavigationViewController.swift in Sources */,
+				CE0172BF24728EC7000E1306 /* AppleMapsViewModel.swift in Sources */,
 				76AB15592456BA4D00F3B86C /* HTTPTask.swift in Sources */,
 				CE0172A624726AAD000E1306 /* MapBoxViewModel.swift in Sources */,
+				CE0172AD24728942000E1306 /* MapBoxViewController.swift in Sources */,
 				76AB155D2456C2BA00F3B86C /* URLParameterEncoder.swift in Sources */,
 				CE0172A024724845000E1306 /* MainViewController.swift in Sources */,
 				76AB15552456B78A00F3B86C /* EndPointType.swift in Sources */,

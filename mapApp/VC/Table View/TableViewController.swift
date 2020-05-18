@@ -23,8 +23,11 @@ class TableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        self.tableView.backgroundColor = .clear
+        self.tableView.separatorColor = .clear
+
         self.tableView.register(CellTableViewCell.self, forCellReuseIdentifier: "cell")
-        
+        self.tableView.tableFooterView = UIView()
         //let a = UITableView()
         
         
@@ -53,7 +56,10 @@ class TableViewController: UITableViewController {
         if let myCell = cell as? CellTableViewCell {
             myCell.textLabel?.text = maps[indexPath.row]
             myCell.textLabel?.textAlignment = .center
+            myCell.contentView.backgroundColor = .clear
+            myCell.backgroundColor = .clear
             return myCell
+            
         }
 
         return cell
@@ -61,7 +67,17 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        self.delegate?.show(whatMap: maps[indexPath.row])
+        //self.delegate?.show(whatMap: maps[indexPath.row])
+
+        if maps[indexPath.row] == "Google" {
+            self.navigationController?.pushViewController(GoogleMapViewController(), animated: true)
+        } else if maps[indexPath.row] == "MapBox" {
+            self.navigationController?.pushViewController(MapBoxViewController(), animated: true)
+        }
+        else if maps[indexPath.row] == "MapKit" {
+            self.navigationController?.pushViewController(AppleMapsViewController(), animated: true)
+        }
+        
         dismiss(animated: true, completion: nil)
     }
 

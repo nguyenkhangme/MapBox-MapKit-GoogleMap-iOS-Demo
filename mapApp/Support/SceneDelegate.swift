@@ -24,9 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         //let initVC = MainViewControllerPresenter()
 
-        let initVC = MainViewController()
+        let initVC = HomeNavigationViewController()
         
-        window.rootViewController = UINavigationController(rootViewController: initVC)
+        //window.rootViewController = UINavigationController(rootViewController: initVC)
+        window.rootViewController = initVC
 
         window.makeKeyAndVisible()
     }
