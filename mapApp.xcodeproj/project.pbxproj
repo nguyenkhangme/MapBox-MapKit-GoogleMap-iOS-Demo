@@ -17,7 +17,6 @@
 		76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */; };
 		76F50151244944E500CC79E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F50150244944E500CC79E7 /* AppDelegate.swift */; };
 		76F50153244944E500CC79E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F50152244944E500CC79E7 /* SceneDelegate.swift */; };
-		76F50155244944E500CC79E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F50154244944E500CC79E7 /* ViewController.swift */; };
 		76F50158244944E500CC79E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76F50156244944E500CC79E7 /* Main.storyboard */; };
 		76F5015A244944E600CC79E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76F50159244944E600CC79E7 /* Assets.xcassets */; };
 		76F5015D244944E600CC79E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76F5015B244944E600CC79E7 /* LaunchScreen.storyboard */; };
@@ -45,6 +44,7 @@
 		CE0172BD24728EB1000E1306 /* AppleMapsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0172BB24728EB1000E1306 /* AppleMapsViewController.xib */; };
 		CE0172BF24728EC7000E1306 /* AppleMapsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172BE24728EC7000E1306 /* AppleMapsViewModel.swift */; };
 		CE0172C124729114000E1306 /* old-map-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE0172C024729113000E1306 /* old-map-background.jpg */; };
+		CE0172C324729A29000E1306 /* OldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172C224729A29000E1306 /* OldCell.swift */; };
 		CE5FF4E3246E508E006F8E6A /* GoogleMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +62,6 @@
 		76F5014D244944E500CC79E7 /* mapApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76F50150244944E500CC79E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76F50152244944E500CC79E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		76F50154244944E500CC79E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		76F50157244944E500CC79E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76F50159244944E600CC79E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76F5015C244944E600CC79E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		CE0172BB24728EB1000E1306 /* AppleMapsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppleMapsViewController.xib; sourceTree = "<group>"; };
 		CE0172BE24728EC7000E1306 /* AppleMapsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapsViewModel.swift; sourceTree = "<group>"; };
 		CE0172C024729113000E1306 /* old-map-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "old-map-background.jpg"; sourceTree = "<group>"; };
+		CE0172C224729A29000E1306 /* OldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldCell.swift; sourceTree = "<group>"; };
 		CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleMapViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -261,8 +261,8 @@
 		CE01729D247246F8000E1306 /* Old VC */ = {
 			isa = PBXGroup;
 			children = (
-				76F50154244944E500CC79E7 /* ViewController.swift */,
 				76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */,
+				CE0172C224729A29000E1306 /* OldCell.swift */,
 			);
 			path = "Old VC";
 			sourceTree = "<group>";
@@ -450,13 +450,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76F50155244944E500CC79E7 /* ViewController.swift in Sources */,
 				76F50151244944E500CC79E7 /* AppDelegate.swift in Sources */,
 				CE0172BC24728EB1000E1306 /* AppleMapsViewController.swift in Sources */,
 				CE017293247224EF000E1306 /* TableViewController.swift in Sources */,
 				762DAB0824516A83005ADBB4 /* SearchModel.swift in Sources */,
 				76F501692449532900CC79E7 /* MapModule.swift in Sources */,
 				76AB15732456CF5500F3B86C /* JSONParameterEncoder.swift in Sources */,
+				CE0172C324729A29000E1306 /* OldCell.swift in Sources */,
 				76D22E67244E8D6900C354BE /* LocationSearchTableViewController.swift in Sources */,
 				76AB155B2456BD8F00F3B86C /* ParameterEncoding.swift in Sources */,
 				CE0172B424728DAA000E1306 /* GoogleMapViewController.swift in Sources */,

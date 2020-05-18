@@ -37,6 +37,7 @@ class LocationSearchTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "oldCell")
     }
     
     var handleMapSearchDelegate:HandleMapSearch? = nil
@@ -60,7 +61,7 @@ class LocationSearchTableViewController: UITableViewController {
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "oldCell", for: indexPath)
     
         
         cell.textLabel?.text = matchingItems1.Name[indexPath.row]
