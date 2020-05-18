@@ -22,7 +22,14 @@ class TableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        self.tableView.register(CellTableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        //let a = UITableView()
+        
+        
     }
+    
 
     
     var delegate: goToTheMap? = nil
@@ -41,9 +48,14 @@ class TableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! CellTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        if let myCell = cell as? CellTableViewCell {
+            myCell.textLabel?.text = maps[indexPath.row]
+            myCell.textLabel?.textAlignment = .center
+            return myCell
+        }
 
-        cell.textLabel?.text = maps[indexPath.row]
         return cell
     }
     

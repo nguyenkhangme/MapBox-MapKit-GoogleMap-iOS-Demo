@@ -31,22 +31,24 @@ class MainViewControllerViewController: UIViewController, MainViewControllerView
         fatalError("init(coder:) has not been implemented")
     }
 
+    //init
+    
+    lazy var tableViewController = TableViewController()
+    
+    //end init
 	override func viewDidLoad() {
         super.viewDidLoad()
 
         presenter.view = self
         presenter.viewDidLoad()
+        
+        //self.addChild(tableViewController)
+        configureTableView()
     }
     
-    
-
-}
-
-
-extension MainViewControllerViewController:goToTheMap{
-    func show(whatMap: String) {
-        <#code#>
+    func configureTableView(){
+        self.view.addSubview(tableViewController.tableView)
     }
     
-    
+
 }

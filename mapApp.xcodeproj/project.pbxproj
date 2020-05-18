@@ -191,17 +191,11 @@
 		CE007514246E4995001465AE /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				76F50154244944E500CC79E7 /* ViewController.swift */,
-				76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */,
+				CE01729D247246F8000E1306 /* Old VC */,
 				CE5FF4E0246E508E006F8E6A /* GoogleMapViewController.swift */,
 				CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */,
-				CE01728724722360000E1306 /* MainViewControllerPresenter.swift */,
-				CE01728824722360000E1306 /* MainViewControllerViewController.swift */,
-				CE01728924722360000E1306 /* MainViewControllerViewController.xib */,
-				CE017291247224EF000E1306 /* TableViewController.swift */,
-				CE017292247224EF000E1306 /* TableViewController.xib */,
-				CE01729524723993000E1306 /* CellTableViewCell.swift */,
-				CE01729624723993000E1306 /* CellTableViewCell.xib */,
+				CE01729B247246B0000E1306 /* MVP MainViewController */,
+				CE01729C247246E8000E1306 /* Table View */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -213,6 +207,36 @@
 				76F501682449532900CC79E7 /* MapModule.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CE01729B247246B0000E1306 /* MVP MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CE01728724722360000E1306 /* MainViewControllerPresenter.swift */,
+				CE01728824722360000E1306 /* MainViewControllerViewController.swift */,
+				CE01728924722360000E1306 /* MainViewControllerViewController.xib */,
+			);
+			path = "MVP MainViewController";
+			sourceTree = "<group>";
+		};
+		CE01729C247246E8000E1306 /* Table View */ = {
+			isa = PBXGroup;
+			children = (
+				CE017291247224EF000E1306 /* TableViewController.swift */,
+				CE017292247224EF000E1306 /* TableViewController.xib */,
+				CE01729524723993000E1306 /* CellTableViewCell.swift */,
+				CE01729624723993000E1306 /* CellTableViewCell.xib */,
+			);
+			path = "Table View";
+			sourceTree = "<group>";
+		};
+		CE01729D247246F8000E1306 /* Old VC */ = {
+			isa = PBXGroup;
+			children = (
+				76F50154244944E500CC79E7 /* ViewController.swift */,
+				76D22E66244E8D6900C354BE /* LocationSearchTableViewController.swift */,
+			);
+			path = "Old VC";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
