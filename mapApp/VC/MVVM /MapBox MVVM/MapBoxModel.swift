@@ -22,26 +22,26 @@ import CoreLocation
 
 import PromiseKit
 
-struct MapBoxPlaceMark{
-    var Name: String
+class MapBoxModel {
     
-    var placeName: String
+    var placeMark = [PlaceMarkForAllMap]()
     
-    var longitude: CLLocationDegrees
-    
-    var latitude: CLLocationDegrees
-    
-    
-}
-
-struct MapBoxModel {
-    
-  var placeMark = [PlaceMarkForAllMap]()
-    
-
-   
+    func setPlaceMark(mapBoxPlaceMark: MapBoxPlaceMark) -> [PlaceMarkForAllMap]{
+        var temp = PlaceMarkForAllMap()
+        for i in mapBoxPlaceMark.Name.indices {
+            
+            temp.Name = mapBoxPlaceMark.Name[i]
+            temp.placeName = mapBoxPlaceMark.placeName[i]
+            temp.latitude = mapBoxPlaceMark.coordinates[i][1]
+            temp.latitude = mapBoxPlaceMark.coordinates[i][0]
+            placeMark.append(temp)
+        }
+        return placeMark
         
-    func loadPlaceMark(query: String, latitude: Double, longitude: Double) -> Promise<PlaceMarkService>? {
+        
+    }
+    
+    func loadPlaceMark(query: String, latitude: Double, longitude: Double) -> Promise<MapBoxPlaceMarkService>? {
            
             
         guard let urlString = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else
@@ -64,7 +64,7 @@ struct MapBoxModel {
                 return URLSession.shared.dataTask(.promise, with:request)
                     
             }.compactMap {
-                return try JSONDecoder().decode(PlaceMarkService.self, from: $0.data)
+                return try JSONDecoder().decode(MapBoxPlaceMarkService.self, from: $0.data)
             }
         
         promise.catch{ error in
@@ -75,30 +75,33 @@ struct MapBoxModel {
                 
     }
     
+    
+   
+    
 }
 
 extension MapBoxModel: ModelAccess{
     
-     func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]?{
-           var placeMarkss = PlaceMark()
-           let promise =
-               firstly(){
-                           
+    func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]?{
+        var placeMarkss = MapBoxPlaceMark()
+        let promise =
+            firstly(){
                 return (loadPlaceMark(query: query, latitude: latitude, longitude: longitude)!)
-                      
-               }
-               .done() { placeMarkStores in
+            }
+            .done() { placeMarkStores in
                    
-                   placeMarkss = PlaceMark(from: placeMarkStores)
+                placeMarkss = MapBoxPlaceMark(from: placeMarkStores)
                    
-               }
+            }
                
-           promise.catch(){ error in
-               print(error)
-           }
-               
-           return placeMarkss
-       }
+        promise.catch(){ error in
+            print(error)
+        }
+            
+        var placeMarkx = [PlaceMarkForAllMap]()
+        placeMarkx = setPlaceMark(mapBoxPlaceMark: placeMarkss)
+        return placeMarkx
+    }
     
     
     func getPlaceMark() -> [PlaceMarkForAllMap] {

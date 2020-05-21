@@ -51,6 +51,7 @@
 		CEA7F65324766EDF00C673FA /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F65224766EDF00C673FA /* SearchTableViewController.swift */; };
 		CEA7F6582476783D00C673FA /* NewMapBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F6562476783D00C673FA /* NewMapBoxViewController.swift */; };
 		CEA7F6592476783D00C673FA /* NewMapBoxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA7F6572476783D00C673FA /* NewMapBoxViewController.xib */; };
+		CEA7F65B2476872B00C673FA /* MapBoxStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F65A2476872B00C673FA /* MapBoxStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		CEA7F65224766EDF00C673FA /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		CEA7F6562476783D00C673FA /* NewMapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMapBoxViewController.swift; sourceTree = "<group>"; };
 		CEA7F6572476783D00C673FA /* NewMapBoxViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMapBoxViewController.xib; sourceTree = "<group>"; };
+		CEA7F65A2476872B00C673FA /* MapBoxStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxStruct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +297,7 @@
 			children = (
 				CE0172AB24728942000E1306 /* MapBoxViewController.swift */,
 				CE0172A524726AAC000E1306 /* MapBoxModel.swift */,
+				CEA7F65A2476872B00C673FA /* MapBoxStruct.swift */,
 				CE0172AC24728942000E1306 /* MapBoxViewController.xib */,
 				CEA7F6562476783D00C673FA /* NewMapBoxViewController.swift */,
 				CEA7F6572476783D00C673FA /* NewMapBoxViewController.xib */,
@@ -487,6 +490,7 @@
 				CE01728A24722360000E1306 /* MainViewControllerPresenter.swift in Sources */,
 				CE0172B224728B4A000E1306 /* HomeNavigationViewController.swift in Sources */,
 				CE0172BF24728EC7000E1306 /* AppleMapsModel.swift in Sources */,
+				CEA7F65B2476872B00C673FA /* MapBoxStruct.swift in Sources */,
 				76AB15592456BA4D00F3B86C /* HTTPTask.swift in Sources */,
 				CE0172A624726AAD000E1306 /* MapBoxModel.swift in Sources */,
 				CE0172AD24728942000E1306 /* MapBoxViewController.swift in Sources */,
