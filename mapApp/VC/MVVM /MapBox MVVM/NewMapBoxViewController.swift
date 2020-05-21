@@ -24,7 +24,8 @@ class NewMapBoxViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SearchTable.modelAccess = "MapBox"
+       // SearchTable.modelAccess = "MapBox"
+        SearchTable.setViewModel(viewModel: viewModel)
 
         configureActivityIndicator()
         configureSearchButton()

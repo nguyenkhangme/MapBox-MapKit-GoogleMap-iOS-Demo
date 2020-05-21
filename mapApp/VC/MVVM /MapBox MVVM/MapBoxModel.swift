@@ -91,7 +91,6 @@ extension MapBoxModel: ModelAccess{
             .done() { placeMarkStores in
                    
                 placeMarkss = MapBoxPlaceMark(from: placeMarkStores)
-                   
             }
                
         promise.catch(){ error in

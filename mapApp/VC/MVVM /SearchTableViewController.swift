@@ -26,6 +26,11 @@ class SearchTableViewController: UITableViewController {
         
     }
     
+    func setViewModel(viewModel: MainViewModel){
+        self.viewModel = viewModel
+        
+    }
+    
     var handleMapSearchDelegate:HandleMapSearch? = nil
     
     var matchingItems : [PlaceMarkForAllMap] = []
