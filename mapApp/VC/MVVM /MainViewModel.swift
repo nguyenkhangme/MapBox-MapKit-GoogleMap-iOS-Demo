@@ -45,9 +45,11 @@
 
 import Foundation
 
+import CoreLocation
+
 protocol ModelAccess {
     
-    func fetchData(query: String)
+    func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]?
     
     func getPlaceMark() -> [PlaceMarkForAllMap]
 }
@@ -71,6 +73,8 @@ class ModelFactory{
 
 class MainViewModel {
 
+    lazy var searchTable = SearchTableViewController()
+    
     private let _modelAccess: ModelAccess?
     var modelFactory = ModelFactory()
     
@@ -80,11 +84,34 @@ class MainViewModel {
         if _modelAccess == nil {
             print("ERROR: Init wrong type for View Model")
         }
+        searchTable.handleMapSearchDelegate = self
         
     }
     
-    lazy var placeMarK = _modelAccess?.getPlaceMark()
+    func getData(query: String, latitude: Double, longitude: Double){
+        _modelAccess?.fetchData(query: query, latitude: latitude, longitude: longitude)
+    }
     
+    //Array of PlaceMark
+    lazy var placeMarks = _modelAccess?.getPlaceMark()
+    
+    //1 PlaceMark for set Annotation
+    var placeMark = PlaceMarkForAllMap()
+    
+}
+
+extension MainViewModel: HandleMapSearch {
+    func addAnnotationAPI(placemark: PlaceMark, row: Int) {
+        print("")
+    }
+    
+    func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
+        placeMark.Name = placeMarks[row].Name
+        placeMark.placeName = placeMarks[row].placeName
+        placeMark.longitude = placeMarks[row].longitude
+        placeMark.latitude = placeMarks[row].latitude
+        
+    }
     
     
 }

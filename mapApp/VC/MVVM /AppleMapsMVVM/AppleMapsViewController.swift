@@ -10,13 +10,24 @@ import UIKit
 
 class AppleMapsViewController: UIViewController {
 
+    var viewModel = MainViewModel(modelAcess: "Apple")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureSearchButton()
+        
         // Do any additional setup after loading the view.
     }
 
 
+    func configureSearchButton(){
+        let barButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchPlace))
+        self.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    @objc func searchPlace() {
+    }
     /*
     // MARK: - Navigation
 

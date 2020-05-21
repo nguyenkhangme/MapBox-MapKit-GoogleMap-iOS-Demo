@@ -30,8 +30,9 @@ class AppleMapsModel {
 }
 
 extension AppleMapsModel:ModelAccess{
-    func fetchData(query: String) {
+    func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]? {
         print("")
+        return nil
     }
     
     func getPlaceMark() -> [PlaceMarkForAllMap] {

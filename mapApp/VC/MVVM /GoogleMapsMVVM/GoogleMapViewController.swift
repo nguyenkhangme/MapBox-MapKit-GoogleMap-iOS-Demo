@@ -12,15 +12,38 @@ import GoogleMaps
 class GoogleMapViewController: UIViewController {
     
     
+    lazy var searchTable = SearchTableViewController()
+    var viewModel = MainViewModel(modelAcess: "Google")
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchTable.modelAccess = "Google"
 
-        
+        configureSearchButton()
         configureMap()
         // Do any additional setup after loading the view.
         
         
+    }
+    
+    func configureSearchButton(){
+        let barButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchPlace))
+        self.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    @objc func searchPlace() {
+               
+        let searchController = UISearchController(searchResultsController: searchTable)
+               
+        searchController.searchResultsUpdater = searchTable
+
+        searchController.searchBar.delegate = self
+               
+        searchController.searchBar.placeholder = "Search for places"
+               
+        searchController.searchBar.resignFirstResponder()
+        
+        present(searchController, animated: true, completion: nil)
     }
 
     func configureMap(){
@@ -60,3 +83,14 @@ class GoogleMapViewController: UIViewController {
     */
 
 }
+
+extension GoogleMapViewController: UISearchBarDelegate{
+      func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            
+            //activityIndicatorX.startAnimating()
+
+            searchTable.dismiss(animated: true, completion: nil)
+   
+        }
+}
+

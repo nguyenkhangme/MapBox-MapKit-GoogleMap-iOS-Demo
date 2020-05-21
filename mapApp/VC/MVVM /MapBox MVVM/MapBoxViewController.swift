@@ -23,6 +23,7 @@ import MapboxDirections
 
 protocol HandleMapSearch {
     func addAnnotationAPI(placemark: PlaceMark, row: Int)
+    func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int)
 }
 
 protocol HandleModelSearch {
@@ -188,7 +189,7 @@ class MapBoxViewController: UIViewController, UISearchBarDelegate {
 //        handleSharedPlaceMark()
 //        updateViewFromModel()
         
-        locationSearchTable.dismiss(animated: true, completion: nil)
+        //locationSearchTable.dismiss(animated: true, completion: nil)
     
 
     }
@@ -275,6 +276,10 @@ extension MapBoxViewController: MGLMapViewDelegate {
 }
 
 extension MapBoxViewController: HandleMapSearch {
+    func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
+        print("")
+    }
+    
     func addAnnotationAPI(placemark: PlaceMark, row: Int) {
         self.Mapp.title = placemark.Name[row]
         self.Mapp.subtitle = placemark.placeName[row]

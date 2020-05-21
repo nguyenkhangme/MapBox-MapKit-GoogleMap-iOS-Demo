@@ -72,7 +72,7 @@ class TableViewController: UITableViewController {
         if maps[indexPath.row] == "Google" {
             self.navigationController?.pushViewController(GoogleMapViewController(), animated: true)
         } else if maps[indexPath.row] == "MapBox" {
-            self.navigationController?.pushViewController(MapBoxViewController(), animated: true)
+            self.navigationController?.pushViewController(NewMapBoxViewController(), animated: true)
         }
         else if maps[indexPath.row] == "MapKit" {
             self.navigationController?.pushViewController(AppleMapsViewController(), animated: true)

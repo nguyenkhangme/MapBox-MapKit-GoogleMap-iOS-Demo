@@ -10,8 +10,8 @@ import Foundation
 import CoreLocation
 
 struct PlaceMarkForAllMap{
-    var Name: String
-    var placeName: String
-    var longtitude: CLLocationDegrees
-    var laitude: CLLocationDegrees
+    var Name: String?
+    var placeName: String?
+    var longitude: CLLocationDegrees?
+    var latitude: CLLocationDegrees?
 }
