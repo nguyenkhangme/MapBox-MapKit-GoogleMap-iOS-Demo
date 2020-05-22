@@ -32,6 +32,10 @@ class GoogleMapViewController: UIViewController {
     }
     
     @objc func searchPlace() {
+        
+        //viewModel.userLocation = self.mapView.userLocation!.coordinate
+        //print("user Location: \(self.mapView.userLocation!.coordinate)")
+        searchTable.setViewModel(viewModel: viewModel)
                
         let searchController = UISearchController(searchResultsController: searchTable)
                

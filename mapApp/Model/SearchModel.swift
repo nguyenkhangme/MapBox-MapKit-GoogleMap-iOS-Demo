@@ -131,8 +131,8 @@ struct FetchData {
                     
             }
             
-            var sharedPlaceMark = PlaceMark.shared
-                
+           
+             
             let decoder = JSONDecoder()
                 
             do {
@@ -143,7 +143,7 @@ struct FetchData {
                 self.HandleModelSearchDelegate?.addPlaceMark1(name:placeMarks.Name, qualified_Name: placeMarks.placeName, coordinates: placeMarks.coordinates)
                     //Singleton
                 
-                sharedPlaceMark = placeMarks
+                PlaceMark.shared = placeMarks
                
                 
             }catch {
@@ -461,7 +461,7 @@ struct test {
 
 struct PlaceMark {
     
-    static let shared = PlaceMark()
+    static var shared = PlaceMark()
     
     var placeName: [String] = []
     var Name: [String] = []

@@ -11,6 +11,7 @@ import UIKit
 class AppleMapsViewController: UIViewController {
 
     var viewModel = MainViewModel(modelAcess: .AppleMaps)
+    lazy var searchTable = SearchTableViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,21 @@ class AppleMapsViewController: UIViewController {
     }
     
     @objc func searchPlace() {
+       // viewModel.userLocation = self.mapView.userLocation!.coordinate
+        //print("user Location: \(self.mapView.userLocation!.coordinate)")
+        searchTable.setViewModel(viewModel: viewModel)
+        
+        let searchController = UISearchController(searchResultsController: searchTable)
+               
+        searchController.searchResultsUpdater = searchTable
+
+        searchController.searchBar.delegate = self
+               
+        searchController.searchBar.placeholder = "Search for places"
+               
+        searchController.searchBar.resignFirstResponder()
+        
+        present(searchController, animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation
@@ -38,4 +54,14 @@ class AppleMapsViewController: UIViewController {
     }
     */
 
+}
+
+extension AppleMapsViewController: UISearchBarDelegate{
+      func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            
+            //activityIndicatorX.startAnimating()
+
+            searchTable.dismiss(animated: true, completion: nil)
+   
+        }
 }

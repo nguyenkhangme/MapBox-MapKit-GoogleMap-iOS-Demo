@@ -66,8 +66,6 @@ class ModelFactory{
             return AppleMapsModel()
         case .Google:
             return GoogleMapsModel()
-        default:
-            return nil
         }
         
     }

@@ -78,22 +78,23 @@ class NewMapBoxViewController: UIViewController {
     func configureGoToUserLocationButton(){
         let GoToUserLocationButton = UIButton()
         GoToUserLocationButton.addTarget(self, action: #selector(GoToUserLocation), for: .touchUpInside)
-        GoToUserLocationButton.backgroundColor = .black
+        GoToUserLocationButton.backgroundColor = .clear
         GoToUserLocationButton.setTitle("👤", for: .normal)
         GoToUserLocationButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body).withSize(27)
         GoToUserLocationButton.translatesAutoresizingMaskIntoConstraints = false
         //customView.frame.origin = CGPoint(x:view.bounds.maxX-spacing,y:view.bounds.maxY/2)
         
-        self.customView.addSubview(GoToUserLocationButton)
+        self.view.addSubview(GoToUserLocationButton)
           
         let viewsDictionary = ["GoToUserLocationButton": GoToUserLocationButton]
-           
-        let GoToUserLocationButton_H = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[GoToUserLocationButton]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
-                 
-        let GoToUserLocationButton_V = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[GoToUserLocationButton]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
         
-          customView.addConstraints(GoToUserLocationButton_H)
-          customView.addConstraints(GoToUserLocationButton_V)
+        
+        let GoToUserLocationButton_H = NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(view.bounds.maxX-spacing)-[GoToUserLocationButton]-\(spacing)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+                 
+        let GoToUserLocationButton_V = NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(view.bounds.maxY/2)-[GoToUserLocationButton]-\(view.bounds.maxY/2)-|", options: NSLayoutConstraint.FormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
+        
+          view.addConstraints(GoToUserLocationButton_H)
+          view.addConstraints(GoToUserLocationButton_V)
         print("ButtonAdd!")
         
     }
