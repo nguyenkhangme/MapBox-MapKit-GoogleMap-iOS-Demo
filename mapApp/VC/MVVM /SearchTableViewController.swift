@@ -22,7 +22,7 @@ class SearchTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "searchCell")
+        self.tableView.register(SearchTableViewCellTableViewCell.self, forCellReuseIdentifier: "searchCell")
         
     }
     
@@ -52,9 +52,16 @@ class SearchTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
 
-        cell.textLabel?.text = matchingItems[indexPath.row].Name
-        cell.detailTextLabel?.text = matchingItems[indexPath.row].placeName
+        
 
+         if let myCell = cell as? SearchTableViewCellTableViewCell {
+            
+            myCell.textLabel?.text = matchingItems[indexPath.row].Name
+            myCell.subText?.text = matchingItems[indexPath.row].placeName
+            
+            return myCell
+        }
+        
         return cell
     }
     

@@ -45,6 +45,8 @@
 		CE0172C124729114000E1306 /* old-map-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE0172C024729113000E1306 /* old-map-background.jpg */; };
 		CE0172C324729A29000E1306 /* OldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172C224729A29000E1306 /* OldCell.swift */; };
 		CE21147B2477669C00BF957E /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21147A2477669C00BF957E /* SearchModel.swift */; };
+		CE2114802477DE7400BF957E /* SearchTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21147E2477DE7400BF957E /* SearchTableViewCellTableViewCell.swift */; };
+		CE2114812477DE7400BF957E /* SearchTableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE21147F2477DE7400BF957E /* SearchTableViewCellTableViewCell.xib */; };
 		CE5FF4E3246E508E006F8E6A /* GoogleMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */; };
 		CEA7F64F24763A1A00C673FA /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F64E24763A1A00C673FA /* MainViewModel.swift */; };
 		CEA7F6512476608E00C673FA /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F6502476608D00C673FA /* MainModel.swift */; };
@@ -97,6 +99,8 @@
 		CE0172C024729113000E1306 /* old-map-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "old-map-background.jpg"; sourceTree = "<group>"; };
 		CE0172C224729A29000E1306 /* OldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldCell.swift; sourceTree = "<group>"; };
 		CE21147A2477669C00BF957E /* SearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		CE21147E2477DE7400BF957E /* SearchTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
+		CE21147F2477DE7400BF957E /* SearchTableViewCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCellTableViewCell.xib; sourceTree = "<group>"; };
 		CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleMapViewController.xib; sourceTree = "<group>"; };
 		CEA7F64E24763A1A00C673FA /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		CEA7F6502476608D00C673FA /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
@@ -288,6 +292,8 @@
 				CEA7F64E24763A1A00C673FA /* MainViewModel.swift */,
 				CEA7F6502476608D00C673FA /* MainModel.swift */,
 				CEA7F65224766EDF00C673FA /* SearchTableViewController.swift */,
+				CE21147E2477DE7400BF957E /* SearchTableViewCellTableViewCell.swift */,
+				CE21147F2477DE7400BF957E /* SearchTableViewCellTableViewCell.xib */,
 			);
 			path = "MVVM ";
 			sourceTree = "<group>";
@@ -397,6 +403,7 @@
 				CE0172A124724845000E1306 /* MainViewController.xib in Resources */,
 				CE0172AE24728942000E1306 /* MapBoxViewController.xib in Resources */,
 				CEA7F6592476783D00C673FA /* NewMapBoxViewController.xib in Resources */,
+				CE2114812477DE7400BF957E /* SearchTableViewCellTableViewCell.xib in Resources */,
 				CE01729824723993000E1306 /* CellTableViewCell.xib in Resources */,
 				76F50158244944E500CC79E7 /* Main.storyboard in Resources */,
 				CE0172C124729114000E1306 /* old-map-background.jpg in Resources */,
@@ -484,6 +491,7 @@
 				CE0172A324724857000E1306 /* MainPresenter.swift in Sources */,
 				CE01728B24722360000E1306 /* MainViewControllerViewController.swift in Sources */,
 				76AB15572456B93000F3B86C /* HTTPMethod.swift in Sources */,
+				CE2114802477DE7400BF957E /* SearchTableViewCellTableViewCell.swift in Sources */,
 				CEA7F6582476783D00C673FA /* NewMapBoxViewController.swift in Sources */,
 				CE01729724723993000E1306 /* CellTableViewCell.swift in Sources */,
 				CE0172B824728E67000E1306 /* GoogleMapsModel.swift in Sources */,
