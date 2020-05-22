@@ -26,24 +26,24 @@ import PromiseKit
 
 class MapBoxModel {
     
-    static var placeMark = [PlaceMarkForAllMap]()
+    //static var placeMark = [PlaceMarkForAllMap]()
     
     weak var parseDataDelegate: ParseDataFromSearch? = nil
     
     func setPlaceMark(mapBoxPlaceMark: MapBoxPlaceMark) -> [PlaceMarkForAllMap]{
         
-        MapBoxModel.placeMark.removeAll()
+        PlaceMarkForAllMap.shared.removeAll()
         var temp = PlaceMarkForAllMap()
-        print("mapBoxPlaceMark: \(mapBoxPlaceMark.Name.count)")
+        //print("mapBoxPlaceMark: \(mapBoxPlaceMark.Name.count)")
         for i in mapBoxPlaceMark.Name.indices {
             
             temp.Name = mapBoxPlaceMark.Name[i]
             temp.placeName = mapBoxPlaceMark.placeName[i]
             temp.latitude = mapBoxPlaceMark.coordinates[i][1]
-            temp.latitude = mapBoxPlaceMark.coordinates[i][0]
-            MapBoxModel.placeMark.append(temp)
+            temp.longitude = mapBoxPlaceMark.coordinates[i][0]
+            PlaceMarkForAllMap.shared.append(temp)
         }
-        return MapBoxModel.placeMark
+        return PlaceMarkForAllMap.shared
         
         
     }
@@ -104,10 +104,10 @@ extension MapBoxModel: ModelAccess{
             .done() { placeMarkStores in
                    
                 placeMarks = MapBoxPlaceMark(from: placeMarkStores)
-                print("placeMarks fetchData: \(placeMarks.Name.count)")
-                MapBoxModel.placeMark = self.setPlaceMark(mapBoxPlaceMark: placeMarks)
+                //print("placeMarks fetchData: \(placeMarks.Name.count)")
+                PlaceMarkForAllMap.shared = self.setPlaceMark(mapBoxPlaceMark: placeMarks)
                 
-                self.parseDataDelegate?.parseData(data: MapBoxModel.placeMark)
+                self.parseDataDelegate?.parseData(data: PlaceMarkForAllMap.shared)
                 //mapBoxPlaceMarkService = placeMarkStores
             }
                
@@ -120,12 +120,12 @@ extension MapBoxModel: ModelAccess{
        // print("fetchData: Mapbox: placeMarkStores: \(String(describing: mapBoxPlaceMarkService.features?[0].text))")
         //var placeMarkx = [PlaceMarkForAllMap]()
         
-        print("MapBoxModel.placeMark: \(MapBoxModel.placeMark)\n---")
-        return MapBoxModel.placeMark
+       // print("MapBoxModel.placeMark: \(PlaceMarkForAllMap.shared)\n---")
+        return PlaceMarkForAllMap.shared
     }
     
     
     func getPlaceMark() -> [PlaceMarkForAllMap] {
-        return MapBoxModel.placeMark
+        return PlaceMarkForAllMap.shared
     }
 }

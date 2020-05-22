@@ -90,7 +90,7 @@ extension SearchTableViewController : UISearchResultsUpdating {
 extension SearchTableViewController : ParseDataFromSearch {
     func parseData(data: [PlaceMarkForAllMap]) {
         
-        matchingItems = MapBoxModel.placeMark
+        matchingItems = PlaceMarkForAllMap.shared
         DispatchQueue.main.async{
             self.tableView.reloadData()
         }

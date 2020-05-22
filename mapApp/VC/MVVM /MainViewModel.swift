@@ -111,6 +111,10 @@ class MainViewModel {
     //1 PlaceMark for set Annotation
     var placeMark = PlaceMarkForAllMap()
     
+//    func updatePlaceMark(){
+//        placeMark = placeMarks[0]
+//    }
+    
 }
 
 extension MainViewModel: HandleMapSearch {
@@ -123,6 +127,7 @@ extension MainViewModel: HandleMapSearch {
         placeMark.placeName = placeMarks[row].placeName
         placeMark.longitude = placeMarks[row].longitude
         placeMark.latitude = placeMarks[row].latitude
+        
         
     }
     

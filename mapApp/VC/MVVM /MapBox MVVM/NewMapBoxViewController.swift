@@ -25,7 +25,7 @@ class NewMapBoxViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        SearchTable.modelAccess = "MapBox"
-        
+        SearchTable.handleMapSearchDelegate = self
 
         configureActivityIndicator()
         configureSearchButton()
@@ -118,6 +118,7 @@ class NewMapBoxViewController: UIViewController {
         
         
         mapView.clearsContextBeforeDrawing = true
+        mapView.removeRoutes()
         removeAllAnnotations()
                
         let annotation = MGLPointAnnotation()
@@ -134,6 +135,8 @@ class NewMapBoxViewController: UIViewController {
         guard let placeName = self.viewModel.placeMark.placeName else {
             return
         }
+        print("self.viewModel.placeMark: \(self.viewModel.placeMark)")
+        
         annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                                   
         print("annotation coordinate update view from model: \(annotation.coordinate)")
@@ -228,7 +231,12 @@ class NewMapBoxViewController: UIViewController {
 extension NewMapBoxViewController: UISearchBarDelegate{
       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
             
-            //activityIndicator.startAnimating()
+        viewModel.placeMark.Name = PlaceMarkForAllMap.shared[0].Name
+           viewModel.placeMark.placeName = PlaceMarkForAllMap.shared[0].placeName
+           viewModel.placeMark.longitude = PlaceMarkForAllMap.shared[0].longitude
+           viewModel.placeMark.latitude = PlaceMarkForAllMap.shared[0].latitude
+           
+           UpdateViewFromModel()
             
             UpdateViewFromModel()
 
@@ -252,4 +260,22 @@ extension NewMapBoxViewController: MGLMapViewDelegate {
      mapView.fly(to: camera, withDuration: 4, peakAltitude: 3000, completionHandler: nil)
 
      }
+}
+
+extension NewMapBoxViewController: HandleMapSearch {
+    func addAnnotationAPI(placemark: PlaceMark, row: Int) {
+        
+    }
+    
+    func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
+        viewModel.placeMark.Name = placeMarks[row].Name
+        viewModel.placeMark.placeName = placeMarks[row].placeName
+        viewModel.placeMark.longitude = placeMarks[row].longitude
+        viewModel.placeMark.latitude = placeMarks[row].latitude
+        
+        UpdateViewFromModel()
+        
+    }
+    
+    
 }
