@@ -115,6 +115,10 @@ class NewMapBoxViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = barButton
     }
     
+    func configureCenterLabel(){
+    
+        
+    }
     
     
     //MARK: Search Button
@@ -234,6 +238,8 @@ class NewMapBoxViewController: UIViewController {
             return
         }
         print("self.viewModel.placeMark: \(self.viewModel.placeMark)")
+        
+        self.navigationItem.title = name
         
         annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                                   
