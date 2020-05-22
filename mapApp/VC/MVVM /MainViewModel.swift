@@ -57,19 +57,19 @@ protocol ModelAccess {
 }
 
 class ModelFactory{
-    func getModel(typeOfModel: String) -> ModelAccess?{
+    func getModel(typeOfModel: ViewModel) -> ModelAccess?{
     
-        if(typeOfModel == "Google"){
-            return GoogleMapsModel()
-        }
-        if typeOfModel == "MapBox"{
+        switch typeOfModel {
+        case .MapBox:
             return MapBoxModel()
-        }
-        if typeOfModel == "Apple" {
+        case .AppleMaps:
             return AppleMapsModel()
-        }else{
+        case .Google:
+            return GoogleMapsModel()
+        default:
             return nil
         }
+        
     }
 }
 
@@ -82,15 +82,15 @@ class MainViewModel {
     
     var userLocation = CLLocationCoordinate2D()
     
-    let modelAccess: String? //Debug
+    //let modelAccess: String? //Debug
     
-    init(modelAcess: String){
+    init(modelAcess: ViewModel){
     
         self._modelAccess = modelFactory.getModel(typeOfModel: modelAcess)
         if _modelAccess == nil {
             print("ERROR: Init wrong type for View Model")
         }
-        self.modelAccess = modelAcess
+        //self.modelAccess = modelAcess
         
         searchTable?.handleMapSearchDelegate = self
       

@@ -13,11 +13,11 @@ class GoogleMapViewController: UIViewController {
     
     
     lazy var searchTable = SearchTableViewController()
-    var viewModel = MainViewModel(modelAcess: "Google")
+    var viewModel = MainViewModel(modelAcess: .Google)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchTable.modelAccess = "Google"
+        //searchTable.modelAccess = "Google"
 
         configureSearchButton()
         configureMap()

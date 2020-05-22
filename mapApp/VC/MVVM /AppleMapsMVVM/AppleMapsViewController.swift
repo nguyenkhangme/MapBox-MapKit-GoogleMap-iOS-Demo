@@ -10,7 +10,7 @@ import UIKit
 
 class AppleMapsViewController: UIViewController {
 
-    var viewModel = MainViewModel(modelAcess: "Apple")
+    var viewModel = MainViewModel(modelAcess: .AppleMaps)
     
     override func viewDidLoad() {
         super.viewDidLoad()

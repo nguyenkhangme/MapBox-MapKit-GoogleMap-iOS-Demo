@@ -11,8 +11,8 @@ import UIKit
 
 class SearchTableViewController: UITableViewController {
     
-    var modelAccess: String = ""
-    lazy var viewModel = MainViewModel(modelAcess: modelAccess)
+   // var modelAccess: ViewModel.Type
+    lazy var viewModel = MainViewModel(modelAcess: .AppleMaps)
 
     override func viewDidLoad() {
         super.viewDidLoad()

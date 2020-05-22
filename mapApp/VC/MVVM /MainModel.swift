@@ -19,3 +19,10 @@ struct PlaceMarkForAllMap{
     var longitude: CLLocationDegrees?
     var latitude: CLLocationDegrees?
 }
+
+enum ViewModel {
+
+    case MapBox
+    case AppleMaps
+    case Google
+}

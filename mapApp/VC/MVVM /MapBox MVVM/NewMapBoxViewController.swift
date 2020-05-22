@@ -15,8 +15,9 @@ import MapboxDirections
 
 class NewMapBoxViewController: UIViewController {
     
-    
-    var viewModel = MainViewModel(modelAcess: "MapBox")
+    var spacing: CGFloat = 0.0
+    var customView = UIView()
+    var viewModel = MainViewModel(modelAcess: .MapBox)
     lazy var SearchTable = SearchTableViewController()
     var directionsRoute: Route?
     
@@ -24,17 +25,98 @@ class NewMapBoxViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       SearchTable.modelAccess = "MapBox"
+        //SearchTable.modelAccess = .MapBox
         SearchTable.handleMapSearchDelegate = self
-
-        configureActivityIndicator()
-        configureSearchButton()
+        
         configureMap()
+        configureActivityIndicator()
+      
+        configureSearchButton()
+        
+        self.view.addSubview(customView)
+        configureGoToUserLocationButton()
+        configureCustomView()
+        
+        
         
         // Do any additional setup after loading the view.
         
         
     }
+    
+    
+    func updateUserLocation(){ //Just Idea
+        while viewModel.userLocation != self.mapView.userLocation!.coordinate {
+            viewModel.userLocation = self.mapView.userLocation!.coordinate
+            //Dat ham nay o dau?
+            //Neu dang di dung lai va hai ve bang nhau?
+            //Neu di den diem dung, trong ham duoi da xu ly chua?
+            self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
+                if error != nil {
+                    
+                    print("Error calculating route")
+                           //activityIndicator.stopAnimating()
+                }
+            }
+        }
+    }
+    
+    //MARK: Configure CustomView
+    func configureCustomView(){
+        customView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: customView, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: customView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0).isActive = true
+        
+        print("customViewAdd!")
+        
+        
+    }
+    
+    // MARK: GoToUserLocationButton
+    
+    func configureGoToUserLocationButton(){
+        let GoToUserLocationButton = UIButton()
+        GoToUserLocationButton.addTarget(self, action: #selector(GoToUserLocation), for: .touchUpInside)
+        GoToUserLocationButton.backgroundColor = .black
+        GoToUserLocationButton.setTitle("👤", for: .normal)
+        GoToUserLocationButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body).withSize(27)
+        GoToUserLocationButton.translatesAutoresizingMaskIntoConstraints = false
+        //customView.frame.origin = CGPoint(x:view.bounds.maxX-spacing,y:view.bounds.maxY/2)
+        
+        self.customView.addSubview(GoToUserLocationButton)
+          
+        let viewsDictionary = ["GoToUserLocationButton": GoToUserLocationButton]
+           
+        let GoToUserLocationButton_H = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[GoToUserLocationButton]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+                 
+        let GoToUserLocationButton_V = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[GoToUserLocationButton]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
+        
+          customView.addConstraints(GoToUserLocationButton_H)
+          customView.addConstraints(GoToUserLocationButton_V)
+        print("ButtonAdd!")
+        
+    }
+    
+    @objc func GoToUserLocation(){
+        mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+    }
+    
+    //MARK: viewWillLayoutSubviews
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        customView.bounds.origin = CGPoint(x:view.bounds.maxX-spacing,y:view.bounds.maxY/2)
+    }
+    
+    func configureGoToNavigationViewButton(){
+        let barButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchPlace))
+        self.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    
+    
+    //MARK: Search Button
     
     func configureSearchButton(){
         let barButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchPlace))
@@ -61,6 +143,7 @@ class NewMapBoxViewController: UIViewController {
     }
 
     
+    //MARK: configureMap
     
     func configureMap(){
         
@@ -89,6 +172,7 @@ class NewMapBoxViewController: UIViewController {
         
     }
 
+    //MARK: - Declare and configureActivityIndicator
     let activityIndicator = UIActivityIndicatorView()
     
     func configureActivityIndicator(){
@@ -99,7 +183,16 @@ class NewMapBoxViewController: UIViewController {
         activityIndicator.hidesWhenStopped = true
 
         self.view.addSubview(activityIndicator)
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+//        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0).isActive = true
     }
+    
+    //MARK: Remove All Annotations
     
     func removeAllAnnotations() {
       
@@ -114,6 +207,10 @@ class NewMapBoxViewController: UIViewController {
       }
     }
     
+    //MARK: UpdateViewFromViewModel
+    
+    let annotation = MGLPointAnnotation()
+    
     func UpdateViewFromModel(){
         
         
@@ -121,7 +218,7 @@ class NewMapBoxViewController: UIViewController {
         mapView.removeRoutes()
         removeAllAnnotations()
                
-        let annotation = MGLPointAnnotation()
+        
                                                     
         guard let longitude = self.viewModel.placeMark.longitude else {
             return
@@ -159,9 +256,29 @@ class NewMapBoxViewController: UIViewController {
     }
     }
     
+    //MARK: layoutTrait
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        layoutTrait(traitCollection: traitCollection)
+    }
    
+    func layoutTrait(traitCollection: UITraitCollection)
+    {
+        if traitCollection.horizontalSizeClass == .compact, traitCollection.verticalSizeClass == .regular {
+            
+            spacing = 12
+            
+        }
+        else {
+            
+            spacing = 24
+        }
+    }
     
-    
+    // MARK: Calculate and Draw Route
     func calculateRoute(from origin: CLLocationCoordinate2D,
         to destination: CLLocationCoordinate2D,
         completion: @escaping (Route?, Error?) -> ()) {
