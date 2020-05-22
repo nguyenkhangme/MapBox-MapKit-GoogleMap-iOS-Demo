@@ -24,12 +24,13 @@ class NewMapBoxViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // SearchTable.modelAccess = "MapBox"
-        SearchTable.setViewModel(viewModel: viewModel)
+       SearchTable.modelAccess = "MapBox"
+        
 
         configureActivityIndicator()
         configureSearchButton()
         configureMap()
+        
         // Do any additional setup after loading the view.
         
         
@@ -41,6 +42,10 @@ class NewMapBoxViewController: UIViewController {
     }
     
     @objc func searchPlace() {
+        
+        viewModel.userLocation = self.mapView.userLocation!.coordinate
+        print("user Location: \(self.mapView.userLocation!.coordinate)")
+        SearchTable.setViewModel(viewModel: viewModel)
                
         let searchController = UISearchController(searchResultsController: SearchTable)
                
@@ -79,6 +84,8 @@ class NewMapBoxViewController: UIViewController {
               mapView.showsUserLocation = true
               
               mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+        
+        
         
     }
 

@@ -24,12 +24,19 @@ struct AppleMapsPlaceMark{
 }
 
 class AppleMapsModel {
+    
+    weak var parseDataDelegate: ParseDataFromSearch? = nil
+    
     var appleMapsPlaceMarks: [AppleMapsPlaceMark] = []
     
     var placeMark = [PlaceMarkForAllMap]()
 }
 
 extension AppleMapsModel:ModelAccess{
+    
+     
+    
+    
     func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]? {
         print("")
         return nil

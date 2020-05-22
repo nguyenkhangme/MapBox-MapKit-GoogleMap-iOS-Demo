@@ -23,10 +23,14 @@ struct GoogleMapsPlaceMark {
 }
 
 class GoogleMapsModel{
+    weak var parseDataDelegate: ParseDataFromSearch? = nil
+    
    var placeMark = [PlaceMarkForAllMap]()
 }
 
 extension GoogleMapsModel: ModelAccess{
+   
+    
     func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]? {
         print("")
         return nil

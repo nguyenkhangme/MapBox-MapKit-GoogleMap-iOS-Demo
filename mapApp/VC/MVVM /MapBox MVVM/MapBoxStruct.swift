@@ -85,7 +85,7 @@ struct MapBoxPlaceMark {
    }
 
    extension MapBoxPlaceMark {
-       init(from service: PlaceMarkService) {
+       init(from service: MapBoxPlaceMarkService) {
            
            guard let Features = service.features else {
                return

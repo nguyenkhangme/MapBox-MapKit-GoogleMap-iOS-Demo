@@ -29,6 +29,7 @@ class SearchTableViewController: UITableViewController {
     func setViewModel(viewModel: MainViewModel){
         self.viewModel = viewModel
         
+        
     }
     
     var handleMapSearchDelegate:HandleMapSearch? = nil
@@ -70,16 +71,30 @@ class SearchTableViewController: UITableViewController {
 extension SearchTableViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
-        //Tam thoi cho latitude va longitude, can truyen vao vi tri nguoi dung khong phai placeMArk
-        self.viewModel.getData(query: searchController.searchBar.text ?? "", latitude:viewModel.placeMark.latitude!, longitude: viewModel.placeMark.longitude! )
-        guard let matchItems = self.viewModel.placeMarks else {
-            return
-        }
-        matchingItems = matchItems
-        self.tableView.reloadData()
+        self.viewModel.getData(query: searchController.searchBar.text ?? "", latitude:viewModel.userLocation.latitude, longitude: viewModel.userLocation.longitude )
+        
+        self.viewModel._modelAccess?.parseDataDelegate = self
+//        guard let matchItems = self.viewModel.placeMarks else {
+//            return
+//        }
+//        matchingItems = MapBoxModel.placeMark
+//        //print(MapBoxModel.placeMark)
+//        print("matchingItems: \(MapBoxModel.placeMark)")
+        
 
       
     }
 
 }
 
+extension SearchTableViewController : ParseDataFromSearch {
+    func parseData(data: [PlaceMarkForAllMap]) {
+        
+        matchingItems = MapBoxModel.placeMark
+        DispatchQueue.main.async{
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+}

@@ -49,6 +49,8 @@ import CoreLocation
 
 protocol ModelAccess {
     
+    var parseDataDelegate: ParseDataFromSearch? { get set }
+    
     func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]?
     
     func getPlaceMark() -> [PlaceMarkForAllMap]
@@ -73,10 +75,14 @@ class ModelFactory{
 
 class MainViewModel {
 
-    lazy var searchTable = SearchTableViewController()
+    weak var searchTable = SearchTableViewController()
     
-    private let _modelAccess: ModelAccess?
+    var _modelAccess: ModelAccess?
     var modelFactory = ModelFactory()
+    
+    var userLocation = CLLocationCoordinate2D()
+    
+    let modelAccess: String? //Debug
     
     init(modelAcess: String){
     
@@ -84,17 +90,24 @@ class MainViewModel {
         if _modelAccess == nil {
             print("ERROR: Init wrong type for View Model")
         }
-        searchTable.handleMapSearchDelegate = self
+        self.modelAccess = modelAcess
+        
+        searchTable?.handleMapSearchDelegate = self
+      
         
     }
     
     func getData(query: String, latitude: Double, longitude: Double){
-        _modelAccess?.fetchData(query: query, latitude: latitude, longitude: longitude)
+        guard let placeMarkx = _modelAccess?.fetchData(query: query, latitude: latitude, longitude: longitude) else {
+            return
+        }
+        placeMarks = placeMarkx
     }
     
     //Array of PlaceMark
-    lazy var placeMarks = _modelAccess?.getPlaceMark()
+    //lazy var placeMarks = _modelAccess?.getPlaceMark()
     
+    var placeMarks : [PlaceMarkForAllMap] = []
     //1 PlaceMark for set Annotation
     var placeMark = PlaceMarkForAllMap()
     

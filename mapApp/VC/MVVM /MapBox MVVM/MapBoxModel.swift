@@ -22,21 +22,28 @@ import CoreLocation
 
 import PromiseKit
 
+
+
 class MapBoxModel {
     
-    var placeMark = [PlaceMarkForAllMap]()
+    static var placeMark = [PlaceMarkForAllMap]()
+    
+    weak var parseDataDelegate: ParseDataFromSearch? = nil
     
     func setPlaceMark(mapBoxPlaceMark: MapBoxPlaceMark) -> [PlaceMarkForAllMap]{
+        
+        MapBoxModel.placeMark.removeAll()
         var temp = PlaceMarkForAllMap()
+        print("mapBoxPlaceMark: \(mapBoxPlaceMark.Name.count)")
         for i in mapBoxPlaceMark.Name.indices {
             
             temp.Name = mapBoxPlaceMark.Name[i]
             temp.placeName = mapBoxPlaceMark.placeName[i]
             temp.latitude = mapBoxPlaceMark.coordinates[i][1]
             temp.latitude = mapBoxPlaceMark.coordinates[i][0]
-            placeMark.append(temp)
+            MapBoxModel.placeMark.append(temp)
         }
-        return placeMark
+        return MapBoxModel.placeMark
         
         
     }
@@ -50,11 +57,13 @@ class MapBoxModel {
                 
             }
             
-        guard let url = URL(string:"https://api.mapbox.com/geocoding/v5/mapbox.places/" + urlString + ".json?proximity="+String(longitude)+","+String(latitude)+"&access_token=pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g") else {
+        guard let url = URL(string:"https://api.mapbox.com/geocoding/v5/mapbox.places/" + urlString + ".json?proximity="+String(longitude)+","+String(latitude)+"&access_token=pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g")
+        else {
                 print("Invalid URL")
                 return nil
             }
             
+        //print("url:\(url)")
         let request = URLRequest(url: url)
         
             
@@ -71,6 +80,7 @@ class MapBoxModel {
             print(error)
                     
         }
+        //print("Promise PlaceMarkService: \(promise.tap(){x in x.features})")
         return promise
                 
     }
@@ -83,27 +93,39 @@ class MapBoxModel {
 extension MapBoxModel: ModelAccess{
     
     func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]?{
-        var placeMarkss = MapBoxPlaceMark()
+        
+        print("fetch Data MapBox Model\n---")
+        var placeMarks = MapBoxPlaceMark()
+        //var mapBoxPlaceMarkService = MapBoxPlaceMarkService()
         let promise =
-            firstly(){
-                return (loadPlaceMark(query: query, latitude: latitude, longitude: longitude)!)
+            firstly{
+                loadPlaceMark(query: query, latitude: latitude, longitude: longitude)!
             }
             .done() { placeMarkStores in
                    
-                placeMarkss = MapBoxPlaceMark(from: placeMarkStores)
+                placeMarks = MapBoxPlaceMark(from: placeMarkStores)
+                print("placeMarks fetchData: \(placeMarks.Name.count)")
+                MapBoxModel.placeMark = self.setPlaceMark(mapBoxPlaceMark: placeMarks)
+                
+                self.parseDataDelegate?.parseData(data: MapBoxModel.placeMark)
+                //mapBoxPlaceMarkService = placeMarkStores
             }
                
         promise.catch(){ error in
             print(error)
         }
-            
-        var placeMarkx = [PlaceMarkForAllMap]()
-        placeMarkx = setPlaceMark(mapBoxPlaceMark: placeMarkss)
-        return placeMarkx
+        
+        //placeMarks = MapBoxPlaceMark(from: mapBoxPlaceMarkService)
+        
+       // print("fetchData: Mapbox: placeMarkStores: \(String(describing: mapBoxPlaceMarkService.features?[0].text))")
+        //var placeMarkx = [PlaceMarkForAllMap]()
+        
+        print("MapBoxModel.placeMark: \(MapBoxModel.placeMark)\n---")
+        return MapBoxModel.placeMark
     }
     
     
     func getPlaceMark() -> [PlaceMarkForAllMap] {
-        return placeMark
+        return MapBoxModel.placeMark
     }
 }

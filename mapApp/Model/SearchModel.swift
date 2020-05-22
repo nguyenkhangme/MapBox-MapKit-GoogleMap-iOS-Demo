@@ -21,6 +21,7 @@ struct FetchData {
     
     func fetchData(query: String, coordinate: CLLocationCoordinate2D) -> PlaceMark?{
         var placeMarkss = PlaceMark()
+        var placeMarkServiceForDebugNewMapBox = PlaceMarkService()
         let promise =
             firstly(){
                     
@@ -30,6 +31,10 @@ struct FetchData {
             .done() { placeMarkStores in
             
                 placeMarkss = PlaceMark(from: placeMarkStores)
+                
+                 print("placeMarks fetchData: \(placeMarkss.Name.count)")
+                
+                placeMarkServiceForDebugNewMapBox = placeMarkStores
             
                 self.HandleModelSearchDelegate?.addPlaceMark1(name:placeMarkss.Name, qualified_Name: placeMarkss.placeName, coordinates: placeMarkss.coordinates)
             }
@@ -37,7 +42,7 @@ struct FetchData {
         promise.catch(){ error in
             print(error)
         }
-        
+        print("DEBUG for New Map Box: PlaceMArkService fetchData: \(String(describing: placeMarkServiceForDebugNewMapBox.features?.count))")
         return placeMarkss
     }
     
@@ -74,6 +79,7 @@ struct FetchData {
             return nil
         }
         
+        print("url:\(url)")
         let request = URLRequest(url: url)
     
         

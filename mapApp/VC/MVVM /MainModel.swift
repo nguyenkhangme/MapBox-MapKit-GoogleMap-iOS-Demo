@@ -9,6 +9,9 @@
 import Foundation
 import CoreLocation
 
+protocol ParseDataFromSearch: class {
+    func parseData(data: [PlaceMarkForAllMap])
+}
 struct PlaceMarkForAllMap{
     var Name: String?
     var placeName: String?
