@@ -22,7 +22,7 @@ class SearchTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        self.tableView.register(SearchTableViewCellTableViewCell.self, forCellReuseIdentifier: "searchCell")
+       // self.tableView.register(SearchTableViewCellTableViewCell.self, forCellReuseIdentifier: "searchCell")
         
     }
     
@@ -50,19 +50,33 @@ class SearchTableViewController: UITableViewController {
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
-
+//        let cell:SearchTableViewCellTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as! SearchTableViewCellTableViewCell
+//
+//
+//
+////         if let myCell = cell as? SearchTableViewCellTableViewCell {
+//
+//        cell.Title?.text = self.matchingItems[indexPath.row].Name
+//        cell.subTitle?.text = self.matchingItems[indexPath.row].placeName
+//            print("\(String(describing: cell.Title)) ")
+//
+//            return myCell
+//        }
         
+        let identifier = "searchCell"
 
-         if let myCell = cell as? SearchTableViewCellTableViewCell {
-            
-            myCell.textLabel?.text = matchingItems[indexPath.row].Name
-            myCell.subText?.text = matchingItems[indexPath.row].placeName
-            
-            return myCell
-        }
+        var myCell: SearchTableViewCellTableViewCell! = tableView.dequeueReusableCell(withIdentifier: identifier) as? SearchTableViewCellTableViewCell
+
+          if myCell == nil {
+            tableView.register(UINib(nibName: "SearchTableViewCellTableViewCell", bundle: nil), forCellReuseIdentifier: identifier)
+            myCell = tableView.dequeueReusableCell(withIdentifier: identifier) as? SearchTableViewCellTableViewCell
+            }
         
-        return cell
+        myCell.Title?.text = self.matchingItems[indexPath.row].Name
+        myCell.subTitle?.text = self.matchingItems[indexPath.row].placeName
+            print("\(String(describing: myCell.Title)) ")
+        
+        return myCell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
