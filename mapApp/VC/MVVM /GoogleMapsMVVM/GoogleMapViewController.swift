@@ -8,12 +8,22 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 
 class GoogleMapViewController: UIViewController {
     
     
     lazy var searchTable = SearchTableViewController()
     var viewModel = MainViewModel(modelAcess: .Google)
+    
+    //MARK: GoogleMap
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocation?
+    var mapView: GMSMapView!
+    var placesClient: GMSPlacesClient!
+    var zoomLevel: Float = 15.0
+    
+    //MARK: viewDidLoad
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +31,22 @@ class GoogleMapViewController: UIViewController {
 
         configureSearchButton()
         configureMap()
+        configureGoogleMapsVar()
         // Do any additional setup after loading the view.
         
         
+    }
+    
+    func configureGoogleMapsVar(){
+        // Initialize the location manager.
+           locationManager = CLLocationManager()
+           locationManager.desiredAccuracy = kCLLocationAccuracyBest
+           locationManager.requestAlwaysAuthorization()
+           locationManager.distanceFilter = 50
+           locationManager.startUpdatingLocation()
+           locationManager.delegate = self
+
+           placesClient = GMSPlacesClient.shared()
     }
     
     func configureSearchButton(){
@@ -54,7 +77,7 @@ class GoogleMapViewController: UIViewController {
         
         
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        let mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
+        mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
         self.view.addSubview(mapView)
 
         // Creates a marker in the center of the map.
@@ -66,7 +89,7 @@ class GoogleMapViewController: UIViewController {
         
         mapView.translatesAutoresizingMaskIntoConstraints = false
         
-        let viewsDictionary: [String:Any] = ["GoogleMapView": mapView]
+        let viewsDictionary: [String:Any] = ["GoogleMapView": mapView!]
         
         let GoogleMapView_H = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[GoogleMapView]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
         
@@ -98,3 +121,51 @@ extension GoogleMapViewController: UISearchBarDelegate{
         }
 }
 
+
+// Delegates to handle events for the location manager.
+extension GoogleMapViewController: CLLocationManagerDelegate {
+
+  // Handle incoming location events.
+//  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//    let location: CLLocation = locations.last!
+//    print("Location: \(location)")
+//
+//    let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+//                                          longitude: location.coordinate.longitude,
+//                                          zoom: zoomLevel)
+//
+//    if mapView.isHidden {
+//      mapView.isHidden = false
+//      mapView.camera = camera
+//    } else {
+//      mapView.animate(to: camera)
+//    }
+//
+//    listLikelyPlaces()
+//  }
+
+  // Handle authorization for the location manager.
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    switch status {
+    case .restricted:
+      print("Location access was restricted.")
+    case .denied:
+      print("User denied access to location.")
+      // Display the map using the default location.
+      mapView.isHidden = false
+    case .notDetermined:
+      print("Location status not determined.")
+    case .authorizedAlways: fallthrough
+    case .authorizedWhenInUse:
+      print("Location status is OK.")
+    @unknown default:
+      fatalError()
+    }
+  }
+
+  // Handle location manager errors.
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    locationManager.stopUpdatingLocation()
+    print("Error: \(error)")
+  }
+}

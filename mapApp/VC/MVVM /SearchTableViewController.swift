@@ -95,12 +95,6 @@ extension SearchTableViewController : UISearchResultsUpdating {
         self.viewModel.getData(query: searchController.searchBar.text ?? "", latitude:viewModel.userLocation.latitude, longitude: viewModel.userLocation.longitude )
         
         self.viewModel._modelAccess?.parseDataDelegate = self
-//        guard let matchItems = self.viewModel.placeMarks else {
-//            return
-//        }
-//        matchingItems = MapBoxModel.placeMark
-//        //print(MapBoxModel.placeMark)
-//        print("matchingItems: \(MapBoxModel.placeMark)")
         
 
       

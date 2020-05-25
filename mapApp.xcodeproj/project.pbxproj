@@ -44,6 +44,8 @@
 		CE0172BF24728EC7000E1306 /* AppleMapsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172BE24728EC7000E1306 /* AppleMapsModel.swift */; };
 		CE0172C124729114000E1306 /* old-map-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE0172C024729113000E1306 /* old-map-background.jpg */; };
 		CE0172C324729A29000E1306 /* OldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172C224729A29000E1306 /* OldCell.swift */; };
+		CE2027C9247BAA9B00233FC9 /* GoogleMapsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2027C8247BAA9B00233FC9 /* GoogleMapsStruct.swift */; };
+		CE2027CB247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2027CA247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift */; };
 		CE21147B2477669C00BF957E /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21147A2477669C00BF957E /* SearchModel.swift */; };
 		CE2114802477DE7400BF957E /* SearchTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21147E2477DE7400BF957E /* SearchTableViewCellTableViewCell.swift */; };
 		CE2114812477DE7400BF957E /* SearchTableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE21147F2477DE7400BF957E /* SearchTableViewCellTableViewCell.xib */; };
@@ -98,6 +100,8 @@
 		CE0172BE24728EC7000E1306 /* AppleMapsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapsModel.swift; sourceTree = "<group>"; };
 		CE0172C024729113000E1306 /* old-map-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "old-map-background.jpg"; sourceTree = "<group>"; };
 		CE0172C224729A29000E1306 /* OldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldCell.swift; sourceTree = "<group>"; };
+		CE2027C8247BAA9B00233FC9 /* GoogleMapsStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsStruct.swift; sourceTree = "<group>"; };
+		CE2027CA247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsJSONResponsesExample.swift; sourceTree = "<group>"; };
 		CE21147A2477669C00BF957E /* SearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		CE21147E2477DE7400BF957E /* SearchTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
 		CE21147F2477DE7400BF957E /* SearchTableViewCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -316,7 +320,9 @@
 			children = (
 				CE0172B324728DAA000E1306 /* GoogleMapViewController.swift */,
 				CE0172B724728E67000E1306 /* GoogleMapsModel.swift */,
+				CE2027C8247BAA9B00233FC9 /* GoogleMapsStruct.swift */,
 				CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */,
+				CE2027CA247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift */,
 			);
 			path = GoogleMapsMVVM;
 			sourceTree = "<group>";
@@ -480,6 +486,7 @@
 				CE0172BC24728EB1000E1306 /* AppleMapsViewController.swift in Sources */,
 				CE017293247224EF000E1306 /* TableViewController.swift in Sources */,
 				CE21147B2477669C00BF957E /* SearchModel.swift in Sources */,
+				CE2027C9247BAA9B00233FC9 /* GoogleMapsStruct.swift in Sources */,
 				CEA7F65324766EDF00C673FA /* SearchTableViewController.swift in Sources */,
 				76F501692449532900CC79E7 /* MapModule.swift in Sources */,
 				CEA7F64F24763A1A00C673FA /* MainViewModel.swift in Sources */,
@@ -500,6 +507,7 @@
 				CE0172BF24728EC7000E1306 /* AppleMapsModel.swift in Sources */,
 				CEA7F65B2476872B00C673FA /* MapBoxStruct.swift in Sources */,
 				76AB15592456BA4D00F3B86C /* HTTPTask.swift in Sources */,
+				CE2027CB247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift in Sources */,
 				CE0172A624726AAD000E1306 /* MapBoxModel.swift in Sources */,
 				CE0172AD24728942000E1306 /* MapBoxViewController.swift in Sources */,
 				76AB155D2456C2BA00F3B86C /* URLParameterEncoder.swift in Sources */,

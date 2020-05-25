@@ -26,7 +26,7 @@ import PromiseKit
 
 class MapBoxModel {
     
-    //static var placeMark = [PlaceMarkForAllMap]()
+    
     
     weak var parseDataDelegate: ParseDataFromSearch? = nil
     
