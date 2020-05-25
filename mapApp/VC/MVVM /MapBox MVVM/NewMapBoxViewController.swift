@@ -362,7 +362,7 @@ extension NewMapBoxViewController: UISearchBarDelegate{
            
            UpdateViewFromModel()
             
-            UpdateViewFromModel()
+            //UpdateViewFromModel()
 
             SearchTable.dismiss(animated: true, completion: nil)
    

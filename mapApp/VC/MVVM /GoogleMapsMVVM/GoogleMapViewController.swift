@@ -185,9 +185,16 @@ class GoogleMapViewController: UIViewController {
 extension GoogleMapViewController: UISearchBarDelegate{
       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
             
-            //activityIndicatorX.startAnimating()
+            viewModel.placeMark.Name = PlaceMarkForAllMap.shared[0].Name
+            viewModel.placeMark.placeName = PlaceMarkForAllMap.shared[0].placeName
+            viewModel.placeMark.longitude = PlaceMarkForAllMap.shared[0].longitude
+            viewModel.placeMark.latitude = PlaceMarkForAllMap.shared[0].latitude
+            
+            UpdateViewFromModel()
+             
+             //UpdateViewFromModel()
 
-            searchTable.dismiss(animated: true, completion: nil)
+             searchTable.dismiss(animated: true, completion: nil)
    
         }
 }
