@@ -48,8 +48,14 @@ extension GoogleMapsPlaceMark {
             return
         }
         
+        var count = 1
+        
         for Result in Results {
             //var temp = GoogleMapsPlaceMark()
+            //hold 9 value at one
+            if count <= 9 {
+                
+            
             name.append(Result.name ?? "")
             formatted_address.append(Result.formatted_address ?? "")
             
@@ -66,8 +72,8 @@ extension GoogleMapsPlaceMark {
                     lng.append(Location.lng ?? 0)
                     lat.append(Location.lat ?? 0)
                 
-                
-            
+                count += 1
+            }
             
 //            GoogleMapsPlaceMark.shared.append(temp)
         }

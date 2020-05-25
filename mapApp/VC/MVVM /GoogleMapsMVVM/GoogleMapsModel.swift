@@ -28,7 +28,8 @@ class GoogleMapsModel{
                 return nil
                 
             }
-            
+          
+        //Uncomment this code below to search around user Location but I do not know how to get USer Location in google map yet.
 //        guard let url = URL(string:"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + urlString + "&location="+String(longitude)+","+String(latitude)+"&radius=10000&key=AIzaSyCvuaYDzCqq7GvOvey6pZSn4bhY92iq7E8")
         guard let url = URL(string:"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + urlString + "&key=AIzaSyCvuaYDzCqq7GvOvey6pZSn4bhY92iq7E8")
         else {
@@ -44,10 +45,13 @@ class GoogleMapsModel{
             firstly() {
                 
                 return URLSession.shared.dataTask(.promise, with:request)
+                
                     
             }.compactMap {
+                
                 return try JSONDecoder().decode(GoogleMapsPlaceMarkService.self, from: $0.data)
             }
+        print("OK getData")
         
         promise.catch{ error in
             print(error)
