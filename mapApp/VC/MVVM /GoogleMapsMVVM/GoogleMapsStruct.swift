@@ -52,7 +52,7 @@ extension GoogleMapsPlaceMark {
         
         for Result in Results {
             //var temp = GoogleMapsPlaceMark()
-            //hold 9 value at one
+            //hold 9 result at one
             if count <= 9 {
                 
             

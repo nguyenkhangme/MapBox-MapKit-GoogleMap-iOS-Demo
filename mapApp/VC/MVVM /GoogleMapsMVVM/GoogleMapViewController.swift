@@ -29,6 +29,8 @@ class GoogleMapViewController: UIViewController {
         super.viewDidLoad()
         //searchTable.modelAccess = "Google"
 
+        searchTable.handleMapSearchDelegate = self
+        
         configureSearchButton()
         configureMap()
         configureGoogleMapsVar()
@@ -48,6 +50,8 @@ class GoogleMapViewController: UIViewController {
 
            placesClient = GMSPlacesClient.shared()
     }
+    
+    //MARK: Search Setup
     
     func configureSearchButton(){
         let barButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchPlace))
@@ -72,6 +76,8 @@ class GoogleMapViewController: UIViewController {
         
         present(searchController, animated: true, completion: nil)
     }
+    
+    //MARK: Configure Map
 
     func configureMap(){
         
@@ -99,6 +105,71 @@ class GoogleMapViewController: UIViewController {
         view.addConstraints(GoogleMapView_V)
     }
 
+    //MARK: - Declare and configureActivityIndicator
+        let activityIndicator = UIActivityIndicatorView()
+        
+        func configureActivityIndicator(){
+            activityIndicator.style = UIActivityIndicatorView.Style.medium
+
+            activityIndicator.center = self.view.center
+
+            activityIndicator.hidesWhenStopped = true
+
+            self.view.addSubview(activityIndicator)
+            
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    //        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    //        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            
+            NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0).isActive = true
+            NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0).isActive = true
+        }
+    
+    //MARK: UpdateViewFromViewModel
+    
+    let marker = GMSMarker()
+    
+    func UpdateViewFromModel(){
+        
+        
+        mapView.clearsContextBeforeDrawing = true
+        //mapView.removeRoutes()
+        //removeAllAnnotations()
+               
+        
+                                                    
+        guard let longitude = self.viewModel.placeMark.longitude else {
+            return
+        }
+        guard let latitude = self.viewModel.placeMark.latitude else {
+            return
+        }
+        guard let name = self.viewModel.placeMark.Name else {
+            return
+        }
+        guard let placeName = self.viewModel.placeMark.placeName else {
+            return
+        }
+        print("self.viewModel.placeMark: \(self.viewModel.placeMark)")
+        
+        self.navigationItem.title = name
+        
+        marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                                  
+        
+               
+        marker.title = name
+        
+        marker.snippet = placeName
+               
+//        activityIndicator.startAnimating()
+//               print("star animating...")
+               
+        marker.map = mapView
+               
+               
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -168,4 +239,22 @@ extension GoogleMapViewController: CLLocationManagerDelegate {
     locationManager.stopUpdatingLocation()
     print("Error: \(error)")
   }
+}
+
+extension GoogleMapViewController: HandleMapSearch {
+    func addAnnotationAPI(placemark: PlaceMark, row: Int) {
+        
+    }
+    
+    func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
+        viewModel.placeMark.Name = placeMarks[row].Name
+        viewModel.placeMark.placeName = placeMarks[row].placeName
+        viewModel.placeMark.longitude = placeMarks[row].longitude
+        viewModel.placeMark.latitude = placeMarks[row].latitude
+        
+        UpdateViewFromModel()
+        
+    }
+    
+    
 }
