@@ -25,6 +25,8 @@ import PromiseKit
 
 
 class MapBoxModel {
+    let defaultSession = URLSession(configuration: .default)
+    var dataTask: URLSessionDataTask?
     
     typealias QueryResult = ([PlaceMarkForAllMap]) -> Void
     
@@ -57,11 +59,20 @@ class MapBoxModel {
                 
             }
             
-        guard let url = URL(string:"https://api.mapbox.com/geocoding/v5/mapbox.places/" + urlString + ".json?proximity="+String(longitude)+","+String(latitude)+"&access_token=pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g")
-        else {
-                print("Invalid URL")
-                return nil
-            }
+        var urlComponents = URLComponents(string: "https://api.mapbox.com/geocoding/v5/mapbox.places/" + urlString + ".json") 
+        urlComponents?.query = "proximity="+String(longitude)+","+String(latitude)+"&access_token=pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g"
+        
+        
+        guard let url = urlComponents?.url else {
+          print("Invalid URL")
+          return nil
+        }
+            
+//        guard let url = URL(string:"https://api.mapbox.com/geocoding/v5/mapbox.places/" + urlString + ".json?proximity="+String(longitude)+","+String(latitude)+"&access_token=pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g")
+//        else {
+//                print("Invalid URL")
+//                return nil
+//            }
             
         //print("url:\(url)")
         let request = URLRequest(url: url)
