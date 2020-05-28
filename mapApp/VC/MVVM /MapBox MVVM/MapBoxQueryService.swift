@@ -59,9 +59,17 @@ class MapBoxModel {
                 
             }
             
-        var urlComponents = URLComponents(string: "https://api.mapbox.com/geocoding/v5/mapbox.places/" + urlString + ".json") 
+        var urlComponents = URLComponents(string: "https://api.mapbox.com/geocoding/v5/mapbox.places/" + urlString + ".json")
         urlComponents?.query = "proximity="+String(longitude)+","+String(latitude)+"&access_token=pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g"
-        
+//        let queries = ["proximity" : "\(longitude),\(latitude)",
+//            "access_token": "pk.eyJ1IjoiZHVuY2Fubmd1eWVuIiwiYSI6ImNrOTJsY3FmaTA5cHkzbG1qeW45ZGFibHMifQ.w8C6P04eSOR7CDLhRXBz6g"]
+//
+//        for (key,value) in queries {
+//            let temp = URLQueryItem(name: key,value: value)
+//            urlComponents?.queryItems?.append(temp)
+//        }
+//
+        print(urlComponents ?? "dd")
         
         guard let url = urlComponents?.url else {
           print("Invalid URL")
