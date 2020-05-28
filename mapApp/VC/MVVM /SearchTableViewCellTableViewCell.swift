@@ -18,6 +18,8 @@ class SearchTableViewCellTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        subTitle.numberOfLines = 0
+        subTitle.lineBreakMode = .byTruncatingTail
         // Initialization code
     }
     

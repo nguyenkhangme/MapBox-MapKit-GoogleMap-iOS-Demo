@@ -23,6 +23,11 @@ class SearchTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
        // self.tableView.register(SearchTableViewCellTableViewCell.self, forCellReuseIdentifier: "searchCell")
+        configureActivityIndicator()
+        
+        tableView.estimatedRowHeight = 90
+        tableView.rowHeight = UITableView.automaticDimension
+       
         
     }
     
@@ -86,15 +91,52 @@ class SearchTableViewController: UITableViewController {
         handleMapSearchDelegate?.addAnnotationFromSearch(placeMarks: selectedItem, row: indexPath.row)
         dismiss(animated: true, completion: nil)
     }
+    
+
+        //MARK: - Declare and configureActivityIndicator
+        let activityIndicator = UIActivityIndicatorView()
+        
+        func configureActivityIndicator(){
+            activityIndicator.style = UIActivityIndicatorView.Style.medium
+
+            activityIndicator.center = self.view.center
+
+            activityIndicator.hidesWhenStopped = true
+
+            self.view.addSubview(activityIndicator)
+            
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    //        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    //        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            
+            NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0).isActive = true
+            NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0).isActive = true
+        }
 
 }
 
 extension SearchTableViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
+        activityIndicator.startAnimating()
+        
         self.viewModel.getData(query: searchController.searchBar.text ?? "", latitude:viewModel.userLocation.latitude, longitude: viewModel.userLocation.longitude )
         
         self.viewModel._modelAccess?.parseDataDelegate = self
+        
+        // MARK: Uncomment this if want to use Closures instead of Delegate (Only MapBox)
+//        if let placeMarkx = self.viewModel._modelAccess?.fetchData1(query: searchController.searchBar.text ?? "", latitude: viewModel.userLocation.latitude, longitude: viewModel.userLocation.longitude, completion: { [weak self] result in
+//            self?.matchingItems = result
+//            
+//                self?.tableView.reloadData()
+//                self?.activityIndicator.stopAnimating()
+//            
+//            
+//        }) {
+//            
+//        } else{
+//            return
+//        }
         
 
       
@@ -106,8 +148,10 @@ extension SearchTableViewController : ParseDataFromSearch {
     func parseData(data: [PlaceMarkForAllMap]) {
         
         matchingItems = PlaceMarkForAllMap.shared
+        
         DispatchQueue.main.async{
             self.tableView.reloadData()
+            self.activityIndicator.stopAnimating()
         }
     }
     

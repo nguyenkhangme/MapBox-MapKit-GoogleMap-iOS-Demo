@@ -26,7 +26,7 @@ import PromiseKit
 
 class MapBoxModel {
     
-    
+    typealias QueryResult = ([PlaceMarkForAllMap]) -> Void
     
     weak var parseDataDelegate: ParseDataFromSearch? = nil
     
@@ -85,7 +85,43 @@ class MapBoxModel {
                 
     }
     
+    //MARK: (Yeu cau cua anh Rio) ReWrite, use closure instead of delegate
     
+    func fetchData1(query: String, latitude: Double, longitude: Double, completion: @escaping QueryResult) -> [PlaceMarkForAllMap]?{
+        
+        print("fetch Data MapBox Model\n---")
+        var placeMarks = MapBoxPlaceMark()
+        //var mapBoxPlaceMarkService = MapBoxPlaceMarkService()
+        let promise =
+            firstly{
+                loadPlaceMark(query: query, latitude: latitude, longitude: longitude)!
+            }
+            .done() { placeMarkStores in
+                   
+                placeMarks = MapBoxPlaceMark(from: placeMarkStores)
+                //print("placeMarks fetchData: \(placeMarks.Name.count)")
+                PlaceMarkForAllMap.shared = self.setPlaceMark(mapBoxPlaceMark: placeMarks)
+                
+                //MARK: use closures instead of delegate
+                DispatchQueue.main.async {
+                           completion(PlaceMarkForAllMap.shared)
+                }
+               // self.parseDataDelegate?.parseData(data: PlaceMarkForAllMap.shared)
+                
+            }
+               
+        promise.catch(){ error in
+            print(error)
+        }
+        
+        //placeMarks = MapBoxPlaceMark(from: mapBoxPlaceMarkService)
+        
+       // print("fetchData: Mapbox: placeMarkStores: \(String(describing: mapBoxPlaceMarkService.features?[0].text))")
+        //var placeMarkx = [PlaceMarkForAllMap]()
+        
+       // print("MapBoxModel.placeMark: \(PlaceMarkForAllMap.shared)\n---")
+        return PlaceMarkForAllMap.shared
+    }
    
     
 }

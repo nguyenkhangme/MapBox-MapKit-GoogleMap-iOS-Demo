@@ -23,12 +23,16 @@ class TableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+       
+        
         self.tableView.backgroundColor = .clear
         self.tableView.separatorColor = .clear
 
         self.tableView.register(CellTableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.tableFooterView = UIView()
         //let a = UITableView()
+        
+        //self.tableView.setContentOffset(CGPoint(x: 0, y: 60), animated: false)
         
         
     }

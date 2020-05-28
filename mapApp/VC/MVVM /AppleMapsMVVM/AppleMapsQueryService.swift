@@ -34,9 +34,8 @@ class AppleMapsModel {
 
 extension AppleMapsModel:ModelAccess{
     
-     
-    
-    
+   
+  
     func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]? {
         print("")
         return nil
@@ -46,5 +45,9 @@ extension AppleMapsModel:ModelAccess{
         return placeMark
     }
     
+    func fetchData1(query: String, latitude: Double, longitude: Double, completion: @escaping QueryResult) -> [PlaceMarkForAllMap]? {
+        return nil
+    }
+
     
 }

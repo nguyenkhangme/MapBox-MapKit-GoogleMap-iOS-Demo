@@ -88,10 +88,8 @@ class GoogleMapsModel{
 }
 
 extension GoogleMapsModel: ModelAccess{
-    
    
-    
-     func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]?{
+    func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]?{
            
            print("fetch Data GoogleMaps Model\n---")
            var placeMarks = GoogleMapsPlaceMark()
@@ -124,6 +122,9 @@ extension GoogleMapsModel: ModelAccess{
         return PlaceMarkForAllMap.shared
     }
     
+    func fetchData1(query: String, latitude: Double, longitude: Double, completion: @escaping QueryResult) -> [PlaceMarkForAllMap]? {
+          return nil
+       }
     
 }
 

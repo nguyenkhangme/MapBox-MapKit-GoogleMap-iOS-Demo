@@ -38,7 +38,9 @@ class NewMapBoxViewController: UIViewController {
         configureCustomView()
         
         
-        
+        SearchTable.tableView.estimatedRowHeight = 90
+        SearchTable.tableView.rowHeight = UITableView.automaticDimension
+
         // Do any additional setup after loading the view.
         
         
@@ -135,6 +137,8 @@ class NewMapBoxViewController: UIViewController {
         SearchTable.setViewModel(viewModel: viewModel)
                
         let searchController = UISearchController(searchResultsController: SearchTable)
+        
+        searchController.resignFirstResponder()
                
         searchController.searchResultsUpdater = SearchTable
 
@@ -354,6 +358,9 @@ class NewMapBoxViewController: UIViewController {
 
 extension NewMapBoxViewController: UISearchBarDelegate{
       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+       
+
             
         viewModel.placeMark.Name = PlaceMarkForAllMap.shared[0].Name
            viewModel.placeMark.placeName = PlaceMarkForAllMap.shared[0].placeName

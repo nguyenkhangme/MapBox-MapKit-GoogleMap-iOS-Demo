@@ -49,9 +49,13 @@ import CoreLocation
 
 protocol ModelAccess {
     
+    typealias QueryResult = ([PlaceMarkForAllMap]) -> Void
+    
     var parseDataDelegate: ParseDataFromSearch? { get set }
     
     func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]?
+    
+    func fetchData1(query: String, latitude: Double, longitude: Double, completion: @escaping QueryResult) -> [PlaceMarkForAllMap]?
     
     func getPlaceMark() -> [PlaceMarkForAllMap]
 }
@@ -102,6 +106,12 @@ class MainViewModel {
         placeMarks = placeMarkx
     }
     
+//    func getData1(query: String, latitude: Double, longitude: Double){
+//        guard let placeMarkx = _modelAccess?.fetchData(query: query, latitude: latitude, longitude: longitude) { [week self] results in print("ddd") } else {
+//            return
+//        }
+//        placeMarks = placeMarkx
+//    }
     //Array of PlaceMark
     //lazy var placeMarks = _modelAccess?.getPlaceMark()
     

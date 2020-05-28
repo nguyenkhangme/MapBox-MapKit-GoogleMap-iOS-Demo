@@ -24,7 +24,8 @@ struct MapBoxPlaceMark {
        
    }
 
-   struct MapBoxPlaceMarkService: Decodable {
+
+struct MapBoxPlaceMarkService: Decodable {
        
        var type: String?
        var query: [String]?
