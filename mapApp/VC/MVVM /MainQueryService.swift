@@ -82,7 +82,7 @@ class MainQueryService {
     var _queryServiceAccess: QueryServiceAccess?
     var queryServiceFactory = QueryServiceFactory()
     
-    var userLocation = CLLocationCoordinate2D()
+    //var userLocation = CLLocationCoordinate2D()
     private var typeOfQueryService : TypeOfMaps?
    
     init(queryServiceAccess: TypeOfMaps){

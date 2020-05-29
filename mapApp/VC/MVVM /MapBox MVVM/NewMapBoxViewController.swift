@@ -53,8 +53,8 @@ class NewMapBoxViewController: UIViewController {
     
     
     func updateUserLocation(){ //Just Idea
-        while queryService.userLocation != self.mapView.userLocation!.coordinate {
-            queryService.userLocation = self.mapView.userLocation!.coordinate
+        while mapsViewModel.userLocation != self.mapView.userLocation!.coordinate {
+            mapsViewModel.userLocation = self.mapView.userLocation!.coordinate
             //Dat ham nay o dau?
             //Neu dang di dung lai va hai ve bang nhau?
             //Neu di den diem dung, trong ham duoi da xu ly chua?
@@ -137,11 +137,12 @@ class NewMapBoxViewController: UIViewController {
     
     @objc func searchPlace() {
         
-        queryService.userLocation = self.mapView.userLocation!.coordinate
+        //queryService.userLocation = self.mapView.userLocation!.coordinate
         mapsViewModel.userLocation = self.mapView.userLocation!.coordinate
 
         print("user Location: \(self.mapView.userLocation!.coordinate)")
         SearchTable.setQueryService(queryService: queryService)
+        SearchTable.setMapsViewModel(mapsViewModel: mapsViewModel)
                
         let searchController = UISearchController(searchResultsController: SearchTable)
         

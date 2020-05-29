@@ -82,7 +82,6 @@ class MapBoxQueryService {
 //                return nil
 //            }
             
-        //print("url:\(url)")
         let request = URLRequest(url: url)
         
             

@@ -13,7 +13,8 @@ class SearchTableViewController: UITableViewController {
     
    // var modelAccess: ViewModel.Type
     lazy var queryService = MainQueryService(queryServiceAccess: .AppleMaps)
-    var _mapsViewModel = MapsViewModel(modelAccess: .MapBox)
+    //Is this make a memory cycle? No
+    var mapsViewModel = MapsViewModel(modelAccess: .MapBox)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,7 @@ class SearchTableViewController: UITableViewController {
     }
     
     func setMapsViewModel(mapsViewModel: MapsViewModel){
-        self._mapsViewModel = mapsViewModel
+        self.mapsViewModel = mapsViewModel
 
     }
 
@@ -136,7 +137,7 @@ extension SearchTableViewController : UISearchResultsUpdating {
         
         activityIndicator.startAnimating()
         
-        self.queryService.getData(query: searchController.searchBar.text ?? "", latitude:queryService.userLocation.latitude, longitude: queryService.userLocation.longitude )
+        self.queryService.getData(query: searchController.searchBar.text ?? "", latitude:mapsViewModel.userLocation.latitude, longitude: mapsViewModel.userLocation.longitude )
         
         self.queryService._queryServiceAccess?.parseDataDelegate = self
         

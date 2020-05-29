@@ -12,6 +12,7 @@ import CoreLocation
 protocol ParseDataFromSearch: class {
     func parseData(data: [PlaceMarkForAllMap])
 }
+
 struct PlaceMarkForAllMap: MapsModelAccess{
     static var shared = [PlaceMarkForAllMap]()
     var Name: String?
