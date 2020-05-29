@@ -24,12 +24,11 @@ class TableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
        
-        
+        setupTableView()
         self.tableView.backgroundColor = .clear
         self.tableView.separatorColor = .clear
 
-        self.tableView.register(CellTableViewCell.self, forCellReuseIdentifier: "cell")
-        self.tableView.tableFooterView = UIView()
+    
         //let a = UITableView()
         
         //self.tableView.setContentOffset(CGPoint(x: 0, y: 60), animated: false)
@@ -37,7 +36,17 @@ class TableViewController: UITableViewController {
         
     }
     
-
+    private func setupTableView() {
+        tableView.register(CellTableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.backgroundColor = .clear
+        self.tableView.separatorColor = .clear
+        //tableView.separatorInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+       // tableView.separatorColor = .mainTextBlue
+        //tableView.backgroundColor = UIColor.rgb(r: 12, g: 47, b: 57)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
+        tableView.tableFooterView = UIView()
+    }
     
     var delegate: GoToTheMap? = nil
 

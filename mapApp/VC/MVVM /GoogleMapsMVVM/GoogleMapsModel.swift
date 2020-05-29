@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct GoogleMapsPlaceMarkService: Decodable {
     var results: [result]?
@@ -29,6 +30,15 @@ struct GoogleMapsPlaceMarkService: Decodable {
 }
 
 struct GoogleMapsPlaceMark: MapsModelAccess {
+    
+    var title: String?
+    
+    var subTitle: String?
+    
+    var longitude: CLLocationDegrees?
+    
+    var latitude: CLLocationDegrees?
+    
     
     static var shared = [GoogleMapsPlaceMark]()
     var lat: [Double] = []

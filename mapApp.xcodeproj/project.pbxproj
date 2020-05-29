@@ -34,7 +34,7 @@
 		CE0172A324724857000E1306 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172A224724857000E1306 /* MainPresenter.swift */; };
 		CE0172A624726AAD000E1306 /* MapBoxQueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172A524726AAC000E1306 /* MapBoxQueryService.swift */; };
 		CE0172A8247270F7000E1306 /* BackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0172A7247270F7000E1306 /* BackButton.png */; };
-		CE0172AD24728942000E1306 /* MapBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172AB24728942000E1306 /* MapBoxViewController.swift */; };
+		CE0172AD24728942000E1306 /* OldMapBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172AB24728942000E1306 /* OldMapBoxViewController.swift */; };
 		CE0172AE24728942000E1306 /* MapBoxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0172AC24728942000E1306 /* MapBoxViewController.xib */; };
 		CE0172B224728B4A000E1306 /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172B124728B4A000E1306 /* HomeNavigationViewController.swift */; };
 		CE0172B424728DAA000E1306 /* GoogleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172B324728DAA000E1306 /* GoogleMapViewController.swift */; };
@@ -45,6 +45,7 @@
 		CE0172C124729114000E1306 /* old-map-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE0172C024729113000E1306 /* old-map-background.jpg */; };
 		CE0172C324729A29000E1306 /* OldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172C224729A29000E1306 /* OldCell.swift */; };
 		CE16DD162480A8AE0040C192 /* MapsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16DD152480A8AE0040C192 /* MapsViewModel.swift */; };
+		CE16DD1E2480B2B20040C192 /* mapAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16DD1D2480B2B20040C192 /* mapAppTests.swift */; };
 		CE2027C9247BAA9B00233FC9 /* GoogleMapsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2027C8247BAA9B00233FC9 /* GoogleMapsModel.swift */; };
 		CE2027CB247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2027CA247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift */; };
 		CE21147B2477669C00BF957E /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21147A2477669C00BF957E /* SearchModel.swift */; };
@@ -58,6 +59,16 @@
 		CEA7F6592476783D00C673FA /* NewMapBoxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA7F6572476783D00C673FA /* NewMapBoxViewController.xib */; };
 		CEA7F65B2476872B00C673FA /* MapBoxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F65A2476872B00C673FA /* MapBoxModel.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE16DD202480B2B20040C192 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76F50145244944E400CC79E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76F5014C244944E500CC79E7;
+			remoteInfo = mapApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		17CAA556097A5042B63A6CF0 /* Pods-mapApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapApp.release.xcconfig"; path = "Target Support Files/Pods-mapApp/Pods-mapApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -91,7 +102,7 @@
 		CE0172A224724857000E1306 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		CE0172A524726AAC000E1306 /* MapBoxQueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxQueryService.swift; sourceTree = "<group>"; };
 		CE0172A7247270F7000E1306 /* BackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackButton.png; sourceTree = "<group>"; };
-		CE0172AB24728942000E1306 /* MapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxViewController.swift; sourceTree = "<group>"; };
+		CE0172AB24728942000E1306 /* OldMapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldMapBoxViewController.swift; sourceTree = "<group>"; };
 		CE0172AC24728942000E1306 /* MapBoxViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapBoxViewController.xib; sourceTree = "<group>"; };
 		CE0172B124728B4A000E1306 /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationViewController.swift; sourceTree = "<group>"; };
 		CE0172B324728DAA000E1306 /* GoogleMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleMapViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +113,9 @@
 		CE0172C024729113000E1306 /* old-map-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "old-map-background.jpg"; sourceTree = "<group>"; };
 		CE0172C224729A29000E1306 /* OldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldCell.swift; sourceTree = "<group>"; };
 		CE16DD152480A8AE0040C192 /* MapsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewModel.swift; sourceTree = "<group>"; };
+		CE16DD1B2480B2B20040C192 /* mapAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mapAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE16DD1D2480B2B20040C192 /* mapAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapAppTests.swift; sourceTree = "<group>"; };
+		CE16DD1F2480B2B20040C192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE2027C8247BAA9B00233FC9 /* GoogleMapsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsModel.swift; sourceTree = "<group>"; };
 		CE2027CA247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsJSONResponsesExample.swift; sourceTree = "<group>"; };
 		CE21147A2477669C00BF957E /* SearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
@@ -122,6 +136,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE401B4071EF6127E2786CB0 /* Pods_mapApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE16DD182480B2B20040C192 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +222,7 @@
 				76F501642449451300CC79E7 /* Podfile */,
 				76F5016624494B9600CC79E7 /* Cartfile */,
 				76F5014F244944E500CC79E7 /* mapApp */,
+				CE16DD1C2480B2B20040C192 /* mapAppTests */,
 				76F5014E244944E500CC79E7 /* Products */,
 				A50892B9AAF15422FD9A669B /* Pods */,
 				658A1FA1B2CA9E6A311005F4 /* Frameworks */,
@@ -211,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				76F5014D244944E500CC79E7 /* mapApp.app */,
+				CE16DD1B2480B2B20040C192 /* mapAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -309,7 +332,7 @@
 		CE0172B524728E3F000E1306 /* MapBox MVVM */ = {
 			isa = PBXGroup;
 			children = (
-				CE0172AB24728942000E1306 /* MapBoxViewController.swift */,
+				CE0172AB24728942000E1306 /* OldMapBoxViewController.swift */,
 				CEA7F6562476783D00C673FA /* NewMapBoxViewController.swift */,
 				CE0172A524726AAC000E1306 /* MapBoxQueryService.swift */,
 				CEA7F65A2476872B00C673FA /* MapBoxModel.swift */,
@@ -341,6 +364,15 @@
 			path = AppleMapsMVVM;
 			sourceTree = "<group>";
 		};
+		CE16DD1C2480B2B20040C192 /* mapAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE16DD1D2480B2B20040C192 /* mapAppTests.swift */,
+				CE16DD1F2480B2B20040C192 /* Info.plist */,
+			);
+			path = mapAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -364,18 +396,40 @@
 			productReference = 76F5014D244944E500CC79E7 /* mapApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CE16DD1A2480B2B20040C192 /* mapAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE16DD222480B2B20040C192 /* Build configuration list for PBXNativeTarget "mapAppTests" */;
+			buildPhases = (
+				CE16DD172480B2B20040C192 /* Sources */,
+				CE16DD182480B2B20040C192 /* Frameworks */,
+				CE16DD192480B2B20040C192 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE16DD212480B2B20040C192 /* PBXTargetDependency */,
+			);
+			name = mapAppTests;
+			productName = mapAppTests;
+			productReference = CE16DD1B2480B2B20040C192 /* mapAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		76F50145244944E400CC79E7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1120;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = Vinova.Train.mapApp;
 				TargetAttributes = {
 					76F5014C244944E500CC79E7 = {
 						CreatedOnToolsVersion = 11.2.1;
+					};
+					CE16DD1A2480B2B20040C192 = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = 76F5014C244944E500CC79E7;
 					};
 				};
 			};
@@ -393,6 +447,7 @@
 			projectRoot = "";
 			targets = (
 				76F5014C244944E500CC79E7 /* mapApp */,
+				CE16DD1A2480B2B20040C192 /* mapAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -417,6 +472,13 @@
 				CE01729824723993000E1306 /* CellTableViewCell.xib in Resources */,
 				76F50158244944E500CC79E7 /* Main.storyboard in Resources */,
 				CE0172C124729114000E1306 /* old-map-background.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE16DD192480B2B20040C192 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,7 +576,7 @@
 				CE16DD162480A8AE0040C192 /* MapsViewModel.swift in Sources */,
 				CE2027CB247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift in Sources */,
 				CE0172A624726AAD000E1306 /* MapBoxQueryService.swift in Sources */,
-				CE0172AD24728942000E1306 /* MapBoxViewController.swift in Sources */,
+				CE0172AD24728942000E1306 /* OldMapBoxViewController.swift in Sources */,
 				76AB155D2456C2BA00F3B86C /* URLParameterEncoder.swift in Sources */,
 				CEA7F6512476608E00C673FA /* MainModel.swift in Sources */,
 				CE0172A024724845000E1306 /* MainViewController.swift in Sources */,
@@ -523,7 +585,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE16DD172480B2B20040C192 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE16DD1E2480B2B20040C192 /* mapAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE16DD212480B2B20040C192 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76F5014C244944E500CC79E7 /* mapApp */;
+			targetProxy = CE16DD202480B2B20040C192 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		76F50156244944E500CC79E7 /* Main.storyboard */ = {
@@ -695,6 +773,46 @@
 			};
 			name = Release;
 		};
+		CE16DD232480B2B20040C192 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = mapAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "-8120184.mapAppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mapApp.app/mapApp";
+			};
+			name = Debug;
+		};
+		CE16DD242480B2B20040C192 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = mapAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "-8120184.mapAppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mapApp.app/mapApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -712,6 +830,15 @@
 			buildConfigurations = (
 				76F50162244944E600CC79E7 /* Debug */,
 				76F50163244944E600CC79E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE16DD222480B2B20040C192 /* Build configuration list for PBXNativeTarget "mapAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE16DD232480B2B20040C192 /* Debug */,
+				CE16DD242480B2B20040C192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

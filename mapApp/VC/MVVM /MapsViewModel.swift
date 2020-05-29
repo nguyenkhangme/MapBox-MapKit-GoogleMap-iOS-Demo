@@ -7,16 +7,22 @@
 //
 
 import Foundation
+import UIKit
+import CoreLocation
 
 protocol MapsModelAccess {
-    
+    var title: String? { get set }
+    var subTitle: String? { get set }
+    var longitude: CLLocationDegrees? { get set }
+    var latitude: CLLocationDegrees? { get set }
+
 }
 
 
-struct MapsViewModelFactory{
-    func getMapsViewModel(typeOfMapsViewModel: TypeOfMaps) -> MapsModelAccess?{
+struct MapsModelFactory{
+    func getMapsModel(typeOfMapsModel: TypeOfMaps) -> MapsModelAccess?{
     
-        switch typeOfMapsViewModel {
+        switch typeOfMapsModel {
         case .MapBox:
             return MapBoxPlaceMark()
         case .AppleMaps:
@@ -30,5 +36,37 @@ struct MapsViewModelFactory{
 
 
 struct MapsViewModel {
+    
+    var Name: String?
+    var placeName: String?
+    var longitude: CLLocationDegrees?
+    var latitude: CLLocationDegrees?
+    
+    
+    private var _mapsModelAccess: MapsModelAccess?
+    var mapsModelFactory = MapsModelFactory()
+    
+    
+    var userLocation = CLLocationCoordinate2D()
+   
+    
+    //MARK:Sketch
+    //Assign type -> Return new instance of type we need. It work well with query service, is it true for View Model?
+    //We use this way in Query Service, so I will try another way in View Model, which we can use init of VM like:
+    //models.map({return MapsViewModel(mapsModel: $0) })
+    
+    init(mapsModelAccess: MapsModelAccess){
+        self._mapsModelAccess = mapsModelAccess
+        if _mapsModelAccess == nil {
+            print("ERROR: Not support yet")
+        }
+        
+    
+        self.Name = mapsModelAccess.title
+        self.placeName = mapsModelAccess.subTitle
+        self.longitude = mapsModelAccess.longitude
+        self.latitude = mapsModelAccess.latitude
+    }
+    
     
 }

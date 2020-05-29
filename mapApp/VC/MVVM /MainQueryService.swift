@@ -83,6 +83,8 @@ class MainQueryService {
     var queryServiceFactory = QueryServiceFactory()
     
     var userLocation = CLLocationCoordinate2D()
+    private var typeOfQueryService : TypeOfMaps?
+   
     
     //let modelAccess: String? //Debug
     
@@ -90,12 +92,13 @@ class MainQueryService {
     
         self._queryServiceAccess = queryServiceFactory.getQueryService(typeOfQueryService: queryServiceAccess)
         if _queryServiceAccess == nil {
-            print("ERROR: Init wrong type for View Model")
+            print("ERROR: Not support yet")
         }
         //self.modelAccess = modelAcess
         
         searchTable?.handleMapSearchDelegate = self
-      
+        
+        typeOfQueryService = queryServiceAccess
         
     }
     

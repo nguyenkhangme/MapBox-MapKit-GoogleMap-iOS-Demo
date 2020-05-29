@@ -14,8 +14,8 @@ class GoogleMapViewController: UIViewController {
     
     
     lazy var searchTable = SearchTableViewController()
-    var viewModel = MainQueryService(queryServiceAccess: .Google)
-    
+    var queryService = MainQueryService(queryServiceAccess: .Google)
+    var mapsViewModel = [MapsViewModel]()
     //MARK: GoogleMap
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation?
@@ -28,6 +28,7 @@ class GoogleMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //searchTable.modelAccess = "Google"
+        navigationController?.navigationBar.prefersLargeTitles = false
 
         searchTable.handleMapSearchDelegate = self
         
@@ -62,9 +63,11 @@ class GoogleMapViewController: UIViewController {
         
         //viewModel.userLocation = self.mapView.userLocation!.coordinate
         //print("user Location: \(self.mapView.userLocation!.coordinate)")
-        searchTable.setViewModel(viewModel: viewModel)
+        print("")
+        searchTable.setQueryService(queryService: queryService)
                
         let searchController = UISearchController(searchResultsController: searchTable)
+        
                
         searchController.searchResultsUpdater = searchTable
 
@@ -138,19 +141,19 @@ class GoogleMapViewController: UIViewController {
                
         
                                                     
-        guard let longitude = self.viewModel.placeMark.longitude else {
+        guard let longitude = self.queryService.placeMark.longitude else {
             return
         }
-        guard let latitude = self.viewModel.placeMark.latitude else {
+        guard let latitude = self.queryService.placeMark.latitude else {
             return
         }
-        guard let name = self.viewModel.placeMark.Name else {
+        guard let name = self.queryService.placeMark.Name else {
             return
         }
-        guard let placeName = self.viewModel.placeMark.placeName else {
+        guard let placeName = self.queryService.placeMark.placeName else {
             return
         }
-        print("self.viewModel.placeMark: \(self.viewModel.placeMark)")
+        print("self.viewModel.placeMark: \(self.queryService.placeMark)")
         
         self.navigationItem.title = name
         
@@ -177,10 +180,10 @@ class GoogleMapViewController: UIViewController {
 extension GoogleMapViewController: UISearchBarDelegate{
       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
             
-            viewModel.placeMark.Name = PlaceMarkForAllMap.shared[0].Name
-            viewModel.placeMark.placeName = PlaceMarkForAllMap.shared[0].placeName
-            viewModel.placeMark.longitude = PlaceMarkForAllMap.shared[0].longitude
-            viewModel.placeMark.latitude = PlaceMarkForAllMap.shared[0].latitude
+            queryService.placeMark.Name = PlaceMarkForAllMap.shared[0].Name
+            queryService.placeMark.placeName = PlaceMarkForAllMap.shared[0].placeName
+            queryService.placeMark.longitude = PlaceMarkForAllMap.shared[0].longitude
+            queryService.placeMark.latitude = PlaceMarkForAllMap.shared[0].latitude
             
             UpdateViewFromModel()
              
@@ -246,10 +249,10 @@ extension GoogleMapViewController: HandleMapSearch {
     }
     
     func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
-        viewModel.placeMark.Name = placeMarks[row].Name
-        viewModel.placeMark.placeName = placeMarks[row].placeName
-        viewModel.placeMark.longitude = placeMarks[row].longitude
-        viewModel.placeMark.latitude = placeMarks[row].latitude
+        queryService.placeMark.Name = placeMarks[row].Name
+        queryService.placeMark.placeName = placeMarks[row].placeName
+        queryService.placeMark.longitude = placeMarks[row].longitude
+        queryService.placeMark.latitude = placeMarks[row].latitude
         
         UpdateViewFromModel()
         

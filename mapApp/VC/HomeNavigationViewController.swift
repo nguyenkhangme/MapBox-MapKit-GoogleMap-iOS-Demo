@@ -17,9 +17,9 @@ class HomeNavigationViewController: UINavigationController {
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "old-map-background.jpg")!)
         
-        
+        setupNavBar()
 //        configureTableView()
-        tableViewController.tableView.frame.origin = CGPoint(x:0, y:0)
+        tableViewController.tableView.frame.origin = CGPoint(x:self.view.frame.maxX/2, y:0)
         tableViewController.tableView.contentSize.height  = self.view.bounds.height/2
         tableViewController.tableView.bounds.size.height = self.view.bounds.height/2
         
@@ -30,7 +30,16 @@ class HomeNavigationViewController: UINavigationController {
         // Do any additional setup after loading the view.
     }
     
-    func configureTableView(){
+    private func setupNavBar() {
+        navigationItem.title = "MapsApp"
+        navigationBar.prefersLargeTitles = true
+        navigationBar.backgroundColor = UIColor(patternImage: UIImage(named: "old-map-background.jpg")!)
+        navigationBar.isTranslucent = false
+        navigationBar.barTintColor = UIColor.rgb(r: 50, g: 199, b: 242)
+        navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
+    private func configureTableView(){
         
        
         self.view.addSubview(tableViewController.tableView)
@@ -59,4 +68,13 @@ class HomeNavigationViewController: UINavigationController {
     }
     */
 
+}
+
+extension UIColor {
+    static let mainTextBlue = UIColor.rgb(r: 7, g: 71, b: 89)
+    static let highlightColor = UIColor.rgb(r: 50, g: 199, b: 242)
+    
+    static func rgb(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
+        return UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1)
+    }
 }

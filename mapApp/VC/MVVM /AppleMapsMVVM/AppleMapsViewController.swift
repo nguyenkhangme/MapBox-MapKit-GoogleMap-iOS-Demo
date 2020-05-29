@@ -10,11 +10,13 @@ import UIKit
 
 class AppleMapsViewController: UIViewController {
 
-    var viewModel = MainQueryService(queryServiceAccess: .AppleMaps)
+    var queryService = MainQueryService(queryServiceAccess: .AppleMaps)
     lazy var searchTable = SearchTableViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.prefersLargeTitles = false
+
 
         configureSearchButton()
         
@@ -30,7 +32,7 @@ class AppleMapsViewController: UIViewController {
     @objc func searchPlace() {
        // viewModel.userLocation = self.mapView.userLocation!.coordinate
         //print("user Location: \(self.mapView.userLocation!.coordinate)")
-        searchTable.setViewModel(viewModel: viewModel)
+        searchTable.setQueryService(queryService: queryService)
         
         let searchController = UISearchController(searchResultsController: searchTable)
                

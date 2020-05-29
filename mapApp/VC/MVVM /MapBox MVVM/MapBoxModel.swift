@@ -11,6 +11,15 @@ import Foundation
 import CoreLocation
 
 struct MapBoxPlaceMark: MapsModelAccess {
+    
+    var title: String?
+    
+    var subTitle: String?
+    
+    var longitude: CLLocationDegrees?
+    
+    var latitude: CLLocationDegrees?
+    
        
        var placeName: [String] = []
        var Name: [String] = []

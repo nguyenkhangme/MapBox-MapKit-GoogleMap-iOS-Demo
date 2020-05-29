@@ -15,9 +15,12 @@ import MapboxDirections
 
 class NewMapBoxViewController: UIViewController {
     
+    
+    
     var spacing: CGFloat = 0.0
     var customView = UIView()
     var queryService = MainQueryService(queryServiceAccess: .MapBox)
+    var mapsViewModel : MapsViewModel?
     lazy var SearchTable = SearchTableViewController()
     var directionsRoute: Route?
     
@@ -25,6 +28,8 @@ class NewMapBoxViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.prefersLargeTitles = false
+
         //SearchTable.modelAccess = .MapBox
         SearchTable.handleMapSearchDelegate = self
         
@@ -133,12 +138,14 @@ class NewMapBoxViewController: UIViewController {
     @objc func searchPlace() {
         
         queryService.userLocation = self.mapView.userLocation!.coordinate
+        mapsViewModel?.userLocation = self.mapView.userLocation!.coordinate
+
         print("user Location: \(self.mapView.userLocation!.coordinate)")
-        SearchTable.setViewModel(viewModel: queryService)
+        SearchTable.setQueryService(queryService: queryService)
                
         let searchController = UISearchController(searchResultsController: SearchTable)
         
-        searchController.resignFirstResponder()
+        //searchController.resignFirstResponder()
                
         searchController.searchResultsUpdater = SearchTable
 
