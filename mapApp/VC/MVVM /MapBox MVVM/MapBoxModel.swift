@@ -10,7 +10,7 @@ import Foundation
 
 import CoreLocation
 
-struct MapBoxPlaceMark {
+struct MapBoxPlaceMark: MapsModelAccess {
        
        var placeName: [String] = []
        var Name: [String] = []

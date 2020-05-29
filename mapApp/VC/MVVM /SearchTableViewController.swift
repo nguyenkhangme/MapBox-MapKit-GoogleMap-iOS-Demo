@@ -12,7 +12,7 @@ import UIKit
 class SearchTableViewController: UITableViewController {
     
    // var modelAccess: ViewModel.Type
-    lazy var viewModel = MainQueryService(modelAcess: .AppleMaps)
+    lazy var viewModel = MainQueryService(queryServiceAccess: .AppleMaps)
 
     override func viewDidLoad() {
         super.viewDidLoad()

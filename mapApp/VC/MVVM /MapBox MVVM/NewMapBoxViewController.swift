@@ -17,7 +17,7 @@ class NewMapBoxViewController: UIViewController {
     
     var spacing: CGFloat = 0.0
     var customView = UIView()
-    var viewModel = MainQueryService(modelAcess: .MapBox)
+    var queryService = MainQueryService(queryServiceAccess: .MapBox)
     lazy var SearchTable = SearchTableViewController()
     var directionsRoute: Route?
     
@@ -48,8 +48,8 @@ class NewMapBoxViewController: UIViewController {
     
     
     func updateUserLocation(){ //Just Idea
-        while viewModel.userLocation != self.mapView.userLocation!.coordinate {
-            viewModel.userLocation = self.mapView.userLocation!.coordinate
+        while queryService.userLocation != self.mapView.userLocation!.coordinate {
+            queryService.userLocation = self.mapView.userLocation!.coordinate
             //Dat ham nay o dau?
             //Neu dang di dung lai va hai ve bang nhau?
             //Neu di den diem dung, trong ham duoi da xu ly chua?
@@ -132,9 +132,9 @@ class NewMapBoxViewController: UIViewController {
     
     @objc func searchPlace() {
         
-        viewModel.userLocation = self.mapView.userLocation!.coordinate
+        queryService.userLocation = self.mapView.userLocation!.coordinate
         print("user Location: \(self.mapView.userLocation!.coordinate)")
-        SearchTable.setViewModel(viewModel: viewModel)
+        SearchTable.setViewModel(viewModel: queryService)
                
         let searchController = UISearchController(searchResultsController: SearchTable)
         
@@ -229,19 +229,19 @@ class NewMapBoxViewController: UIViewController {
                
         
                                                     
-        guard let longitude = self.viewModel.placeMark.longitude else {
+        guard let longitude = self.queryService.placeMark.longitude else {
             return
         }
-        guard let latitude = self.viewModel.placeMark.latitude else {
+        guard let latitude = self.queryService.placeMark.latitude else {
             return
         }
-        guard let name = self.viewModel.placeMark.Name else {
+        guard let name = self.queryService.placeMark.Name else {
             return
         }
-        guard let placeName = self.viewModel.placeMark.placeName else {
+        guard let placeName = self.queryService.placeMark.placeName else {
             return
         }
-        print("self.viewModel.placeMark: \(self.viewModel.placeMark)")
+        print("self.viewModel.placeMark: \(self.queryService.placeMark)")
         
         self.navigationItem.title = name
         
@@ -362,10 +362,10 @@ extension NewMapBoxViewController: UISearchBarDelegate{
        
 
             
-        viewModel.placeMark.Name = PlaceMarkForAllMap.shared[0].Name
-           viewModel.placeMark.placeName = PlaceMarkForAllMap.shared[0].placeName
-           viewModel.placeMark.longitude = PlaceMarkForAllMap.shared[0].longitude
-           viewModel.placeMark.latitude = PlaceMarkForAllMap.shared[0].latitude
+        queryService.placeMark.Name = PlaceMarkForAllMap.shared[0].Name
+           queryService.placeMark.placeName = PlaceMarkForAllMap.shared[0].placeName
+           queryService.placeMark.longitude = PlaceMarkForAllMap.shared[0].longitude
+           queryService.placeMark.latitude = PlaceMarkForAllMap.shared[0].latitude
            
            UpdateViewFromModel()
             
@@ -399,10 +399,10 @@ extension NewMapBoxViewController: HandleMapSearch {
     }
     
     func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
-        viewModel.placeMark.Name = placeMarks[row].Name
-        viewModel.placeMark.placeName = placeMarks[row].placeName
-        viewModel.placeMark.longitude = placeMarks[row].longitude
-        viewModel.placeMark.latitude = placeMarks[row].latitude
+        queryService.placeMark.Name = placeMarks[row].Name
+        queryService.placeMark.placeName = placeMarks[row].placeName
+        queryService.placeMark.longitude = placeMarks[row].longitude
+        queryService.placeMark.latitude = placeMarks[row].latitude
         
         UpdateViewFromModel()
         

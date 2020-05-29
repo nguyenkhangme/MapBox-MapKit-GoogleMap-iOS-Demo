@@ -20,7 +20,7 @@ struct PlaceMarkForAllMap{
     var latitude: CLLocationDegrees?
 }
 
-enum ViewModel {
+enum TypeOfMaps {
 
     case MapBox
     case AppleMaps

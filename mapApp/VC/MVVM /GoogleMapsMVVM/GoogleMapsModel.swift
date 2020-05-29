@@ -28,7 +28,7 @@ struct GoogleMapsPlaceMarkService: Decodable {
     }
 }
 
-struct GoogleMapsPlaceMark {
+struct GoogleMapsPlaceMark: MapsModelAccess {
     
     static var shared = [GoogleMapsPlaceMark]()
     var lat: [Double] = []

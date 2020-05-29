@@ -61,9 +61,9 @@ protocol QueryServiceAccess {
 }
 
 class QueryServiceFactory{
-    func getQueryService(typeOfModel: ViewModel) -> QueryServiceAccess?{
+    func getQueryService(typeOfQueryService: TypeOfMaps) -> QueryServiceAccess?{
     
-        switch typeOfModel {
+        switch typeOfQueryService {
         case .MapBox:
             return MapBoxQueryService()
         case .AppleMaps:
@@ -86,9 +86,9 @@ class MainQueryService {
     
     //let modelAccess: String? //Debug
     
-    init(modelAcess: ViewModel){
+    init(queryServiceAccess: TypeOfMaps){
     
-        self._queryServiceAccess = queryServiceFactory.getQueryService(typeOfModel: modelAcess)
+        self._queryServiceAccess = queryServiceFactory.getQueryService(typeOfQueryService: queryServiceAccess)
         if _queryServiceAccess == nil {
             print("ERROR: Init wrong type for View Model")
         }

@@ -44,6 +44,7 @@
 		CE0172BF24728EC7000E1306 /* AppleMapsQueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172BE24728EC7000E1306 /* AppleMapsQueryService.swift */; };
 		CE0172C124729114000E1306 /* old-map-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE0172C024729113000E1306 /* old-map-background.jpg */; };
 		CE0172C324729A29000E1306 /* OldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172C224729A29000E1306 /* OldCell.swift */; };
+		CE16DD162480A8AE0040C192 /* MapsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16DD152480A8AE0040C192 /* MapsViewModel.swift */; };
 		CE2027C9247BAA9B00233FC9 /* GoogleMapsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2027C8247BAA9B00233FC9 /* GoogleMapsModel.swift */; };
 		CE2027CB247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2027CA247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift */; };
 		CE21147B2477669C00BF957E /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21147A2477669C00BF957E /* SearchModel.swift */; };
@@ -100,6 +101,7 @@
 		CE0172BE24728EC7000E1306 /* AppleMapsQueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapsQueryService.swift; sourceTree = "<group>"; };
 		CE0172C024729113000E1306 /* old-map-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "old-map-background.jpg"; sourceTree = "<group>"; };
 		CE0172C224729A29000E1306 /* OldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldCell.swift; sourceTree = "<group>"; };
+		CE16DD152480A8AE0040C192 /* MapsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewModel.swift; sourceTree = "<group>"; };
 		CE2027C8247BAA9B00233FC9 /* GoogleMapsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsModel.swift; sourceTree = "<group>"; };
 		CE2027CA247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsJSONResponsesExample.swift; sourceTree = "<group>"; };
 		CE21147A2477669C00BF957E /* SearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				CE0172B624728E50000E1306 /* GoogleMapsMVVM */,
 				CE0172B524728E3F000E1306 /* MapBox MVVM */,
 				CEA7F64E24763A1A00C673FA /* MainQueryService.swift */,
+				CE16DD152480A8AE0040C192 /* MapsViewModel.swift */,
 				CEA7F6502476608D00C673FA /* MainModel.swift */,
 				CEA7F65224766EDF00C673FA /* SearchTableViewController.swift */,
 				CE21147E2477DE7400BF957E /* SearchTableViewCellTableViewCell.swift */,
@@ -508,6 +511,7 @@
 				CE0172BF24728EC7000E1306 /* AppleMapsQueryService.swift in Sources */,
 				CEA7F65B2476872B00C673FA /* MapBoxModel.swift in Sources */,
 				76AB15592456BA4D00F3B86C /* HTTPTask.swift in Sources */,
+				CE16DD162480A8AE0040C192 /* MapsViewModel.swift in Sources */,
 				CE2027CB247BBC2600233FC9 /* GoogleMapsJSONResponsesExample.swift in Sources */,
 				CE0172A624726AAD000E1306 /* MapBoxQueryService.swift in Sources */,
 				CE0172AD24728942000E1306 /* MapBoxViewController.swift in Sources */,
