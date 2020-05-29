@@ -142,15 +142,16 @@ extension SearchTableViewController : UISearchResultsUpdating {
         self.queryService._queryServiceAccess?.parseDataDelegate = self
         
         // MARK: Uncomment this if want to use Closures instead of Delegate (Only MapBox)
-//        if let placeMarkx = self.viewModel._modelAccess?.fetchData1(query: searchController.searchBar.text ?? "", latitude: viewModel.userLocation.latitude, longitude: viewModel.userLocation.longitude, completion: { [weak self] result in
-//            self?.matchingItems = result
-//            
+//        if let placeMarkx = self.queryService._queryServiceAccess?.fetchData1(query: searchController.searchBar.text ?? "", latitude: mapsViewModel.userLocation.latitude, longitude: mapsViewModel.userLocation.longitude, completion: { [weak self] result in
+//           var temp = MapsViewModel(modelAccess: .Google)
+//            self?.mapsViewModels = result.map({ return temp.setMapsModel(mapsModelAccess: $0)})
+//
 //                self?.tableView.reloadData()
 //                self?.activityIndicator.stopAnimating()
-//            
-//            
+//
+//
 //        }) {
-//            
+//
 //        } else{
 //            return
 //        }
