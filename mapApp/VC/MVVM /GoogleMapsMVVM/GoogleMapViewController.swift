@@ -14,7 +14,7 @@ class GoogleMapViewController: UIViewController {
     
     
     lazy var searchTable = SearchTableViewController()
-    var viewModel = MainViewModel(modelAcess: .Google)
+    var viewModel = MainQueryService(modelAcess: .Google)
     
     //MARK: GoogleMap
     var locationManager: CLLocationManager!

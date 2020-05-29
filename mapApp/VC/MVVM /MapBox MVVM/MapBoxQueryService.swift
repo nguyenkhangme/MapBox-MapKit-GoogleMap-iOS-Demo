@@ -24,7 +24,7 @@ import PromiseKit
 
 
 
-class MapBoxModel {
+class MapBoxQueryService {
     let defaultSession = URLSession(configuration: .default)
     var dataTask: URLSessionDataTask?
     
@@ -145,7 +145,7 @@ class MapBoxModel {
     
 }
 
-extension MapBoxModel: ModelAccess{
+extension MapBoxQueryService: QueryServiceAccess{
     
     func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]?{
         

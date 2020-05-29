@@ -12,7 +12,7 @@ import UIKit
 class SearchTableViewController: UITableViewController {
     
    // var modelAccess: ViewModel.Type
-    lazy var viewModel = MainViewModel(modelAcess: .AppleMaps)
+    lazy var viewModel = MainQueryService(modelAcess: .AppleMaps)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class SearchTableViewController: UITableViewController {
         
     }
     
-    func setViewModel(viewModel: MainViewModel){
+    func setViewModel(viewModel: MainQueryService){
         self.viewModel = viewModel
         
         
@@ -122,7 +122,7 @@ extension SearchTableViewController : UISearchResultsUpdating {
         
         self.viewModel.getData(query: searchController.searchBar.text ?? "", latitude:viewModel.userLocation.latitude, longitude: viewModel.userLocation.longitude )
         
-        self.viewModel._modelAccess?.parseDataDelegate = self
+        self.viewModel._queryServiceAccess?.parseDataDelegate = self
         
         // MARK: Uncomment this if want to use Closures instead of Delegate (Only MapBox)
 //        if let placeMarkx = self.viewModel._modelAccess?.fetchData1(query: searchController.searchBar.text ?? "", latitude: viewModel.userLocation.latitude, longitude: viewModel.userLocation.longitude, completion: { [weak self] result in

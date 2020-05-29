@@ -23,7 +23,7 @@ struct AppleMapsPlaceMark{
     
 }
 
-class AppleMapsModel {
+class AppleMapsQueryService {
     
     weak var parseDataDelegate: ParseDataFromSearch? = nil
     
@@ -32,7 +32,7 @@ class AppleMapsModel {
     var placeMark = [PlaceMarkForAllMap]()
 }
 
-extension AppleMapsModel:ModelAccess{
+extension AppleMapsQueryService:QueryServiceAccess{
     
    
   

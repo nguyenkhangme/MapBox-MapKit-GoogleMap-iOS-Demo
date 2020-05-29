@@ -15,7 +15,7 @@ import CoreLocation
 
 import PromiseKit
 
-class GoogleMapsModel{
+class GoogleMapsQueryService{
     
     weak var parseDataDelegate: ParseDataFromSearch? = nil
     
@@ -87,7 +87,7 @@ class GoogleMapsModel{
     
 }
 
-extension GoogleMapsModel: ModelAccess{
+extension GoogleMapsQueryService: QueryServiceAccess{
    
     func fetchData(query: String, latitude: Double, longitude: Double) -> [PlaceMarkForAllMap]?{
            

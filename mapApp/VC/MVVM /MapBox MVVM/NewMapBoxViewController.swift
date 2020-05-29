@@ -17,7 +17,7 @@ class NewMapBoxViewController: UIViewController {
     
     var spacing: CGFloat = 0.0
     var customView = UIView()
-    var viewModel = MainViewModel(modelAcess: .MapBox)
+    var viewModel = MainQueryService(modelAcess: .MapBox)
     lazy var SearchTable = SearchTableViewController()
     var directionsRoute: Route?
     

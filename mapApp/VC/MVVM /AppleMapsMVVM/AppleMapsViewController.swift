@@ -10,7 +10,7 @@ import UIKit
 
 class AppleMapsViewController: UIViewController {
 
-    var viewModel = MainViewModel(modelAcess: .AppleMaps)
+    var viewModel = MainQueryService(modelAcess: .AppleMaps)
     lazy var searchTable = SearchTableViewController()
     
     override func viewDidLoad() {

@@ -47,7 +47,7 @@ import Foundation
 
 import CoreLocation
 
-protocol ModelAccess {
+protocol QueryServiceAccess {
     
     typealias QueryResult = ([PlaceMarkForAllMap]) -> Void
     
@@ -60,27 +60,27 @@ protocol ModelAccess {
     func getPlaceMark() -> [PlaceMarkForAllMap]
 }
 
-class ModelFactory{
-    func getModel(typeOfModel: ViewModel) -> ModelAccess?{
+class QueryServiceFactory{
+    func getQueryService(typeOfModel: ViewModel) -> QueryServiceAccess?{
     
         switch typeOfModel {
         case .MapBox:
-            return MapBoxModel()
+            return MapBoxQueryService()
         case .AppleMaps:
-            return AppleMapsModel()
+            return AppleMapsQueryService()
         case .Google:
-            return GoogleMapsModel()
+            return GoogleMapsQueryService()
         }
         
     }
 }
 
-class MainViewModel {
+class MainQueryService {
 
     weak var searchTable = SearchTableViewController()
     
-    var _modelAccess: ModelAccess?
-    var modelFactory = ModelFactory()
+    var _queryServiceAccess: QueryServiceAccess?
+    var queryServiceFactory = QueryServiceFactory()
     
     var userLocation = CLLocationCoordinate2D()
     
@@ -88,8 +88,8 @@ class MainViewModel {
     
     init(modelAcess: ViewModel){
     
-        self._modelAccess = modelFactory.getModel(typeOfModel: modelAcess)
-        if _modelAccess == nil {
+        self._queryServiceAccess = queryServiceFactory.getQueryService(typeOfModel: modelAcess)
+        if _queryServiceAccess == nil {
             print("ERROR: Init wrong type for View Model")
         }
         //self.modelAccess = modelAcess
@@ -100,18 +100,12 @@ class MainViewModel {
     }
     
     func getData(query: String, latitude: Double, longitude: Double){
-        guard let placeMarkx = _modelAccess?.fetchData(query: query, latitude: latitude, longitude: longitude) else {
+        guard let placeMarkx = _queryServiceAccess?.fetchData(query: query, latitude: latitude, longitude: longitude) else {
             return
         }
         placeMarks = placeMarkx
     }
     
-//    func getData1(query: String, latitude: Double, longitude: Double){
-//        guard let placeMarkx = _modelAccess?.fetchData(query: query, latitude: latitude, longitude: longitude) { [week self] results in print("ddd") } else {
-//            return
-//        }
-//        placeMarks = placeMarkx
-//    }
     //Array of PlaceMark
     //lazy var placeMarks = _modelAccess?.getPlaceMark()
     
@@ -125,7 +119,7 @@ class MainViewModel {
     
 }
 
-extension MainViewModel: HandleMapSearch {
+extension MainQueryService: HandleMapSearch {
     func addAnnotationAPI(placemark: PlaceMark, row: Int) {
         print("")
     }
