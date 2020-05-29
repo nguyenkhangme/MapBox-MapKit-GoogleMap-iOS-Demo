@@ -16,6 +16,13 @@ class SearchTableViewCellTableViewCell: UITableViewCell {
     
     @IBOutlet weak var subTitle: UILabel!
     
+    var mapsViewModel: MapsViewModel!{
+        didSet{
+            Title?.text = mapsViewModel.Name
+            subTitle?.text = mapsViewModel.placeName
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         subTitle.numberOfLines = 0

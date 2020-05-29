@@ -24,6 +24,7 @@ import MapboxDirections
 protocol HandleMapSearch {
     func addAnnotationAPI(placemark: PlaceMark, row: Int)
     func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int)
+    func parseDataFromSearch(viewModel: [MapsViewModel], row: Int)
 }
 
 protocol HandleModelSearch {
@@ -276,6 +277,10 @@ extension MapBoxViewController: MGLMapViewDelegate {
 }
 
 extension MapBoxViewController: HandleMapSearch {
+    func parseDataFromSearch(viewModel: [MapsViewModel], row: Int) {
+        
+    }
+    
     func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
         print("")
     }

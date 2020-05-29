@@ -55,20 +55,13 @@ struct MapsViewModel {
     //We use this way in Query Service, so I will try another way in View Model, which we can use init of VM like:
     //models.map({return MapsViewModel(mapsModel: $0) })
     
-//    init(mapsModelAccess: MapsModelAccess){
-//        self._mapsModelAccess = mapsModelAccess
-//        if _mapsModelAccess == nil {
-//            print("ERROR: Not support yet")
-//        }
-//        
-//    
-//        self.Name = mapsModelAccess.Name
-//        self.placeName = mapsModelAccess.placeName
-//        self.longitude = mapsModelAccess.longitude
-//        self.latitude = mapsModelAccess.latitude
-//    }
-    
-    mutating func setMapsModel(mapsModelAccess: MapsModelAccess){
+    init(modelAccess: TypeOfMaps){
+        self._mapsModelAccess = mapsModelFactory.getMapsModel(typeOfMapsModel: modelAccess)
+        if _mapsModelAccess == nil {
+            print("Not support this map yet.")
+        }
+    }
+    mutating func setMapsModel(mapsModelAccess: MapsModelAccess) -> MapsViewModel{
         self._mapsModelAccess = mapsModelAccess
         if _mapsModelAccess == nil {
             print("ERROR: Not support yet")
@@ -78,9 +71,8 @@ struct MapsViewModel {
         self.placeName = mapsModelAccess.placeName
         self.longitude = mapsModelAccess.longitude
         self.latitude = mapsModelAccess.latitude
+        
+        return self
     }
-    
-    //Tam thoi
-    var placeMark = PlaceMarkForAllMap()
-    
+        
 }

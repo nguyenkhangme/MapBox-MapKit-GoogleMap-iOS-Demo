@@ -13,8 +13,8 @@ class SearchTableViewController: UITableViewController {
     
    // var modelAccess: ViewModel.Type
     lazy var queryService = MainQueryService(queryServiceAccess: .AppleMaps)
-    let mapsViewModel = [MapsViewModel]()
-
+    var _mapsViewModel = MapsViewModel(modelAccess: .MapBox)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,13 +34,21 @@ class SearchTableViewController: UITableViewController {
     
     func setQueryService(queryService: MainQueryService){
         self.queryService = queryService
-        
-        
     }
+    
+    func setMapsViewModel(mapsViewModel: MapsViewModel){
+        self._mapsViewModel = mapsViewModel
+
+    }
+
     
     var handleMapSearchDelegate:HandleMapSearch? = nil
     
-    var matchingItems : [PlaceMarkForAllMap] = []
+    
+    //MARK: Change this from PlaceMarkForAllMap to MapsViewModel
+    //Change in: ParseDataFromSearch, reuse cell, number of rows
+    //var matchingItems : [PlaceMarkForAllMap] = []
+    var mapsViewModels = [MapsViewModel]()
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -50,7 +58,8 @@ class SearchTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return matchingItems.count
+        //return matchingItems.count
+        return mapsViewModels.count
     }
 
   
@@ -78,9 +87,11 @@ class SearchTableViewController: UITableViewController {
             myCell = tableView.dequeueReusableCell(withIdentifier: identifier) as? SearchTableViewCellTableViewCell
             }
         
-        myCell.Title?.text = self.matchingItems[indexPath.row].Name
-        myCell.subTitle?.text = self.matchingItems[indexPath.row].placeName
-            print("\(String(describing: myCell.Title)) ")
+        let mapsViewModel = mapsViewModels[indexPath.row]
+        myCell.mapsViewModel = mapsViewModel
+//        myCell.Title?.text = self.matchingItems[indexPath.row].Name
+//        myCell.subTitle?.text = self.matchingItems[indexPath.row].placeName
+//            print("\(String(describing: myCell.Title)) ")
         
         return myCell
     }
@@ -88,8 +99,12 @@ class SearchTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         //API
-        let selectedItem = matchingItems
-        handleMapSearchDelegate?.addAnnotationFromSearch(placeMarks: selectedItem, row: indexPath.row)
+        //let selectedItem = matchingItems
+        //handleMapSearchDelegate?.addAnnotationFromSearch(placeMarks: selectedItem, row: indexPath.row)
+        
+        let selectedItem = mapsViewModels
+        handleMapSearchDelegate?.parseDataFromSearch(viewModel: selectedItem, row: indexPath.row)
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -148,8 +163,10 @@ extension SearchTableViewController : UISearchResultsUpdating {
 extension SearchTableViewController : ParseDataFromSearch {
     func parseData(data: [PlaceMarkForAllMap]) {
         
-        matchingItems = PlaceMarkForAllMap.shared
-        
+       // matchingItems = PlaceMarkForAllMap.shared
+
+        var temp = MapsViewModel(modelAccess: .Google)
+        mapsViewModels = data.map({ return temp.setMapsModel(mapsModelAccess: $0)})
         DispatchQueue.main.async{
             self.tableView.reloadData()
             self.activityIndicator.stopAnimating()

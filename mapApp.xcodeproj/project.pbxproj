@@ -322,9 +322,7 @@
 				CEA7F64E24763A1A00C673FA /* MainQueryService.swift */,
 				CE16DD152480A8AE0040C192 /* MapsViewModel.swift */,
 				CEA7F6502476608D00C673FA /* MainModel.swift */,
-				CEA7F65224766EDF00C673FA /* SearchTableViewController.swift */,
-				CE21147E2477DE7400BF957E /* SearchTableViewCellTableViewCell.swift */,
-				CE21147F2477DE7400BF957E /* SearchTableViewCellTableViewCell.xib */,
+				CEA7E9612480F8A8001EB54B /* SearchTableViewController */,
 			);
 			path = "MVVM ";
 			sourceTree = "<group>";
@@ -371,6 +369,16 @@
 				CE16DD1F2480B2B20040C192 /* Info.plist */,
 			);
 			path = mapAppTests;
+			sourceTree = "<group>";
+		};
+		CEA7E9612480F8A8001EB54B /* SearchTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CEA7F65224766EDF00C673FA /* SearchTableViewController.swift */,
+				CE21147E2477DE7400BF957E /* SearchTableViewCellTableViewCell.swift */,
+				CE21147F2477DE7400BF957E /* SearchTableViewCellTableViewCell.xib */,
+			);
+			path = SearchTableViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

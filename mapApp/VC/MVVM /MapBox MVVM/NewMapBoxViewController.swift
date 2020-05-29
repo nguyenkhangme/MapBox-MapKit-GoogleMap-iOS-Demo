@@ -20,7 +20,7 @@ class NewMapBoxViewController: UIViewController {
     var spacing: CGFloat = 0.0
     var customView = UIView()
     var queryService = MainQueryService(queryServiceAccess: .MapBox)
-    var mapsViewModel = MapsViewModel()
+    var mapsViewModel = MapsViewModel(modelAccess: .MapBox)
     lazy var SearchTable = SearchTableViewController()
     var directionsRoute: Route?
     
@@ -396,6 +396,11 @@ extension NewMapBoxViewController: MGLMapViewDelegate {
 }
 
 extension NewMapBoxViewController: HandleMapSearch {
+    func parseDataFromSearch(viewModel: [MapsViewModel], row: Int) {
+        mapsViewModel = viewModel[row]
+        UpdateViewFromModel()
+    }
+    
     func addAnnotationAPI(placemark: PlaceMark, row: Int) {
         
     }

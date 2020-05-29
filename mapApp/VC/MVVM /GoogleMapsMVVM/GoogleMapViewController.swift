@@ -15,7 +15,7 @@ class GoogleMapViewController: UIViewController {
     
     lazy var searchTable = SearchTableViewController()
     var queryService = MainQueryService(queryServiceAccess: .Google)
-    var mapsViewModel : MapsViewModel?
+    var mapsViewModel = MapsViewModel(modelAccess: .MapBox)
     //MARK: GoogleMap
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation?
@@ -141,16 +141,16 @@ class GoogleMapViewController: UIViewController {
                
         
                                                     
-        guard let longitude = self.mapsViewModel?.longitude else {
+        guard let longitude = self.mapsViewModel.longitude else {
                    return
                }
-        guard let latitude = self.mapsViewModel?.latitude else {
+        guard let latitude = self.mapsViewModel.latitude else {
                    return
                }
-        guard let name = self.mapsViewModel?.Name else {
+        guard let name = self.mapsViewModel.Name else {
                    return
                }
-        guard let placeName = self.mapsViewModel?.placeName else {
+        guard let placeName = self.mapsViewModel.placeName else {
                    return
                }
         
@@ -180,7 +180,7 @@ class GoogleMapViewController: UIViewController {
 extension GoogleMapViewController: UISearchBarDelegate{
       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        mapsViewModel?.setMapsModel(mapsModelAccess: PlaceMarkForAllMap.shared[0])
+        mapsViewModel.setMapsModel(mapsModelAccess: PlaceMarkForAllMap.shared[0])
             
         UpdateViewFromModel()
 
@@ -239,13 +239,19 @@ extension GoogleMapViewController: CLLocationManagerDelegate {
 }
 
 extension GoogleMapViewController: HandleMapSearch {
+    func parseDataFromSearch(viewModel: [MapsViewModel], row: Int) {
+        mapsViewModel = viewModel[row]
+        UpdateViewFromModel()
+
+    }
+    
     func addAnnotationAPI(placemark: PlaceMark, row: Int) {
         
     }
     
     func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
         
-        mapsViewModel?.setMapsModel(mapsModelAccess: placeMarks[row])
+        mapsViewModel.setMapsModel(mapsModelAccess: placeMarks[row])
         
         UpdateViewFromModel()
         
