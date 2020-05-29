@@ -12,17 +12,17 @@ import CoreLocation
 
 struct MapBoxPlaceMark: MapsModelAccess {
     
-    var title: String?
+    var Name: String?
     
-    var subTitle: String?
+    var placeName: String?
     
     var longitude: CLLocationDegrees?
     
     var latitude: CLLocationDegrees?
     
        
-       var placeName: [String] = []
-       var Name: [String] = []
+       var placeNames: [String] = []
+       var Names: [String] = []
        var coordinates: [[Double]] = []
        
        private enum CodingKeys: String, CodingKey {
@@ -101,8 +101,8 @@ struct MapBoxPlaceMarkService: Decodable {
                return
            }
            for Feature in Features {
-               placeName.append(Feature.place_name)
-               Name.append(Feature.text)
+               placeNames.append(Feature.place_name)
+               Names.append(Feature.text)
 
                let Geometry = Feature.geometry
                coordinates.append(Geometry.coordinates)

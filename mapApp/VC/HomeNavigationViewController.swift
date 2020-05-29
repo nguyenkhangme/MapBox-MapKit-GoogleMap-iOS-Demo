@@ -23,6 +23,7 @@ class HomeNavigationViewController: UINavigationController {
         tableViewController.tableView.contentSize.height  = self.view.bounds.height/2
         tableViewController.tableView.bounds.size.height = self.view.bounds.height/2
         
+        //self.addChild(tableViewController)
         
          pushViewController(tableViewController, animated: true)
         
@@ -30,11 +31,21 @@ class HomeNavigationViewController: UINavigationController {
         // Do any additional setup after loading the view.
     }
     
+//    override func viewWillLayoutSubviews() {
+//        setupNavBar()
+//        tableViewController.tableView.frame.origin = CGPoint(x:self.view.frame.maxX/2, y:0)
+//        tableViewController.tableView.contentSize.height  = self.view.bounds.height/2
+//        tableViewController.tableView.bounds.size.height = self.view.bounds.height/2
+//
+//        self.addChild(tableViewController)
+//
+//    }
+    
     private func setupNavBar() {
         navigationItem.title = "MapsApp"
         navigationBar.prefersLargeTitles = true
         navigationBar.backgroundColor = UIColor(patternImage: UIImage(named: "old-map-background.jpg")!)
-        navigationBar.isTranslucent = false
+        navigationBar.isTranslucent = true
         navigationBar.barTintColor = UIColor.rgb(r: 50, g: 199, b: 242)
         navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
     }
@@ -76,5 +87,11 @@ extension UIColor {
     
     static func rgb(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
         return UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1)
+    }
+}
+
+class CustomNavigationController: UINavigationController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }

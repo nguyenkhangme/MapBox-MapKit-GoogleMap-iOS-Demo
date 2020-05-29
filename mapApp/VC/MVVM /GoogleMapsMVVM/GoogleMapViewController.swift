@@ -15,7 +15,7 @@ class GoogleMapViewController: UIViewController {
     
     lazy var searchTable = SearchTableViewController()
     var queryService = MainQueryService(queryServiceAccess: .Google)
-    var mapsViewModel = [MapsViewModel]()
+    var mapsViewModel : MapsViewModel?
     //MARK: GoogleMap
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation?
@@ -141,19 +141,19 @@ class GoogleMapViewController: UIViewController {
                
         
                                                     
-        guard let longitude = self.queryService.placeMark.longitude else {
-            return
-        }
-        guard let latitude = self.queryService.placeMark.latitude else {
-            return
-        }
-        guard let name = self.queryService.placeMark.Name else {
-            return
-        }
-        guard let placeName = self.queryService.placeMark.placeName else {
-            return
-        }
-        print("self.viewModel.placeMark: \(self.queryService.placeMark)")
+        guard let longitude = self.mapsViewModel?.longitude else {
+                   return
+               }
+        guard let latitude = self.mapsViewModel?.latitude else {
+                   return
+               }
+        guard let name = self.mapsViewModel?.Name else {
+                   return
+               }
+        guard let placeName = self.mapsViewModel?.placeName else {
+                   return
+               }
+        
         
         self.navigationItem.title = name
         
@@ -179,17 +179,12 @@ class GoogleMapViewController: UIViewController {
 
 extension GoogleMapViewController: UISearchBarDelegate{
       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        mapsViewModel?.setMapsModel(mapsModelAccess: PlaceMarkForAllMap.shared[0])
             
-            queryService.placeMark.Name = PlaceMarkForAllMap.shared[0].Name
-            queryService.placeMark.placeName = PlaceMarkForAllMap.shared[0].placeName
-            queryService.placeMark.longitude = PlaceMarkForAllMap.shared[0].longitude
-            queryService.placeMark.latitude = PlaceMarkForAllMap.shared[0].latitude
-            
-            UpdateViewFromModel()
-             
-             //UpdateViewFromModel()
+        UpdateViewFromModel()
 
-             searchTable.dismiss(animated: true, completion: nil)
+        searchTable.dismiss(animated: true, completion: nil)
    
         }
 }
@@ -249,10 +244,8 @@ extension GoogleMapViewController: HandleMapSearch {
     }
     
     func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
-        queryService.placeMark.Name = placeMarks[row].Name
-        queryService.placeMark.placeName = placeMarks[row].placeName
-        queryService.placeMark.longitude = placeMarks[row].longitude
-        queryService.placeMark.latitude = placeMarks[row].latitude
+        
+        mapsViewModel?.setMapsModel(mapsModelAccess: placeMarks[row])
         
         UpdateViewFromModel()
         

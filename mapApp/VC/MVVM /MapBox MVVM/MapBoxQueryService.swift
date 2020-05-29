@@ -37,10 +37,10 @@ class MapBoxQueryService {
         PlaceMarkForAllMap.shared.removeAll()
         var temp = PlaceMarkForAllMap()
         //print("mapBoxPlaceMark: \(mapBoxPlaceMark.Name.count)")
-        for i in mapBoxPlaceMark.Name.indices {
+        for i in mapBoxPlaceMark.Names.indices {
             
-            temp.Name = mapBoxPlaceMark.Name[i]
-            temp.placeName = mapBoxPlaceMark.placeName[i]
+            temp.Name = mapBoxPlaceMark.Names[i]
+            temp.placeName = mapBoxPlaceMark.placeNames[i]
             temp.latitude = mapBoxPlaceMark.coordinates[i][1]
             temp.longitude = mapBoxPlaceMark.coordinates[i][0]
             PlaceMarkForAllMap.shared.append(temp)

@@ -77,7 +77,7 @@ class QueryServiceFactory{
 
 class MainQueryService {
 
-    weak var searchTable = SearchTableViewController()
+    
     
     var _queryServiceAccess: QueryServiceAccess?
     var queryServiceFactory = QueryServiceFactory()
@@ -85,56 +85,23 @@ class MainQueryService {
     var userLocation = CLLocationCoordinate2D()
     private var typeOfQueryService : TypeOfMaps?
    
-    
-    //let modelAccess: String? //Debug
-    
     init(queryServiceAccess: TypeOfMaps){
     
         self._queryServiceAccess = queryServiceFactory.getQueryService(typeOfQueryService: queryServiceAccess)
         if _queryServiceAccess == nil {
             print("ERROR: Not support yet")
         }
-        //self.modelAccess = modelAcess
-        
-        searchTable?.handleMapSearchDelegate = self
         
         typeOfQueryService = queryServiceAccess
         
     }
     
     func getData(query: String, latitude: Double, longitude: Double){
-        guard let placeMarkx = _queryServiceAccess?.fetchData(query: query, latitude: latitude, longitude: longitude) else {
+        guard (_queryServiceAccess?.fetchData(query: query, latitude: latitude, longitude: longitude)) != nil else {
             return
         }
-        placeMarks = placeMarkx
+
     }
-    
-    //Array of PlaceMark
-    //lazy var placeMarks = _modelAccess?.getPlaceMark()
-    
-    var placeMarks : [PlaceMarkForAllMap] = []
-    //1 PlaceMark for set Annotation
-    var placeMark = PlaceMarkForAllMap()
-    
-//    func updatePlaceMark(){
-//        placeMark = placeMarks[0]
-//    }
     
 }
 
-extension MainQueryService: HandleMapSearch {
-    func addAnnotationAPI(placemark: PlaceMark, row: Int) {
-        print("")
-    }
-    
-    func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
-        placeMark.Name = placeMarks[row].Name
-        placeMark.placeName = placeMarks[row].placeName
-        placeMark.longitude = placeMarks[row].longitude
-        placeMark.latitude = placeMarks[row].latitude
-        
-        
-    }
-    
-    
-}

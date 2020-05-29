@@ -20,7 +20,7 @@ class NewMapBoxViewController: UIViewController {
     var spacing: CGFloat = 0.0
     var customView = UIView()
     var queryService = MainQueryService(queryServiceAccess: .MapBox)
-    var mapsViewModel : MapsViewModel?
+    var mapsViewModel = MapsViewModel()
     lazy var SearchTable = SearchTableViewController()
     var directionsRoute: Route?
     
@@ -138,7 +138,7 @@ class NewMapBoxViewController: UIViewController {
     @objc func searchPlace() {
         
         queryService.userLocation = self.mapView.userLocation!.coordinate
-        mapsViewModel?.userLocation = self.mapView.userLocation!.coordinate
+        mapsViewModel.userLocation = self.mapView.userLocation!.coordinate
 
         print("user Location: \(self.mapView.userLocation!.coordinate)")
         SearchTable.setQueryService(queryService: queryService)
@@ -236,19 +236,20 @@ class NewMapBoxViewController: UIViewController {
                
         
                                                     
-        guard let longitude = self.queryService.placeMark.longitude else {
+        guard let longitude = self.mapsViewModel.longitude else {
             return
         }
-        guard let latitude = self.queryService.placeMark.latitude else {
+        guard let latitude = self.mapsViewModel.latitude else {
             return
         }
-        guard let name = self.queryService.placeMark.Name else {
+        guard let name = self.mapsViewModel.Name else {
             return
         }
-        guard let placeName = self.queryService.placeMark.placeName else {
+        guard let placeName = self.mapsViewModel.placeName else {
             return
         }
-        print("self.viewModel.placeMark: \(self.queryService.placeMark)")
+    
+        print("AAAAAA: \(longitude), \(latitude), \(name), \(placeName)")
         
         self.navigationItem.title = name
         
@@ -366,13 +367,7 @@ class NewMapBoxViewController: UIViewController {
 extension NewMapBoxViewController: UISearchBarDelegate{
       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-       
-
-            
-        queryService.placeMark.Name = PlaceMarkForAllMap.shared[0].Name
-           queryService.placeMark.placeName = PlaceMarkForAllMap.shared[0].placeName
-           queryService.placeMark.longitude = PlaceMarkForAllMap.shared[0].longitude
-           queryService.placeMark.latitude = PlaceMarkForAllMap.shared[0].latitude
+         mapsViewModel.setMapsModel(mapsModelAccess: PlaceMarkForAllMap.shared[0])
            
            UpdateViewFromModel()
             
@@ -406,10 +401,8 @@ extension NewMapBoxViewController: HandleMapSearch {
     }
     
     func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
-        queryService.placeMark.Name = placeMarks[row].Name
-        queryService.placeMark.placeName = placeMarks[row].placeName
-        queryService.placeMark.longitude = placeMarks[row].longitude
-        queryService.placeMark.latitude = placeMarks[row].latitude
+        
+        mapsViewModel.setMapsModel(mapsModelAccess: placeMarks[row])
         
         UpdateViewFromModel()
         

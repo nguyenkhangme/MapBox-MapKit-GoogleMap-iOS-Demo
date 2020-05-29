@@ -31,9 +31,9 @@ struct GoogleMapsPlaceMarkService: Decodable {
 
 struct GoogleMapsPlaceMark: MapsModelAccess {
     
-    var title: String?
+    var Name: String?
     
-    var subTitle: String?
+    var placeName: String?
     
     var longitude: CLLocationDegrees?
     

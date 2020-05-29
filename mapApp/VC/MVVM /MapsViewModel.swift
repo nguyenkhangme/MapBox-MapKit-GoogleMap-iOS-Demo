@@ -11,8 +11,8 @@ import UIKit
 import CoreLocation
 
 protocol MapsModelAccess {
-    var title: String? { get set }
-    var subTitle: String? { get set }
+    var Name: String? { get set }
+    var placeName: String? { get set }
     var longitude: CLLocationDegrees? { get set }
     var latitude: CLLocationDegrees? { get set }
 
@@ -55,18 +55,32 @@ struct MapsViewModel {
     //We use this way in Query Service, so I will try another way in View Model, which we can use init of VM like:
     //models.map({return MapsViewModel(mapsModel: $0) })
     
-    init(mapsModelAccess: MapsModelAccess){
+//    init(mapsModelAccess: MapsModelAccess){
+//        self._mapsModelAccess = mapsModelAccess
+//        if _mapsModelAccess == nil {
+//            print("ERROR: Not support yet")
+//        }
+//        
+//    
+//        self.Name = mapsModelAccess.Name
+//        self.placeName = mapsModelAccess.placeName
+//        self.longitude = mapsModelAccess.longitude
+//        self.latitude = mapsModelAccess.latitude
+//    }
+    
+    mutating func setMapsModel(mapsModelAccess: MapsModelAccess){
         self._mapsModelAccess = mapsModelAccess
         if _mapsModelAccess == nil {
             print("ERROR: Not support yet")
         }
         
-    
-        self.Name = mapsModelAccess.title
-        self.placeName = mapsModelAccess.subTitle
+        self.Name = mapsModelAccess.Name
+        self.placeName = mapsModelAccess.placeName
         self.longitude = mapsModelAccess.longitude
         self.latitude = mapsModelAccess.latitude
     }
     
+    //Tam thoi
+    var placeMark = PlaceMarkForAllMap()
     
 }
