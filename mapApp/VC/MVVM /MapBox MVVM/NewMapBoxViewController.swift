@@ -15,7 +15,7 @@ import MapboxDirections
 
 class NewMapBoxViewController: UIViewController {
     
-    
+    var annotations = [MGLPointAnnotation()]
     var whatIndexOfViewModelInViewModels = 0
     var spacing: CGFloat = 0.0
     var customView = UIView()
@@ -358,6 +358,21 @@ class NewMapBoxViewController: UIViewController {
     
     // MARK: Add Annotations
     
+    func addAnnotations(longitude: CLLocationDegrees, latitude: CLLocationDegrees, name: String, placeName: String) -> MGLPointAnnotation{
+        
+            
+            annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                                      
+            print("annotation coordinate update view from model: \(annotation.coordinate)")
+                   
+            annotation.title = name
+            
+            annotation.subtitle = placeName
+                   
+          
+            //self.mapView.addAnnotation(annotation)
+        return annotation
+    }
     /*
     // MARK: - Navigation
 
@@ -370,13 +385,57 @@ class NewMapBoxViewController: UIViewController {
 
 }
 
+//MARK: searchBarSearchButtonClicked
+
 extension NewMapBoxViewController: UISearchBarDelegate{
       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-         mapsViewModel.setMapsModel(mapsModelAccess: PlaceMarkForAllMap.shared[0])
-           
-           UpdateViewFromModel()
+//        mapsViewModel.setMapsModel(mapsModelAccess: PlaceMarkForAllMap.shared[0])
+//
+//        UpdateViewFromModel()
+        
+        //annotations
+        
+        mapView.clearsContextBeforeDrawing = true
+        mapView.removeRoutes()
+        removeAllAnnotations()
+
+        
+        activityIndicator.startAnimating()
+        
+        var temp = MapsViewModel(modelAccess: .MapBox)
+        
+        mapsViewModels = PlaceMarkForAllMap.shared.map({ return temp.setMapsModel(mapsModelAccess: $0)})
+        
+        for i in mapsViewModels.indices{
+            print("i:\(i)\n")
+        guard let longitude = self.mapsViewModels[i].longitude else {
+                   return
+               }
+               guard let latitude = self.mapsViewModels[i].latitude else {
+                   return
+               }
+               guard let name = self.mapsViewModels[i].Name else {
+                   return
+               }
+               guard let placeName = self.mapsViewModels[i].placeName else {
+                   return
+               }
+            let temp = addAnnotations(longitude: longitude, latitude: latitude, name: name, placeName: placeName)
             
+            //annotations[i] = temp
+            
+            
+            annotations.append(temp)
+            //print("SBBC: \(annotations[i])")
+
+            self.mapView.addAnnotation(annotations[i])
+            
+        }
+
+        
+        activityIndicator.stopAnimating()
+        
             //UpdateViewFromModel()
 
             SearchTable.dismiss(animated: true, completion: nil)
