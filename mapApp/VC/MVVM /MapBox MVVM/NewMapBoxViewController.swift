@@ -237,19 +237,19 @@ class NewMapBoxViewController: UIViewController {
         mapView.clearsContextBeforeDrawing = true
         mapView.removeRoutes()
         removeAllAnnotations()
-               
+        
         
                                                     
-        guard let longitude = self.mapsViewModel.longitude else {
+        guard let longitude = self.mapsViewModels[whatIndexOfViewModelInViewModels].longitude else {
             return
         }
-        guard let latitude = self.mapsViewModel.latitude else {
+        guard let latitude = self.mapsViewModels[whatIndexOfViewModelInViewModels].latitude else {
             return
         }
-        guard let name = self.mapsViewModel.Name else {
+        guard let name = self.mapsViewModels[whatIndexOfViewModelInViewModels].Name else {
             return
         }
-        guard let placeName = self.mapsViewModel.placeName else {
+        guard let placeName = self.mapsViewModels[whatIndexOfViewModelInViewModels].placeName else {
             return
         }
     
@@ -360,7 +360,8 @@ class NewMapBoxViewController: UIViewController {
     
     func addAnnotations(longitude: CLLocationDegrees, latitude: CLLocationDegrees, name: String, placeName: String) -> MGLPointAnnotation{
         
-            
+        
+        
             annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                                       
             print("annotation coordinate update view from model: \(annotation.coordinate)")
@@ -421,14 +422,22 @@ extension NewMapBoxViewController: UISearchBarDelegate{
                guard let placeName = self.mapsViewModels[i].placeName else {
                    return
                }
-            let temp = addAnnotations(longitude: longitude, latitude: latitude, name: name, placeName: placeName)
             
-            //annotations[i] = temp
+            let temp = MGLPointAnnotation()
+           
+            temp.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                                      
+            print("annotation coordinate update view from model: \(annotation.coordinate)")
+                   
+            temp.title = name
+            
+            temp.subtitle = placeName
+
+            //Why it's not work exactly if we use this function? (Test: Print annotations exactly but not show it in the map!)
+            //let temp = addAnnotations(longitude: longitude, latitude: latitude, name: name, placeName: placeName)
             
             
             annotations.append(temp)
-            //print("SBBC: \(annotations[i])")
-
             self.mapView.addAnnotation(annotations[i])
             
         }
