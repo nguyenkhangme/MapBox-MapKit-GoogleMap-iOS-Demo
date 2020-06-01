@@ -16,11 +16,12 @@ import MapboxDirections
 class NewMapBoxViewController: UIViewController {
     
     
-    
+    var whatIndexOfViewModelInViewModels = 0
     var spacing: CGFloat = 0.0
     var customView = UIView()
     var queryService = MainQueryService(queryServiceAccess: .MapBox)
     var mapsViewModel = MapsViewModel(modelAccess: .MapBox)
+    var mapsViewModels = [MapsViewModel(modelAccess: .MapBox)]
     lazy var SearchTable = SearchTableViewController()
     var directionsRoute: Route?
     
@@ -50,6 +51,8 @@ class NewMapBoxViewController: UIViewController {
         
         
     }
+    
+    
     
     
     func updateUserLocation(){ //Just Idea
@@ -353,6 +356,8 @@ class NewMapBoxViewController: UIViewController {
         }
     }
     
+    // MARK: Add Annotations
+    
     /*
     // MARK: - Navigation
 
@@ -399,6 +404,10 @@ extension NewMapBoxViewController: MGLMapViewDelegate {
 extension NewMapBoxViewController: HandleMapSearch {
     func parseDataFromSearch(viewModel: [MapsViewModel], row: Int) {
         mapsViewModel = viewModel[row]
+        
+        //Way 2
+        mapsViewModels = viewModel
+        whatIndexOfViewModelInViewModels = row
         UpdateViewFromModel()
     }
     

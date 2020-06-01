@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import MapKit
 
 class AppleMapsViewController: UIViewController {
+    
+    let locationManager = CLLocationManager()
 
+    @IBOutlet weak var AppleMapView: MKMapView!
+    
     var queryService = MainQueryService(queryServiceAccess: .AppleMaps)
     lazy var searchTable = SearchTableViewController()
     
@@ -17,12 +22,19 @@ class AppleMapsViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = false
 
-
+        
         configureSearchButton()
+        configureMap()
         
         // Do any additional setup after loading the view.
     }
 
+    func configureMap(){
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+    }
 
     func configureSearchButton(){
         let barButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchPlace))
@@ -66,4 +78,24 @@ extension AppleMapsViewController: UISearchBarDelegate{
             searchTable.dismiss(animated: true, completion: nil)
    
         }
+}
+
+extension AppleMapsViewController : CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("sds")
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+       if let location = locations.first {
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            AppleMapView.setRegion(region, animated: true)
+        }
+        
+    }
 }
