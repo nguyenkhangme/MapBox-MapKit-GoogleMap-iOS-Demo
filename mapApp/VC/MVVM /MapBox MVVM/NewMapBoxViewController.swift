@@ -433,7 +433,7 @@ extension NewMapBoxViewController: UISearchBarDelegate{
             
             temp.subtitle = placeName
 
-            //Why it's not work exactly if we use this function? (Test: Print annotations exactly but not show it in the map!)
+            //Why it's not work exactly if we use this function? (Test: Print annotations exactly but can not show it in the map!)
             //let temp = addAnnotations(longitude: longitude, latitude: latitude, name: name, placeName: placeName)
             
             
@@ -461,10 +461,12 @@ extension NewMapBoxViewController: MGLMapViewDelegate {
       
      
     func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
+        
+        print("didSelectannotation")
 
-     let camera = MGLMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 4500, pitch: 15, heading: 180)
-
-     mapView.fly(to: camera, withDuration: 4, peakAltitude: 3000, completionHandler: nil)
+//     let camera = MGLMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 4500, pitch: 15, heading: 180)
+//
+//     mapView.fly(to: camera, withDuration: 4, peakAltitude: 3000, completionHandler: nil)
 
      }
 }
