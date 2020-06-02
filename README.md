@@ -8,7 +8,11 @@
 
 - Navigate: mark the place user choose and draw a route to it.
 
-- If user click the search button, show all annotations and accept user to select what place they want to draw route.
+- If people click the search button, we show all annotations and accept user to select what place they want to draw route.
+
+## In process
+
+People can share location with others they want like their group, their family,...
 
 ## Structure
 
