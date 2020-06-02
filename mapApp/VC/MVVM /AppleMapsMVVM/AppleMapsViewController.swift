@@ -18,9 +18,10 @@ class AppleMapsViewController: UIViewController {
     //Use Google Search for Apple Maps
     var queryService = MainQueryService(queryServiceAccess: .Google)
     var whatIndexOfViewModelInViewModels = 0
-    var mapsViewModels = [MapsViewModel(modelAccess: .MapBox)]
-    let annotation = MKPointAnnotation()
+    var mapsViewModels = [MapsViewModel(modelAccess: .AppleMaps)]
+    var annotation = MKPointAnnotation()
     var location = CLLocation()
+    var annotations = [MKPointAnnotation]()
 
     lazy var searchTable = SearchTableViewController()
     
@@ -178,8 +179,48 @@ class AppleMapsViewController: UIViewController {
 extension AppleMapsViewController: UISearchBarDelegate{
       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
             
-            //activityIndicatorX.startAnimating()
+            activityIndicator.startAnimating()
+            
+            var temp = MapsViewModel(modelAccess: .AppleMaps)
+            
+            mapsViewModels = PlaceMarkForAllMap.shared.map({ return temp.setMapsModel(mapsModelAccess: $0)})
+            
+            for i in mapsViewModels.indices{
+                print("i:\(i)\n")
+            guard let longitude = self.mapsViewModels[i].longitude else {
+                       return
+                   }
+                   guard let latitude = self.mapsViewModels[i].latitude else {
+                       return
+                   }
+                   guard let name = self.mapsViewModels[i].Name else {
+                       return
+                   }
+                   guard let placeName = self.mapsViewModels[i].placeName else {
+                       return
+                   }
+                
+                let temp = MKPointAnnotation()
+               
+                temp.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                                          
+                print("annotation coordinate update view from model: \(annotation.coordinate)")
+                       
+                temp.title = name
+                
+                temp.subtitle = placeName
 
+                //Why it's not work exactly if we use this function? (Test: Print annotations exactly but can not show it in the map!)
+                //let temp = addAnnotations(longitude: longitude, latitude: latitude, name: name, placeName: placeName)
+                
+                
+                annotations.append(temp)
+                AppleMapView.addAnnotation(annotations[i])
+                
+            }
+
+            
+            activityIndicator.stopAnimating()
             searchTable.dismiss(animated: true, completion: nil)
    
         }
@@ -257,5 +298,11 @@ extension AppleMapsViewController : MKMapViewDelegate {
         button.addTarget(self, action: #selector(getDirections), for: .touchUpInside)
         pinView?.leftCalloutAccessoryView = button
         return pinView
+    }
+
+
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        annotation = view.annotation as! MKPointAnnotation
+        
     }
 }
