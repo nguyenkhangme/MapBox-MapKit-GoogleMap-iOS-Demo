@@ -229,13 +229,21 @@ class NewMapBoxViewController: UIViewController {
     
     //MARK: UpdateViewFromViewModel
     
-    let annotation = MGLPointAnnotation()
+    var annotation = MGLPointAnnotation()
     
     func UpdateViewFromModel(){
         
         
         mapView.clearsContextBeforeDrawing = true
-        mapView.removeRoutes()
+        //mapView.removeRoutes()
+        
+//        self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: (self.mapView.userLocation!.coordinate)) { (route, error) in
+//               if error != nil {
+//                          print("Error calculating route")
+//                          //activityIndicator.stopAnimating()
+//                      }
+//           }
+        
         removeAllAnnotations()
         
         
@@ -374,6 +382,24 @@ class NewMapBoxViewController: UIViewController {
             //self.mapView.addAnnotation(annotation)
         return annotation
     }
+    
+    @objc func getDirectionss(){
+           
+          print("sdasda")
+        activityIndicator.startAnimating()
+                   print("star animating...")
+                   
+            
+                   
+            self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
+            if error != nil {
+                       print("Error calculating route")
+                       //activityIndicator.stopAnimating()
+                   }
+        }
+           
+       }
+    
     /*
     // MARK: - Navigation
 
@@ -396,6 +422,16 @@ extension NewMapBoxViewController: UISearchBarDelegate{
 //        UpdateViewFromModel()
         
         //annotations
+        
+                //mapView.removeRoutes()
+                
+                self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: (self.mapView.userLocation!.coordinate)) { (route, error) in
+                       if error != nil {
+                                  print("Error calculating route")
+                                  //activityIndicator.stopAnimating()
+                              }
+                   }
+                
         
         mapView.clearsContextBeforeDrawing = true
         mapView.removeRoutes()
@@ -459,10 +495,61 @@ extension NewMapBoxViewController: MGLMapViewDelegate {
          return true
      }
       
+//    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+//        if annotation is MGLUserLocation {
+//            //return nil so map view draws "blue dot" for standard user location
+//            return nil
+//        }
+//        let reuseId = "pin"
+//        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+//        pinView = MGLAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+//        pinView?.tintColor = .orange
+//
+//        //pinView?.canShowCallout = true
+//
+//        //pinView?.addSubview(button)
+//        return pinView
+//    }
+    
+    func mapView(_ mapView: MGLMapView, leftCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
+    
+        let smallSquare = CGSize(width: 30, height: 30)
+        
+        let button = UIButton(type: .custom)
+        button.frame = CGRect(origin: .zero, size: smallSquare)
+        button.setBackgroundImage(UIImage(named: "BackButton"), for: .normal)
+        button.addTarget(self, action: #selector(getDirectionss), for: .touchUpInside)
+       
+        return button
+    }
+    
+    func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
+    // Hide the callout view.
+    mapView.deselectAnnotation(annotation, animated: false)
+     
+    activityIndicator.startAnimating()
+                   print("star animating...")
+                   
+            
+                   
+            self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
+            if error != nil {
+                       print("Error calculating route")
+                       //activityIndicator.stopAnimating()
+                   }
+        }
+    // Show an alert containing the annotation's details
+    let alert = UIAlertController(title: annotation.title!!, message: "A lovely (if touristy) place.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    self.present(alert, animated: true, completion: nil)
+     
+    }
      
     func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
         
         print("didSelectannotation")
+        
+        self.annotation = annotation as! MGLPointAnnotation
 
 //     let camera = MGLMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 4500, pitch: 15, heading: 180)
 //
@@ -473,7 +560,7 @@ extension NewMapBoxViewController: MGLMapViewDelegate {
 
 extension NewMapBoxViewController: HandleMapSearch {
     func parseDataFromSearch(viewModel: [MapsViewModel], row: Int) {
-        mapsViewModel = viewModel[row]
+        //mapsViewModel = viewModel[row]
         
         //Way 2
         mapsViewModels = viewModel
@@ -487,9 +574,9 @@ extension NewMapBoxViewController: HandleMapSearch {
     
     func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
         
-        mapsViewModel.setMapsModel(mapsModelAccess: placeMarks[row])
+       // mapsViewModel.setMapsModel(mapsModelAccess: placeMarks[row])
         
-        UpdateViewFromModel()
+        //UpdateViewFromModel()
         
     }
     

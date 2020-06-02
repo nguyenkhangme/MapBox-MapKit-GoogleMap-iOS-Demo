@@ -27,6 +27,7 @@ class AppleMapsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        AppleMapView.delegate = self
         
         navigationController?.navigationBar.prefersLargeTitles = false
         searchTable.handleMapSearchDelegate = self
