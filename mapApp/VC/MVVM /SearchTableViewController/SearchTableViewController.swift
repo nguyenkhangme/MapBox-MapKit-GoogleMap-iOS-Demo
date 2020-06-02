@@ -97,6 +97,8 @@ class SearchTableViewController: UITableViewController {
         return myCell
     }
     
+    //MARK: didSelectRowAt
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         //API

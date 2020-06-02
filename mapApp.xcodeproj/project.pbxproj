@@ -44,6 +44,7 @@
 		CE0172BF24728EC7000E1306 /* AppleMapsQueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172BE24728EC7000E1306 /* AppleMapsQueryService.swift */; };
 		CE0172C124729114000E1306 /* old-map-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE0172C024729113000E1306 /* old-map-background.jpg */; };
 		CE0172C324729A29000E1306 /* OldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0172C224729A29000E1306 /* OldCell.swift */; };
+		CE0B0B9924862882001FEF8E /* AppleMapsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B0B9824862882001FEF8E /* AppleMapsModel.swift */; };
 		CE16DD162480A8AE0040C192 /* MapsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16DD152480A8AE0040C192 /* MapsViewModel.swift */; };
 		CE16DD1E2480B2B20040C192 /* mapAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16DD1D2480B2B20040C192 /* mapAppTests.swift */; };
 		CE2027C9247BAA9B00233FC9 /* GoogleMapsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2027C8247BAA9B00233FC9 /* GoogleMapsModel.swift */; };
@@ -112,6 +113,7 @@
 		CE0172BE24728EC7000E1306 /* AppleMapsQueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapsQueryService.swift; sourceTree = "<group>"; };
 		CE0172C024729113000E1306 /* old-map-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "old-map-background.jpg"; sourceTree = "<group>"; };
 		CE0172C224729A29000E1306 /* OldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldCell.swift; sourceTree = "<group>"; };
+		CE0B0B9824862882001FEF8E /* AppleMapsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapsModel.swift; sourceTree = "<group>"; };
 		CE16DD152480A8AE0040C192 /* MapsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewModel.swift; sourceTree = "<group>"; };
 		CE16DD1B2480B2B20040C192 /* mapAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mapAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE16DD1D2480B2B20040C192 /* mapAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapAppTests.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				CE0172BA24728EB1000E1306 /* AppleMapsViewController.swift */,
 				CE0172BE24728EC7000E1306 /* AppleMapsQueryService.swift */,
 				CE0172BB24728EB1000E1306 /* AppleMapsViewController.xib */,
+				CE0B0B9824862882001FEF8E /* AppleMapsModel.swift */,
 			);
 			path = AppleMapsMVVM;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				CE01728B24722360000E1306 /* MainViewControllerViewController.swift in Sources */,
 				76AB15572456B93000F3B86C /* HTTPMethod.swift in Sources */,
 				CE2114802477DE7400BF957E /* SearchTableViewCellTableViewCell.swift in Sources */,
+				CE0B0B9924862882001FEF8E /* AppleMapsModel.swift in Sources */,
 				CEA7F6582476783D00C673FA /* NewMapBoxViewController.swift in Sources */,
 				CE01729724723993000E1306 /* CellTableViewCell.swift in Sources */,
 				CE0172B824728E67000E1306 /* GoogleMapsQueryService.swift in Sources */,

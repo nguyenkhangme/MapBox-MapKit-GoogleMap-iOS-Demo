@@ -15,14 +15,21 @@ class AppleMapsViewController: UIViewController {
 
     @IBOutlet weak var AppleMapView: MKMapView!
     
-    var queryService = MainQueryService(queryServiceAccess: .AppleMaps)
+    //Use Google Search for Apple Maps
+    var queryService = MainQueryService(queryServiceAccess: .Google)
+    var whatIndexOfViewModelInViewModels = 0
+    var mapsViewModels = [MapsViewModel(modelAccess: .MapBox)]
+    let annotation = MKPointAnnotation()
+    var location = CLLocation()
+
     lazy var searchTable = SearchTableViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.prefersLargeTitles = false
-
         
+        navigationController?.navigationBar.prefersLargeTitles = false
+        searchTable.handleMapSearchDelegate = self
+        configureActivityIndicator()
         configureSearchButton()
         configureMap()
         
@@ -58,6 +65,102 @@ class AppleMapsViewController: UIViewController {
         
         present(searchController, animated: true, completion: nil)
     }
+    
+    // MARK: Update View From Model
+    
+    func UpdateViewFromModel(){
+        
+        
+       // mapView.clearsContextBeforeDrawing = true
+        //mapView.removeRoutes()
+        AppleMapView.removeAnnotations(AppleMapView.annotations)
+        
+        print("Test 1")
+                                                    
+        guard let longitude = self.mapsViewModels[whatIndexOfViewModelInViewModels].longitude else {
+            return
+        }
+        guard let latitude = self.mapsViewModels[whatIndexOfViewModelInViewModels].latitude else {
+            return
+        }
+        guard let name = self.mapsViewModels[whatIndexOfViewModelInViewModels].Name else {
+            return
+        }
+        guard let placeName = self.mapsViewModels[whatIndexOfViewModelInViewModels].placeName else {
+            return
+        }
+        
+        
+    
+        print("AAAAAA: \(longitude), \(latitude), \(name), \(placeName)")
+        
+        self.navigationItem.title = name
+        
+        annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        
+        
+        print("annotation coordinate update view from model: \(annotation.coordinate)")
+               
+        annotation.title = name
+        
+        annotation.subtitle = placeName
+        
+        activityIndicator.startAnimating()
+               print("star animating...")
+               
+      AppleMapView.addAnnotation(annotation)
+        
+        var spanData = CLLocationDegrees()
+        if (2*abs(location.coordinate.latitude-annotation.coordinate.latitude) > 2*abs(location.coordinate.longitude-annotation.coordinate.longitude)) {
+            
+            spanData = (2*abs(location.coordinate.latitude-annotation.coordinate.latitude) + 0.01)
+        } else {
+            spanData = (2*abs(location.coordinate.longitude-annotation.coordinate.longitude) + 0.01)
+        }
+       
+        
+        
+        let span = MKCoordinateSpan(latitudeDelta: spanData, longitudeDelta: spanData)
+        let region = MKCoordinateRegion(center: annotation.coordinate, span: span)
+        
+        //selectedPin = .init(coordinate: annotation.coordinate)
+        
+        
+        AppleMapView.setRegion(region, animated: true)
+        
+        activityIndicator.stopAnimating()
+               
+     
+    }
+
+    //MARK: - Declare and configureActivityIndicator
+    let activityIndicator = UIActivityIndicatorView()
+    
+    func configureActivityIndicator(){
+        activityIndicator.style = UIActivityIndicatorView.Style.medium
+
+        activityIndicator.center = self.view.center
+
+        activityIndicator.hidesWhenStopped = true
+
+        self.view.addSubview(activityIndicator)
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+//        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0).isActive = true
+    }
+    
+    @objc func getDirections(){
+        
+        let selectedPin = MKPlacemark(coordinate: annotation.coordinate)
+        let mapItem = MKMapItem(placemark: selectedPin)
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+        mapItem.openInMaps(launchOptions: launchOptions)
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -69,6 +172,8 @@ class AppleMapsViewController: UIViewController {
     */
 
 }
+
+//MARK: searchBarSearchButtonClicked
 
 extension AppleMapsViewController: UISearchBarDelegate{
       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -90,12 +195,67 @@ extension AppleMapsViewController : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("sds")
     }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
        if let location = locations.first {
+        self.location = location
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            AppleMapView.setRegion(region, animated: true)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        AppleMapView.setRegion(region, animated: true)
+        //let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         }
         
+    }
+}
+
+private extension MKMapView {
+  func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance = 1000) {
+    let coordinateRegion = MKCoordinateRegion(
+      center: location.coordinate,
+      latitudinalMeters: regionRadius,
+      longitudinalMeters: regionRadius)
+    setRegion(coordinateRegion, animated: true)
+  }
+}
+
+//Hndle Map Search
+
+extension AppleMapsViewController: HandleMapSearch {
+    func parseDataFromSearch(viewModel: [MapsViewModel], row: Int) {
+       
+        //Way 2
+        mapsViewModels = viewModel
+        whatIndexOfViewModelInViewModels = row
+        UpdateViewFromModel()
+    }
+    
+    func addAnnotationAPI(placemark: PlaceMark, row: Int) {
+        
+    }
+    
+    func addAnnotationFromSearch(placeMarks: [PlaceMarkForAllMap], row: Int) {
+        
+    }
+    
+    
+}
+
+extension AppleMapsViewController : MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
+        if annotation is MKUserLocation {
+            //return nil so map view draws "blue dot" for standard user location
+            return nil
+        }
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        pinView?.pinTintColor = .orange
+        pinView?.canShowCallout = true
+        let smallSquare = CGSize(width: 30, height: 30)
+        let button = UIButton(frame: CGRect(origin: .zero, size: smallSquare))
+        button.setBackgroundImage(UIImage(named: "BackButton"), for: .normal)
+        button.addTarget(self, action: #selector(getDirections), for: .touchUpInside)
+        pinView?.leftCalloutAccessoryView = button
+        return pinView
     }
 }

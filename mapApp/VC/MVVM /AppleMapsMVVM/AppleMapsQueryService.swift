@@ -10,19 +10,6 @@ import Foundation
 
 import CoreLocation
 
-struct AppleMapsPlaceMark{
-    
-    var Name: String
-    
-    var placeName: String
-    
-    var longitude: Double
-    
-    var latitude: Double
-    
-    
-}
-
 class AppleMapsQueryService {
     
     weak var parseDataDelegate: ParseDataFromSearch? = nil
