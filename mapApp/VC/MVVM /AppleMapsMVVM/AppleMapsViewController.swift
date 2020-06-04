@@ -21,6 +21,7 @@ class AppleMapsViewController: UIViewController {
     var mapsViewModels = [MapsViewModel(modelAccess: .AppleMaps)]
     var annotation = MKPointAnnotation()
     var location = CLLocation()
+    var userCoordinate : CLLocationCoordinate2D?
     var annotations = [MKPointAnnotation]()
 
     lazy var searchTable = SearchTableViewController()
@@ -303,7 +304,13 @@ extension AppleMapsViewController : MKMapViewDelegate {
 
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        //if annotation View is user?
+      if view.annotation?.coordinate == userCoordinate { return }
         annotation = view.annotation as! MKPointAnnotation
         
+    }
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        userCoordinate = mapView.userLocation.location?.coordinate
     }
 }
