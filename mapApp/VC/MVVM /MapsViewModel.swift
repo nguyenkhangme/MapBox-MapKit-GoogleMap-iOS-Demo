@@ -26,7 +26,7 @@ struct MapsModelFactory{
         case .MapBox:
             return MapBoxPlaceMark()
         case .AppleMaps:
-            return nil
+            return AppleMapsPlaceMark(title: "", locationName: "", discipline: "", coordinate: CLLocationCoordinate2D())
         case .Google:
             return GoogleMapsPlaceMark()
         }

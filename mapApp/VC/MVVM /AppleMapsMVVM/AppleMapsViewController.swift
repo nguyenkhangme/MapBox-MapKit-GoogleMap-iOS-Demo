@@ -183,10 +183,18 @@ extension AppleMapsViewController: UISearchBarDelegate{
             
             activityIndicator.startAnimating()
             
-            var temp = MapsViewModel(modelAccess: .AppleMaps)
+            var tempp = MapsViewModel(modelAccess: .AppleMaps)
+        
+       
+        //mapsViewModels.removeAll()
+            mapsViewModels = PlaceMarkForAllMap.shared.map({ return tempp.setMapsModel(mapsModelAccess: $0)})
             
-            mapsViewModels = PlaceMarkForAllMap.shared.map({ return temp.setMapsModel(mapsModelAccess: $0)})
-            
+         //print("\(mapsViewModels)")
+        AppleMapView.removeAnnotations(annotations)
+
+        annotations.removeAll()
+        
+        
             for i in mapsViewModels.indices{
                 print("i:\(i)\n")
             guard let longitude = self.mapsViewModels[i].longitude else {
@@ -206,7 +214,7 @@ extension AppleMapsViewController: UISearchBarDelegate{
                
                 temp.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                                           
-                print("annotation coordinate update view from model: \(annotation.coordinate)")
+                //print("annotation name update view from model: \(annotation)")
                        
                 temp.title = name
                 
@@ -214,9 +222,12 @@ extension AppleMapsViewController: UISearchBarDelegate{
 
                 //Why it's not work exactly if we use this function? (Test: Print annotations exactly but can not show it in the map!)
                 //let temp = addAnnotations(longitude: longitude, latitude: latitude, name: name, placeName: placeName)
-                
-                
+                print("\(temp)")
+            
                 annotations.append(temp)
+                
+                print("annotation name update view from model: \(String(describing: annotations[i].title))")
+                
                 AppleMapView.addAnnotation(annotations[i])
                 
             }
