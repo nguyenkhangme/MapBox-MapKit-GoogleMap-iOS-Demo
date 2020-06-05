@@ -60,6 +60,7 @@
 		CEA7F6582476783D00C673FA /* NewMapBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F6562476783D00C673FA /* NewMapBoxViewController.swift */; };
 		CEA7F6592476783D00C673FA /* NewMapBoxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA7F6572476783D00C673FA /* NewMapBoxViewController.xib */; };
 		CEA7F65B2476872B00C673FA /* MapBoxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F65A2476872B00C673FA /* MapBoxModel.swift */; };
+		CEDD63582489E6C700206034 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDD63572489E6C700206034 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,7 @@
 		CEA7F6572476783D00C673FA /* NewMapBoxViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMapBoxViewController.xib; sourceTree = "<group>"; };
 		CEA7F65A2476872B00C673FA /* MapBoxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxModel.swift; sourceTree = "<group>"; };
 		CEDD63562489DCD600206034 /* mapApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mapApp.entitlements; sourceTree = "<group>"; };
+		CEDD63572489E6C700206034 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE401B4071EF6127E2786CB0 /* Pods_mapApp.framework in Frameworks */,
+				CEDD63582489E6C700206034 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +160,7 @@
 		658A1FA1B2CA9E6A311005F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEDD63572489E6C700206034 /* StoreKit.framework */,
 				23A3DAD9E35034D1FDE974D1 /* Pods_mapApp.framework */,
 			);
 			name = Frameworks;
