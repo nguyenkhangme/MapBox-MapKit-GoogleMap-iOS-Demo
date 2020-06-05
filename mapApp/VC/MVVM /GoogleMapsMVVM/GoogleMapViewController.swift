@@ -50,6 +50,7 @@ class GoogleMapViewController: UIViewController {
            locationManager.delegate = self
 
            placesClient = GMSPlacesClient.shared()
+
     }
     
     //MARK: Search Setup

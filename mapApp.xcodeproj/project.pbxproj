@@ -52,6 +52,7 @@
 		CE21147B2477669C00BF957E /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21147A2477669C00BF957E /* SearchModel.swift */; };
 		CE2114802477DE7400BF957E /* SearchTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21147E2477DE7400BF957E /* SearchTableViewCellTableViewCell.swift */; };
 		CE2114812477DE7400BF957E /* SearchTableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE21147F2477DE7400BF957E /* SearchTableViewCellTableViewCell.xib */; };
+		CE339F492488F0BB0023E11D /* main-qimg-eec6f82500b4efccb808158180f9fcf3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE339F482488F0BB0023E11D /* main-qimg-eec6f82500b4efccb808158180f9fcf3.png */; };
 		CE5FF4E3246E508E006F8E6A /* GoogleMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */; };
 		CEA7F64F24763A1A00C673FA /* MainQueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F64E24763A1A00C673FA /* MainQueryService.swift */; };
 		CEA7F6512476608E00C673FA /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F6502476608D00C673FA /* MainModel.swift */; };
@@ -123,6 +124,7 @@
 		CE21147A2477669C00BF957E /* SearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		CE21147E2477DE7400BF957E /* SearchTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
 		CE21147F2477DE7400BF957E /* SearchTableViewCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCellTableViewCell.xib; sourceTree = "<group>"; };
+		CE339F482488F0BB0023E11D /* main-qimg-eec6f82500b4efccb808158180f9fcf3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "main-qimg-eec6f82500b4efccb808158180f9fcf3.png"; path = "../../../../../Downloads/main-qimg-eec6f82500b4efccb808158180f9fcf3.png"; sourceTree = "<group>"; };
 		CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleMapViewController.xib; sourceTree = "<group>"; };
 		CEA7F64E24763A1A00C673FA /* MainQueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueryService.swift; sourceTree = "<group>"; };
 		CEA7F6502476608D00C673FA /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		CEA7F6562476783D00C673FA /* NewMapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMapBoxViewController.swift; sourceTree = "<group>"; };
 		CEA7F6572476783D00C673FA /* NewMapBoxViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMapBoxViewController.xib; sourceTree = "<group>"; };
 		CEA7F65A2476872B00C673FA /* MapBoxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxModel.swift; sourceTree = "<group>"; };
+		CEDD63562489DCD600206034 /* mapApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mapApp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +214,7 @@
 				76F50152244944E500CC79E7 /* SceneDelegate.swift */,
 				76F50150244944E500CC79E7 /* AppDelegate.swift */,
 				76F50159244944E600CC79E7 /* Assets.xcassets */,
+				CE339F482488F0BB0023E11D /* main-qimg-eec6f82500b4efccb808158180f9fcf3.png */,
 				CE0172C024729113000E1306 /* old-map-background.jpg */,
 				CE0172A7247270F7000E1306 /* BackButton.png */,
 				76F5015E244944E600CC79E7 /* Info.plist */,
@@ -243,6 +247,7 @@
 		76F5014F244944E500CC79E7 /* mapApp */ = {
 			isa = PBXGroup;
 			children = (
+				CEDD63562489DCD600206034 /* mapApp.entitlements */,
 				76AB155E2456C2E200F3B86C /* Support */,
 				CE007515246E49AB001465AE /* Old Model - Not Use */,
 				CE007514246E4995001465AE /* VC */,
@@ -475,6 +480,7 @@
 				CE5FF4E3246E508E006F8E6A /* GoogleMapViewController.xib in Resources */,
 				76F5015A244944E600CC79E7 /* Assets.xcassets in Resources */,
 				76F501652449451300CC79E7 /* Podfile in Resources */,
+				CE339F492488F0BB0023E11D /* main-qimg-eec6f82500b4efccb808158180f9fcf3.png in Resources */,
 				CE01728C24722360000E1306 /* MainViewControllerViewController.xib in Resources */,
 				CE0172A124724845000E1306 /* MainViewController.xib in Resources */,
 				CE0172AE24728942000E1306 /* MapBoxViewController.xib in Resources */,
@@ -754,14 +760,18 @@
 			baseConfigurationReference = 8A2AE2D78A00E0245EBFF769 /* Pods-mapApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = mapApp/mapApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = XX83HG39E3;
 				INFOPLIST_FILE = mapApp/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Vinova.Train.mapApp.mapApp;
+				PRODUCT_BUNDLE_IDENTIFIER = vinova.train.duncan.mapapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "duncan mapappp";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -772,14 +782,18 @@
 			baseConfigurationReference = 17CAA556097A5042B63A6CF0 /* Pods-mapApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = mapApp/mapApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = XX83HG39E3;
 				INFOPLIST_FILE = mapApp/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Vinova.Train.mapApp.mapApp;
+				PRODUCT_BUNDLE_IDENTIFIER = vinova.train.duncan.mapapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "duncan mapappp";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

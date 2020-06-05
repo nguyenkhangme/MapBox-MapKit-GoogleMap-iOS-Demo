@@ -432,12 +432,12 @@ extension NewMapBoxViewController: UISearchBarDelegate{
                               }
                    }
                 
-        
+
         mapView.clearsContextBeforeDrawing = true
         mapView.removeRoutes()
         removeAllAnnotations()
 
-        
+        annotations.removeAll()
         activityIndicator.startAnimating()
         
         var temp = MapsViewModel(modelAccess: .MapBox)
