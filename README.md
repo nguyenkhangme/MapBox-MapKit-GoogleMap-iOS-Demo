@@ -2,6 +2,8 @@
 
 ## What it can do
 
+Based on MapBox, MapKit, GoogleMaps:
+
 - Show map
 
 - Search: Search the place near user location, show all result in table view.
