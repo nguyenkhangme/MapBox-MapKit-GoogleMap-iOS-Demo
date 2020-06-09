@@ -18,5 +18,9 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Show your location on a map</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Show your location on a map</string>
 </dict>
 </plist>
