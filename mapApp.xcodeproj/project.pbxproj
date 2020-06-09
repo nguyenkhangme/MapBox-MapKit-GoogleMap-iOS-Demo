@@ -54,6 +54,7 @@
 		CE2114812477DE7400BF957E /* SearchTableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE21147F2477DE7400BF957E /* SearchTableViewCellTableViewCell.xib */; };
 		CE339F492488F0BB0023E11D /* main-qimg-eec6f82500b4efccb808158180f9fcf3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE339F482488F0BB0023E11D /* main-qimg-eec6f82500b4efccb808158180f9fcf3.png */; };
 		CE5FF4E3246E508E006F8E6A /* GoogleMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */; };
+		CE784D89248E496A00CD3F61 /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE784D88248E496A00CD3F61 /* MapboxMobileEvents.framework */; };
 		CEA7F64F24763A1A00C673FA /* MainQueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F64E24763A1A00C673FA /* MainQueryService.swift */; };
 		CEA7F6512476608E00C673FA /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F6502476608D00C673FA /* MainModel.swift */; };
 		CEA7F65324766EDF00C673FA /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7F65224766EDF00C673FA /* SearchTableViewController.swift */; };
@@ -127,6 +128,7 @@
 		CE21147F2477DE7400BF957E /* SearchTableViewCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCellTableViewCell.xib; sourceTree = "<group>"; };
 		CE339F482488F0BB0023E11D /* main-qimg-eec6f82500b4efccb808158180f9fcf3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "main-qimg-eec6f82500b4efccb808158180f9fcf3.png"; path = "../../../../../Downloads/main-qimg-eec6f82500b4efccb808158180f9fcf3.png"; sourceTree = "<group>"; };
 		CE5FF4E1246E508E006F8E6A /* GoogleMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleMapViewController.xib; sourceTree = "<group>"; };
+		CE784D88248E496A00CD3F61 /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MapboxMobileEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA7F64E24763A1A00C673FA /* MainQueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueryService.swift; sourceTree = "<group>"; };
 		CEA7F6502476608D00C673FA /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		CEA7F65224766EDF00C673FA /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE784D89248E496A00CD3F61 /* MapboxMobileEvents.framework in Frameworks */,
 				BE401B4071EF6127E2786CB0 /* Pods_mapApp.framework in Frameworks */,
 				CEDD63582489E6C700206034 /* StoreKit.framework in Frameworks */,
 			);
@@ -160,6 +163,7 @@
 		658A1FA1B2CA9E6A311005F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE784D88248E496A00CD3F61 /* MapboxMobileEvents.framework */,
 				CEDD63572489E6C700206034 /* StoreKit.framework */,
 				23A3DAD9E35034D1FDE974D1 /* Pods_mapApp.framework */,
 			);

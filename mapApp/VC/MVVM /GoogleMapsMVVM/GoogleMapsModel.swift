@@ -10,8 +10,8 @@ import Foundation
 import CoreLocation
 
 struct GoogleMapsPlaceMarkService: Decodable {
-    var results: [result]?
-    struct result: Decodable {
+    var candidates: [candidates]?
+    struct candidates: Decodable {
         var geometry: geometry?
         
         struct geometry: Decodable {
@@ -24,6 +24,7 @@ struct GoogleMapsPlaceMarkService: Decodable {
         }
         
         var name: String?
+        //var place_id: String?
         var formatted_address: String?
         
     }
@@ -45,6 +46,7 @@ struct GoogleMapsPlaceMark: MapsModelAccess {
     var lng: [Double] = []
     var name: [String] = []
     var formatted_address: [String] = []
+    //var place_id: [String] = []
     
 }
 
@@ -54,7 +56,7 @@ extension GoogleMapsPlaceMark {
         
         //self.init()
         
-        guard let Results = service.results else {
+        guard let Results = service.candidates else {
             return
         }
         
@@ -67,6 +69,7 @@ extension GoogleMapsPlaceMark {
                 
             
             name.append(Result.name ?? "")
+            //place_id.append(Result.place_id ?? "")
             formatted_address.append(Result.formatted_address ?? "")
             
             guard let Geometry = Result.geometry  else {

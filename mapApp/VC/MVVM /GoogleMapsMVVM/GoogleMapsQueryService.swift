@@ -31,7 +31,11 @@ class GoogleMapsQueryService{
           
         //Uncomment this code below to search around user Location but I do not know how to get USer Location in google map yet.
 //        guard let url = URL(string:"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + urlString + "&location="+String(longitude)+","+String(latitude)+"&radius=10000&key=AIzaSyCvuaYDzCqq7GvOvey6pZSn4bhY92iq7E8")
-        guard let url = URL(string:"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + urlString + "&key=AIzaSyCvuaYDzCqq7GvOvey6pZSn4bhY92iq7E8")
+        
+        //https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=
+        
+        
+        guard let url = URL(string:"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + urlString + "&inputtype=textquery&fields=place_id,formatted_address,name,geometry/location&key=AIzaSyDzZ2ixVoy_vDGRrc52Axw45YifTu0qvQQ")
         else {
                 print("Invalid URL")
                 return nil

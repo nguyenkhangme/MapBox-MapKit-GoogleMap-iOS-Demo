@@ -37,8 +37,8 @@ PODS:
   - Turf (0.3.0)
 
 DEPENDENCIES:
-  - GoogleMaps (= 3.8.2)
-  - GooglePlaces (= 3.8.2)
+  - GoogleMaps
+  - GooglePlaces
   - MapboxGeocoder.swift (~> 0.12)
   - MapboxNavigation (~> 0.39.0)
   - PromiseKit (~> 6.8)
@@ -76,6 +76,6 @@ SPEC CHECKSUMS:
   Solar: 2dc6e7cc39186cb0c8228fa08df76fb50c7d8f24
   Turf: c6bdf62d6a70c647874f295dd1cf4eefc0c3e9e6
 
-PODFILE CHECKSUM: 2de11f87dbf4aa38bd6e721a72ca56a6c0286313
+PODFILE CHECKSUM: 35b30d52699ada720dc4da8b31a2f6971b948333
 
 COCOAPODS: 1.9.1

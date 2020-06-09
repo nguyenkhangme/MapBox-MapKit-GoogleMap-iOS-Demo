@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class HomeNavigationViewController: UINavigationController {
 
@@ -14,6 +15,12 @@ class HomeNavigationViewController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let container = CKContainer.default()
+
+              if let containerIdentifier = container.containerIdentifier {
+                  print(containerIdentifier)
+              }
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "old-map-background.jpg")!)
         
