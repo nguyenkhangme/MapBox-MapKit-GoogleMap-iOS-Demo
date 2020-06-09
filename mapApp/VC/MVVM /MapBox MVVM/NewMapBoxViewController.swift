@@ -13,11 +13,21 @@ import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
 
+class setStack: UIStackView {
+    var sizeee: CGSize {
+        return self.superview!.frame.size
+    }
+    override var intrinsicContentSize: CGSize {
+        return sizeee
+    }
+}
+
 class NewMapBoxViewController: UIViewController {
     
     var annotations = [MGLPointAnnotation()]
     var whatIndexOfViewModelInViewModels = 0
-    var spacing: CGFloat = 0.0
+    var spacing: CGFloat = 12.0
+    var btnSize: CGFloat = 12.0
     var customView = UIView()
     var queryService = MainQueryService(queryServiceAccess: .MapBox)
     var mapsViewModel = MapsViewModel(modelAccess: .MapBox)
@@ -39,21 +49,55 @@ class NewMapBoxViewController: UIViewController {
       
         configureSearchButton()
         
-        self.view.addSubview(customView)
-        configureGoToUserLocationButton()
-        configureCustomView()
-        
+//        self.view.addSubview(customView)
+//         configureCustomView()
+//        
+//        ConfigureVStack()
+        configureButtonBusStop()
+
+        mapsViewModel.userLocation = self.mapView.userLocation!.coordinate
         
         SearchTable.tableView.estimatedRowHeight = 90
         SearchTable.tableView.rowHeight = UITableView.automaticDimension
 
-        // Do any additional setup after loading the view.
-        
         
     }
     
     
-    
+    //MARK: ConfigureVStack
+    func ConfigureVStack(){
+        let busStopButton = NewButton(title: "🚌")
+                
+        let goToUserLocationButton = NewButton(title: "👤")
+
+                
+        let VStack = creatStack(button: [goToUserLocationButton,busStopButton])
+                
+        print("\(String(describing: busStopButton.titleLabel))")
+
+
+                
+        customView.addSubview(VStack)
+            
+        //
+                
+        let viewsDictionary = ["VStack": VStack]
+
+                
+        let VStack_H = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[VStack]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+
+                
+        let VStack_V = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[VStack]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
+
+                
+        customView.addConstraints(VStack_H)
+                
+        customView.addConstraints(VStack_V)
+        
+        print("\(busStopButton)")
+        print("CS: \(customView.frame), \(customView.bounds)")
+        print("\(String(describing: goToUserLocationButton.titleLabel))")
+    }
     
     func updateUserLocation(){ //Just Idea
         while mapsViewModel.userLocation != self.mapView.userLocation!.coordinate {
@@ -63,7 +107,6 @@ class NewMapBoxViewController: UIViewController {
             //Neu di den diem dung, trong ham duoi da xu ly chua?
             self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: annotation.coordinate) { (route, error) in
                 if error != nil {
-                    
                     print("Error calculating route")
                            //activityIndicator.stopAnimating()
                 }
@@ -73,23 +116,125 @@ class NewMapBoxViewController: UIViewController {
     
     //MARK: Configure CustomView
     func configureCustomView(){
+        
         customView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: customView, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: customView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0).isActive = true
+        
+            let viewsDictionary = ["customView": customView]
+            
+            
+//            let customView_H = NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(view.bounds.maxX-spacing-btnSize)-[customView]-\(spacing)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+//
+//            let customView_V = NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(view.bounds.maxY/2-btnSize)-[customView]-\(view.bounds.maxY/2)-|", options: NSLayoutConstraint.FormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
+        
+        let customView_H = NSLayoutConstraint.constraints(withVisualFormat: "H:|-50-[customView]-50-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+                 
+        let customView_V = NSLayoutConstraint.constraints(withVisualFormat: "V:|-50-[customView]-50-|", options: NSLayoutConstraint.FormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
+            
+              view.addConstraints(customView_H)
+              view.addConstraints(customView_V)
         
         print("customViewAdd!")
         
         
     }
     
-    // MARK: GoToUserLocationButton
+    // MARK: CreatNewButton
     
-    func configureGoToUserLocationButton(){
+    func NewButton(title: String) -> UIButton{
+        let newButton = UIButton()
+        //newButton.frame.size = CGSize(width: btnSize, height: btnSize)
+        newButton.addTarget(self, action: #selector(ButtonCenter), for: .touchUpInside)
+        newButton.backgroundColor = .clear
+        //👤 🚌
+        newButton.setTitle(title, for: .normal)
+        newButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body).withSize(27)
+        newButton.translatesAutoresizingMaskIntoConstraints = false
+        //customView.frame.origin = CGPoint(x:view.bounds.maxX-spacing,y:view.bounds.maxY/2)
+        
+        print("Creat New Button!")
+
+        return newButton
+    }
+    
+    //MARK: ButtonCenter
+    @objc func ButtonCenter(sender: UIButton!){
+        
+        if sender.title(for: .normal) == "🚌" {
+            
+             activityIndicator.startAnimating()
+            self.queryService.getData(query: "bus stop", latitude:mapsViewModel.userLocation.latitude, longitude: mapsViewModel.userLocation.longitude )
+                   
+            
+                   self.queryService._queryServiceAccess?.parseDataDelegate = self
+            
+            self.calculateRoute(from: (self.mapView.userLocation!.coordinate), to: (self.mapView.userLocation!.coordinate)) { (route, error) in
+                                  if error != nil {
+                                             print("Error calculating route")
+                                             //activityIndicator.stopAnimating()
+                                         }
+                              }
+                           
+
+                   mapView.clearsContextBeforeDrawing = true
+                   mapView.removeRoutes()
+                   removeAllAnnotations()
+
+                   annotations.removeAll()
+                  
+                
+                   
+                   for i in mapsViewModels.indices{
+                       print("i:\(i)\n")
+                   guard let longitude = self.mapsViewModels[i].longitude else {
+                              return
+                          }
+                          guard let latitude = self.mapsViewModels[i].latitude else {
+                              return
+                          }
+                          guard let name = self.mapsViewModels[i].Name else {
+                              return
+                          }
+                          guard let placeName = self.mapsViewModels[i].placeName else {
+                              return
+                          }
+                       
+                       let temp = MGLPointAnnotation()
+                      
+                       temp.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                                                 
+                       print("annotation coordinate update view from model: \(annotation.coordinate)")
+                              
+                       temp.title = name
+                       
+                       temp.subtitle = placeName
+
+                       //Why it's not work exactly if we use this function? (Test: Print annotations exactly but can not show it in the map!)
+                       //let temp = addAnnotations(longitude: longitude, latitude: latitude, name: name, placeName: placeName)
+                       
+                       
+                       annotations.append(temp)
+                       self.mapView.addAnnotation(annotations[i])
+                       
+                   }
+
+                   
+                   activityIndicator.stopAnimating()
+            
+        }
+    }
+    
+    @objc func GoToUserLocation(){
+        mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+    }
+    
+    //MARK: Button Tam thoi
+    
+    func configureButtonBusStop(){
         let GoToUserLocationButton = UIButton()
-        GoToUserLocationButton.addTarget(self, action: #selector(GoToUserLocation), for: .touchUpInside)
+        GoToUserLocationButton.addTarget(self, action: #selector(ButtonCenter), for: .touchUpInside)
         GoToUserLocationButton.backgroundColor = .clear
-        GoToUserLocationButton.setTitle("👤", for: .normal)
+        GoToUserLocationButton.setTitle("🚌", for: .normal)
         GoToUserLocationButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body).withSize(27)
         GoToUserLocationButton.translatesAutoresizingMaskIntoConstraints = false
         //customView.frame.origin = CGPoint(x:view.bounds.maxX-spacing,y:view.bounds.maxY/2)
@@ -108,10 +253,31 @@ class NewMapBoxViewController: UIViewController {
         print("ButtonAdd!")
         
     }
+
     
-    @objc func GoToUserLocation(){
-        mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+    //MARK: Creat Stack
+    
+    func creatStack(button: [UIView], isFillEqually: Bool = true) -> UIStackView {
+         
+         let stackView = setStack(arrangedSubviews: button)
+        
+        stackView.axis = .vertical
+         if isFillEqually {
+             stackView.distribution = .fillEqually
+         } else {
+             stackView.distribution = .fill
+         }
+         
+         stackView.alignment = .fill
+         stackView.spacing = spacing
+         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        print("Creat Stack!")
+         //self.view.addSubview(stackView)
+         
+         return stackView
     }
+       
     
     //MARK: viewWillLayoutSubviews
     override func viewWillLayoutSubviews() {
@@ -578,6 +744,19 @@ extension NewMapBoxViewController: HandleMapSearch {
         
         //UpdateViewFromModel()
         
+    }
+    
+    
+}
+
+extension NewMapBoxViewController : ParseDataFromSearch {
+    func parseData(data: [PlaceMarkForAllMap]) {
+        
+       // matchingItems = PlaceMarkForAllMap.shared
+
+        var temp = MapsViewModel(modelAccess: .Google)
+        mapsViewModels = data.map({ return temp.setMapsModel(mapsModelAccess: $0)})
+       
     }
     
     

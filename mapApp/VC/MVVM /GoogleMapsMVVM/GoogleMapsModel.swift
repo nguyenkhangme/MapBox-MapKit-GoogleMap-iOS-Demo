@@ -24,10 +24,13 @@ struct GoogleMapsPlaceMarkService: Decodable {
         }
         
         var name: String?
-        //var place_id: String?
+        var place_id: String?
         var formatted_address: String?
         
+       
     }
+    var error_message: String?
+           
 }
 
 struct GoogleMapsPlaceMark: MapsModelAccess {
@@ -46,7 +49,8 @@ struct GoogleMapsPlaceMark: MapsModelAccess {
     var lng: [Double] = []
     var name: [String] = []
     var formatted_address: [String] = []
-    //var place_id: [String] = []
+    var place_id: [String] = []
+    var error_message: [String] = []
     
 }
 
@@ -69,7 +73,7 @@ extension GoogleMapsPlaceMark {
                 
             
             name.append(Result.name ?? "")
-            //place_id.append(Result.place_id ?? "")
+            place_id.append(Result.place_id ?? "")
             formatted_address.append(Result.formatted_address ?? "")
             
             guard let Geometry = Result.geometry  else {
@@ -90,6 +94,8 @@ extension GoogleMapsPlaceMark {
             
 //            GoogleMapsPlaceMark.shared.append(temp)
         }
+        
+        error_message.append(service.error_message ?? "")
         
     }
 }

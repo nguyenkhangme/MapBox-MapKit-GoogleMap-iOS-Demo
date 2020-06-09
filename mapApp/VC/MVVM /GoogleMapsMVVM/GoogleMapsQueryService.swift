@@ -9,6 +9,12 @@
 //https://developers.google.com/places/web-service/search?hl=vi
 //Request: https://developers.google.com/places/web-service/search?hl=vi#TextSearchRequests
 //Responses
+
+///
+//MARK: Google Maps Platform Terms of Service
+///(e) No Use With Non-Google Maps. To avoid quality issues and/or brand confusion, Customer will not use the Google Maps Core Services with or near a non-Google Map in a Customer Application. For example, Customer will not (i) display or use Places content on a non-Google map, (ii) display Street View imagery and non-Google maps on the same screen, or (iii) link a Google Map to non-Google Maps content or a non-Google map.
+///
+
 import Foundation
 
 import CoreLocation
@@ -105,8 +111,14 @@ extension GoogleMapsQueryService: QueryServiceAccess{
                .done() { placeMarkStores in
                       
                    placeMarks = GoogleMapsPlaceMark(from: placeMarkStores)
+                
+                if(placeMarks.error_message[0] != ""){
+                                   print("\(placeMarks.error_message)")
+                               }
                    //print("placeMarks fetchData: \(placeMarks.Name.count)")
                 PlaceMarkForAllMap.shared = self.setPlaceMark(GoogleMapsPlaceMark: placeMarks)
+                
+               
                    
                    self.parseDataDelegate?.parseData(data: PlaceMarkForAllMap.shared)
                    //mapBoxPlaceMarkService = placeMarkStores

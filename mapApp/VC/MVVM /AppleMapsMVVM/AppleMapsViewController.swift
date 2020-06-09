@@ -16,9 +16,10 @@ class AppleMapsViewController: UIViewController {
     @IBOutlet weak var AppleMapView: MKMapView!
     
     //Use Google Search for Apple Maps
-    var queryService = MainQueryService(queryServiceAccess: .Google)
+    var queryService = MainQueryService(queryServiceAccess: .MapBox)
     var whatIndexOfViewModelInViewModels = 0
     var mapsViewModels = [MapsViewModel(modelAccess: .AppleMaps)]
+    var mapsViewModel = MapsViewModel(modelAccess: .MapBox) //For Pass user location
     var annotation = MKPointAnnotation()
     var location = CLLocation()
     var userCoordinate : CLLocationCoordinate2D?
@@ -46,15 +47,22 @@ class AppleMapsViewController: UIViewController {
         locationManager.requestLocation()
     }
 
+    //MARK: Search
+    
     func configureSearchButton(){
         let barButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchPlace))
         self.navigationItem.rightBarButtonItem = barButton
     }
     
     @objc func searchPlace() {
+        
+        mapsViewModel.userLocation = userCoordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
+
+        searchTable.setQueryService(queryService: queryService)
+        searchTable.setMapsViewModel(mapsViewModel: mapsViewModel)
        // viewModel.userLocation = self.mapView.userLocation!.coordinate
         //print("user Location: \(self.mapView.userLocation!.coordinate)")
-        searchTable.setQueryService(queryService: queryService)
+        //searchTable.setQueryService(queryService: queryService)
         
         let searchController = UISearchController(searchResultsController: searchTable)
                

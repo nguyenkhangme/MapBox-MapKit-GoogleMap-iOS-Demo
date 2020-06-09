@@ -181,7 +181,7 @@ class GoogleMapViewController: UIViewController {
 extension GoogleMapViewController: UISearchBarDelegate{
       func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        mapsViewModel.setMapsModel(mapsModelAccess: PlaceMarkForAllMap.shared[0])
+        //mapsViewModel.setMapsModel(mapsModelAccess: PlaceMarkForAllMap.shared[0])
             
         UpdateViewFromModel()
 
