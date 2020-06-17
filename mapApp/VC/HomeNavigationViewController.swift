@@ -53,6 +53,7 @@ class HomeNavigationViewController: UINavigationController {
         navigationBar.prefersLargeTitles = true
         navigationBar.backgroundColor = UIColor(patternImage: UIImage(named: "old-map-background.jpg")!)
         navigationBar.isTranslucent = true
+        
         navigationBar.barTintColor = UIColor.rgb(r: 50, g: 199, b: 242)
         navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
     }
